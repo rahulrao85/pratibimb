@@ -1,0 +1,82 @@
+{
+  "lessons": [
+    {
+      "id": "L01",
+      "version": 2,
+      "status": "approved",
+      "title": "SLA Breach Renewal Guardrail",
+      "rule": "No renewal with 2+ SLA breaches without a service-credit clause and a 90-day exit.",
+      "trigger": "vendor_renewal with min_sla_breaches_12m >= 2",
+      "action_required": "Must escalate to senior. Require mandatory 5% service credit per breach, 90-day termination for convenience, and at least one competing benchmark quote.",
+      "source_decision_ids": ["DEC-0087"],
+      "created": "2025-07-28",
+      "approved_by": "Meera Nair",
+      "half_life_days": 540
+    },
+    {
+      "id": "L02",
+      "version": 1,
+      "status": "approved",
+      "title": "Price Hike Benchmark Guardrail",
+      "rule": "No price increase above 8% without a competing quote and market benchmark review.",
+      "trigger": "vendor_renewal or contract_amendment with price_increase_pct > 8",
+      "action_required": "Escalate to senior. Refuse auto-indexing without independent market benchmarking and formal supplier negotiation.",
+      "source_decision_ids": ["DEC-0062"],
+      "created": "2024-11-20",
+      "approved_by": "Meera Nair",
+      "half_life_days": 720
+    },
+    {
+      "id": "L03",
+      "version": 1,
+      "status": "approved",
+      "title": "Client Data Governance & Residency Guardrail",
+      "rule": "Any vendor handling client data requires verified data location, DPA signed, approved sub-processor list, and 24h breach notice.",
+      "trigger": "vendor_onboarding or vendor_renewal with handles_client_data == true",
+      "action_required": "Escalate immediately with data security checklist: verify in-country residency, execute formal DPA, prohibit unvetted sub-processors, and mandate 24-hour incident notification.",
+      "source_decision_ids": ["DEC-0105"],
+      "created": "2025-10-05",
+      "approved_by": "Meera Nair",
+      "half_life_days": 900
+    },
+    {
+      "id": "L04",
+      "version": 1,
+      "status": "approved",
+      "title": "Fully-Loaded One-Time Spend Guardrail",
+      "rule": "One-time service and fitout quotes require fully-loaded cost breakdown; no open-ended consumables or reimbursables.",
+      "trigger": "one_time_spend with open_ended_materials or unitemized_consumables",
+      "action_required": "Reject or escalate until quote provides fixed cap on consumables and itemized bill of materials.",
+      "source_decision_ids": ["DEC-0094"],
+      "created": "2025-05-15",
+      "approved_by": "Meera Nair",
+      "half_life_days": 720
+    },
+    {
+      "id": "L05",
+      "version": 1,
+      "status": "approved",
+      "title": "Key Personnel Verification Guardrail",
+      "rule": "For service/staffing vendors with named key personnel, verify named persons are active and contractually bound before renewal.",
+      "trigger": "vendor_renewal with key_person_dependency == true",
+      "action_required": "Verify named lead presence before approval; insert substitution approval clause with 30-day handover period.",
+      "source_decision_ids": ["DEC-0126"],
+      "created": "2026-04-18",
+      "approved_by": "Meera Nair",
+      "half_life_days": 540
+    },
+    {
+      "id": "L06",
+      "version": 1,
+      "status": "approved",
+      "title": "Early-Stage Vendor Advance Payment Cap",
+      "rule": "Advance payment capped at 30% for vendors with less than 24 months relationship history.",
+      "trigger": "any request with advance_pct > 30 and relationship_months < 24",
+      "action_required": "Escalate to senior. Refuse commercial terms requiring >30% advance without bank guarantee or escrow milestone.",
+      "source_decision_ids": ["DEC-0038"],
+      "created": "2023-04-10",
+      "approved_by": "Meera Nair",
+      "half_life_days": 720
+    }
+  ]
+}

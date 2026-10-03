@@ -1,0 +1,58 @@
+{
+  "requests": [
+    {
+      "id": "REQ-001",
+      "date": "2026-10-04",
+      "type": "vendor_renewal",
+      "vendor_id": "V-PRINTPRO",
+      "vendor_name": "PrintPro Leasing",
+      "value_inr": 280000,
+      "term_months": 12,
+      "sla_breaches_12m": 0,
+      "handles_client_data": false,
+      "advance_pct": 0,
+      "price_increase_pct": 0,
+      "contract_id": null,
+      "requested_by": "Admin – S. Patwardhan",
+      "description": "Annual equipment lease renewal for 14 enterprise network printers across Mumbai operations centre floors 2 through 5. Rate held constant at ₹2.8 lakh/yr. Zero SLA disruptions over 26-month tenure.",
+      "expected_verdict": "approve",
+      "expected_headline": "Approve PrintPro Leasing renewal for ₹2.8 lakh (12 months)"
+    },
+    {
+      "id": "REQ-002",
+      "date": "2026-10-04",
+      "type": "vendor_renewal",
+      "vendor_id": "V-KESTREL",
+      "vendor_name": "Kestrel IT Services",
+      "value_inr": 1420000,
+      "term_months": 24,
+      "sla_breaches_12m": 3,
+      "handles_client_data": true,
+      "advance_pct": 0,
+      "price_increase_pct": 0,
+      "contract_id": "CN-KESTREL-2025",
+      "requested_by": "IT Infrastructure – R. Deshmukh",
+      "description": "Renewal of L1/L2 desktop and user infrastructure maintenance. Clause 9.2 triggers evergreen auto-renewal for 24 months at ₹14.2 lakh/yr on 31-Oct-2026 unless terminated. Vendor recorded 3 SLA outages, including two during critical month-end accounting close.",
+      "expected_verdict": "escalate",
+      "expected_headline": "Escalate Kestrel renewal: restrict to 12 months, mandate service credits and 90-day exit"
+    },
+    {
+      "id": "REQ-003",
+      "date": "2026-10-04",
+      "type": "vendor_onboarding",
+      "vendor_id": "V-PARLO",
+      "vendor_name": "Parlo Transcription",
+      "value_inr": 750000,
+      "term_months": 12,
+      "sla_breaches_12m": 0,
+      "handles_client_data": true,
+      "advance_pct": 30,
+      "price_increase_pct": 0,
+      "contract_id": "CN-PARLO-DRAFT",
+      "requested_by": "Customer Operations QA – P. Mehta",
+      "description": "Onboard new transcription provider Parlo to ingest recorded client support calls for AI QA scoring. Draft agreement requests 30% advance fee, omits data storage jurisdiction specifics, lacks approved sub-processor list, and allows 14-day security incident notification.",
+      "expected_verdict": "ask",
+      "expected_headline": "Hold onboarding: ask data residency, sub-processor and DPA terms before escalation"
+    }
+  ]
+}

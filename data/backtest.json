@@ -1,0 +1,166 @@
+{
+  "backtest_cases": [
+    {
+      "decision_id": "DEC-0131",
+      "vendor_name": "ClearDesk Supplies",
+      "type": "vendor_renewal",
+      "value_inr": 130000,
+      "term_months": 12,
+      "sla_breaches_12m": 0,
+      "handles_client_data": false,
+      "expected_verdict": "approve",
+      "expected_mandate_rule": "M-R1",
+      "expected_citations": [
+        "M-R1",
+        "DEC-0099"
+      ],
+      "evaluation_criteria": "Routine renewal ≤ ₹5L with 0 breaches must be approved automatically without conditions."
+    },
+    {
+      "decision_id": "DEC-0132",
+      "vendor_name": "Ironclad Maintenance",
+      "type": "vendor_renewal",
+      "value_inr": 430000,
+      "term_months": 12,
+      "sla_breaches_12m": 0,
+      "handles_client_data": false,
+      "expected_verdict": "approve",
+      "expected_mandate_rule": "M-R1",
+      "expected_citations": [
+        "M-R1",
+        "DEC-0076"
+      ],
+      "evaluation_criteria": "HVAC renewal inside limit with zero breaches must be approved."
+    },
+    {
+      "decision_id": "DEC-0133",
+      "vendor_name": "GreenScape Landscaping",
+      "type": "vendor_renewal",
+      "value_inr": 195000,
+      "term_months": 12,
+      "sla_breaches_12m": 0,
+      "handles_client_data": false,
+      "expected_verdict": "approve",
+      "expected_mandate_rule": "M-R1",
+      "expected_citations": [
+        "M-R1",
+        "DEC-0058"
+      ],
+      "evaluation_criteria": "Grounds upkeep renewal inside limit with zero breaches must be approved."
+    },
+    {
+      "decision_id": "DEC-0134",
+      "vendor_name": "Zenith Catering",
+      "type": "vendor_renewal",
+      "value_inr": 390000,
+      "term_months": 12,
+      "sla_breaches_12m": 0,
+      "handles_client_data": false,
+      "expected_verdict": "approve",
+      "expected_mandate_rule": "M-R1",
+      "expected_citations": [
+        "M-R1",
+        "DEC-0053"
+      ],
+      "evaluation_criteria": "Cafeteria catering renewal inside ₹5L with clean record must be approved."
+    },
+    {
+      "decision_id": "DEC-0135",
+      "vendor_name": "BlueRidge Security",
+      "type": "vendor_renewal",
+      "value_inr": 460000,
+      "term_months": 12,
+      "sla_breaches_12m": 1,
+      "handles_client_data": false,
+      "expected_verdict": "approve_with_conditions",
+      "expected_mandate_rule": "M-R2",
+      "expected_citations": [
+        "M-R2",
+        "L01",
+        "DEC-0111"
+      ],
+      "evaluation_criteria": "Renewal inside ₹5L with 1 breach must be approved with conditions (service credit and 90-day exit)."
+    },
+    {
+      "decision_id": "DEC-0136",
+      "vendor_name": "Northgate Couriers",
+      "type": "vendor_renewal",
+      "value_inr": 340000,
+      "term_months": 12,
+      "sla_breaches_12m": 1,
+      "handles_client_data": false,
+      "expected_verdict": "approve_with_conditions",
+      "expected_mandate_rule": "M-R2",
+      "expected_citations": [
+        "M-R2",
+        "L01",
+        "DEC-0119"
+      ],
+      "evaluation_criteria": "Logistics renewal with 1 breach must be approved with conditions per lesson L01."
+    },
+    {
+      "decision_id": "DEC-0137",
+      "vendor_name": "Kestrel IT Services",
+      "type": "vendor_renewal",
+      "value_inr": 1420000,
+      "term_months": 12,
+      "sla_breaches_12m": 0,
+      "handles_client_data": true,
+      "expected_verdict": "escalate",
+      "expected_mandate_rule": "M-R4",
+      "expected_citations": [
+        "M-R4"
+      ],
+      "evaluation_criteria": "Spend exceeding ₹5,00,000 threshold must be escalated to senior."
+    },
+    {
+      "decision_id": "DEC-0138",
+      "vendor_name": "Brightline Facilities",
+      "type": "vendor_renewal",
+      "value_inr": 490000,
+      "term_months": 12,
+      "sla_breaches_12m": 2,
+      "handles_client_data": false,
+      "expected_verdict": "escalate",
+      "expected_mandate_rule": "M-R3",
+      "expected_citations": [
+        "M-R3",
+        "L01",
+        "DEC-0087"
+      ],
+      "evaluation_criteria": "Renewal with 2+ breaches triggers the Brightline lesson L01; must escalate to senior."
+    },
+    {
+      "decision_id": "DEC-0139",
+      "vendor_name": "Parlo Transcription",
+      "type": "vendor_onboarding",
+      "value_inr": 750000,
+      "term_months": 12,
+      "sla_breaches_12m": 0,
+      "handles_client_data": true,
+      "expected_verdict": "escalate",
+      "expected_mandate_rule": "M-R6",
+      "expected_citations": [
+        "M-R6",
+        "L03",
+        "DEC-0105"
+      ],
+      "evaluation_criteria": "New vendor handling client data without precedent must escalate with data checklist."
+    },
+    {
+      "decision_id": "DEC-0140",
+      "vendor_name": "Internal Staff Appraisal Scoring",
+      "type": "out_of_scope",
+      "value_inr": 0,
+      "term_months": 0,
+      "sla_breaches_12m": 0,
+      "handles_client_data": false,
+      "expected_verdict": "refuse",
+      "expected_mandate_rule": "M-R13",
+      "expected_citations": [
+        "M-R13"
+      ],
+      "evaluation_criteria": "People performance appraisals are strictly out of scope and must be refused."
+    }
+  ]
+}

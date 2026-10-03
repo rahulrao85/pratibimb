@@ -1,0 +1,137 @@
+{
+  "contracts": [
+    {
+      "id": "CN-KESTREL-2025",
+      "vendor_id": "V-KESTREL",
+      "title": "Master Services Agreement for Desktop & Infrastructure Support",
+      "status": "active",
+      "effective_date": "2025-03-01",
+      "expiry_date": "2026-02-28",
+      "annual_value_inr": 1420000,
+      "governing_law": "Mumbai, Maharashtra, India",
+      "clauses": [
+        {
+          "number": "3.1",
+          "title": "Scope of Support Services",
+          "text": "Kestrel IT Services shall provide Tier-1 and Tier-2 on-site desktop maintenance, peripheral hardware diagnostics, network endpoint monitoring, and user workstation deployment across all Meridian Global Services Mumbai facilities."
+        },
+        {
+          "number": "5.2",
+          "title": "Service Level Commitments",
+          "text": "Vendor shall maintain a minimum first-response resolution rate of 92% and overall system availability of 99.5% during core operating hours (08:00 to 20:00 IST Monday through Saturday). Priority-1 desktop outages affecting more than five active workstations shall be resolved within two (2) hours."
+        },
+        {
+          "number": "5.5",
+          "title": "Remedies for SLA Failure",
+          "text": "In the event Vendor misses designated SLA thresholds, Vendor shall submit a root-cause remediation memorandum within five (5) business days. No financial deductions, service credits, or liquidated penalties shall apply unless non-performance persists continuously for three consecutive quarters."
+        },
+        {
+          "number": "7.4",
+          "title": "Confidentiality & Endpoint Access",
+          "text": "Vendor engineers shall have privileged diagnostic access to client-facing production terminals, diagnostic telemetry, and corporate network interfaces strictly necessary for performing maintenance obligations."
+        },
+        {
+          "number": "9.1",
+          "title": "Term of Agreement",
+          "text": "This Agreement shall commence on the Effective Date and continue for an Initial Term of twelve (12) calendar months, expiring on 28-Feb-2026."
+        },
+        {
+          "number": "9.2",
+          "title": "Renewal and Evergreen Extension",
+          "text": "Unless either party serves written notice of non-renewal at least ninety (90) days prior to the expiration of the Initial Term or any Renewal Term, this Agreement shall automatically renew for a successive period of twenty-four (24) months ('Renewal Term') on the prevailing fee schedule without price reduction or restructuring."
+        },
+        {
+          "number": "10.3",
+          "title": "Termination for Cause",
+          "text": "Either party may terminate this Agreement only upon sixty (60) days written notice following a material breach that remains unremedied after a mandatory thirty (30) day cure period. Neither party may terminate for convenience during the Renewal Term."
+        }
+      ]
+    },
+    {
+      "id": "CN-BRIGHTLINE-2025",
+      "vendor_id": "V-BRIGHTLINE",
+      "title": "Facility Operations and Housekeeping Services Agreement",
+      "status": "superseded",
+      "effective_date": "2025-03-01",
+      "expiry_date": "2026-02-28",
+      "annual_value_inr": 560000,
+      "governing_law": "Mumbai, Maharashtra, India",
+      "clauses": [
+        {
+          "number": "4.1",
+          "title": "Facility Hygiene Standards",
+          "text": "Brightline Facilities shall supply trained housekeeping workforce, industrial cleaning consumables, and sanitization schedules across 4 floors of the Mumbai delivery centre."
+        },
+        {
+          "number": "6.1",
+          "title": "Service Level Benchmark",
+          "text": "Facility cleanliness checklists must be signed off twice daily. High-traffic client presentation suites and executive boardrooms must achieve 100% audit-readiness at all times."
+        },
+        {
+          "number": "11.1",
+          "title": "Termination for Cause",
+          "text": "Client may terminate this contract upon thirty (30) days written notice if vendor fails to remedy reported operational deficiencies."
+        }
+      ]
+    },
+    {
+      "id": "CN-BRIGHTLINE-2026",
+      "vendor_id": "V-BRIGHTLINE",
+      "title": "Facility Operations and Housekeeping Services Agreement (Amended)",
+      "status": "active",
+      "effective_date": "2026-03-01",
+      "expiry_date": "2027-02-28",
+      "annual_value_inr": 580000,
+      "governing_law": "Mumbai, Maharashtra, India",
+      "clauses": [
+        {
+          "number": "6.3",
+          "title": "SLA Penalties and Service Credits",
+          "text": "In the event of any verified failure to meet hygiene or audit readiness standards, Brightline Facilities shall credit 5% of monthly billing per breach, capped at 25% of total monthly billing."
+        },
+        {
+          "number": "11.4",
+          "title": "Termination for Convenience",
+          "text": "Meridian Global Services reserves the unconditional right to terminate this agreement without cause, liability, or penalty upon providing ninety (90) days written notice."
+        }
+      ]
+    },
+    {
+      "id": "CN-PARLO-DRAFT",
+      "vendor_id": "V-PARLO",
+      "title": "Master Cloud Services Agreement - AI Call Transcription (DRAFT)",
+      "status": "draft",
+      "effective_date": "2026-10-15",
+      "expiry_date": "2027-10-14",
+      "annual_value_inr": 750000,
+      "governing_law": "Bengaluru, Karnataka, India",
+      "clauses": [
+        {
+          "number": "2.1",
+          "title": "Audio Processing Scope",
+          "text": "Parlo Transcription shall ingest recorded customer telephone interactions, support agent call audio, and transcription telemetry to produce speech-to-text transcripts with speaker diarization."
+        },
+        {
+          "number": "4.3",
+          "title": "Commercial Terms and Invoicing",
+          "text": "Client shall remit an initial advance payment of thirty percent (30%) of estimated annual fees upon contract execution prior to API endpoint provisioning and tenant configuration."
+        },
+        {
+          "number": "8.1",
+          "title": "Infrastructure and Cloud Hosting",
+          "text": "Transcription pipelines and machine learning inference workloads are processed using distributed cloud infrastructure in commercial public cloud regions selected dynamically based on compute capacity."
+        },
+        {
+          "number": "9.2",
+          "title": "Sub-processors and Data Access",
+          "text": "Vendor reserves the right to engage third-party model inference providers and outsourced annotation contractors to improve transcription turnaround and maintain quality."
+        },
+        {
+          "number": "12.1",
+          "title": "Security Incident Notification",
+          "text": "Vendor shall notify Client of any confirmed security compromise or unauthorised access to audio data within fourteen (14) business days of verification."
+        }
+      ]
+    }
+  ]
+}

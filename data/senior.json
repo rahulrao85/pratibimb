@@ -1,0 +1,39 @@
+{
+  "id": "SEN-001",
+  "name": "Meera Nair",
+  "title": "Head of Delivery Operations",
+  "org": "Meridian Global Services (Mumbai delivery centre)",
+  "location": "Mumbai, India",
+  "timezone": "Asia/Kolkata",
+  "tenure_years": 9,
+  "reports_to": "Group COO (London)",
+  "span": "180 staff, 14 active vendor relationships, 3 client accounts",
+  "decision_style": {
+    "summary": "Paper-first, outcomes-driven. Reads the clause, not the email. Rings the requester before signing anything new. Distrusts headline prices and headline guarantees.",
+    "principles": [
+      "If it can renew itself, it will — read the renewal clause before the price.",
+      "A vendor with 2+ missed SLAs is a process problem, not a relationship problem.",
+      "Whoever handles client data must be answerable for where it lives.",
+      "The lowest quote is rarely the lowest cost; ask for the fully-loaded number.",
+      "Anyone can approve a good deal; the job is catching the deal that looks good."
+    ],
+    "red_flags": [
+      "Auto-renewal / evergreen clauses",
+      "No penalty or service-credit for a missed SLA",
+      "Advance payment above 30% on a young vendor",
+      "Key person named on the contract who has already left",
+      "Price increases above 8% without a competing quote",
+      "Client data handled without an approved sub-processor list"
+    ],
+    "questions_she_always_asks": [
+      "What happened the last time we did this?",
+      "What is the worst case if this vendor fails mid-term?",
+      "Can we get out in 90 days if we need to?",
+      "Who is the named person on this, and are they still there?",
+      "Where does the data live, and who else touches it?"
+    ]
+  },
+  "escalation_preference": "Escalate early with a recommendation attached. She would rather spend two minutes approving than ten minutes reconstructing.",
+  "signature_limit_inr": 500000,
+  "created": "2026-10-03"
+}

@@ -1,0 +1,119 @@
+{
+  "id": "MAN-MEERA-2026",
+  "senior_id": "SEN-001",
+  "currency": "INR",
+  "effective_from": "2026-10-01",
+  "supersedes": "MAN-MEERA-2025",
+  "notes": "Delegation of authority. Viveka may decide only what a rule allows; every other case is escalated with a recommendation. Any escalate/refuse rule overrides an earlier approve.",
+  "rules": [
+    {
+      "id": "M-R1",
+      "applies_to": "vendor_renewal",
+      "when": { "max_value_inr": 500000, "max_sla_breaches_12m": 0, "min_relationship_months": 12, "no_open_dispute": true },
+      "then": "approve",
+      "reason": "Routine renewal inside the ₹5,00,000 signature limit, clean record."
+    },
+    {
+      "id": "M-R2",
+      "applies_to": "vendor_renewal",
+      "when": { "max_value_inr": 500000, "sla_breaches_12m": 1, "min_relationship_months": 12 },
+      "then": "approve_with_conditions",
+      "requires_conditions": ["service_credit_clause", "90_day_exit"],
+      "reason": "One breach means the relationship is salvageable, but only with teeth in the contract."
+    },
+    {
+      "id": "M-R3",
+      "applies_to": "vendor_renewal",
+      "when": { "min_sla_breaches_12m": 2 },
+      "then": "escalate",
+      "requires_conditions": ["service_credit_clause", "90_day_exit", "competing_quote"],
+      "reason": "Two or more breaches — the Brightline lesson (L01). Never auto-renew."
+    },
+    {
+      "id": "M-R4",
+      "applies_to": "vendor_renewal",
+      "when": { "min_value_inr": 500000 },
+      "then": "escalate",
+      "reason": "Above the ₹5,00,000 signature limit."
+    },
+    {
+      "id": "M-R5",
+      "applies_to": "vendor_onboarding",
+      "when": {},
+      "then": "escalate",
+      "reason": "No precedent to learn from. New vendors always go to the senior."
+    },
+    {
+      "id": "M-R6",
+      "applies_to": "vendor_onboarding",
+      "when": { "handles_client_data": true },
+      "then": "escalate",
+      "requires_checklist": ["data_location", "approved_subprocessors", "dpa_signed", "breach_notification_24h", "right_to_audit"],
+      "reason": "Client data is the one thing that cannot be un-leaked (L03)."
+    },
+    {
+      "id": "M-R7",
+      "applies_to": "contract_term",
+      "when": { "auto_renewal": true },
+      "then": "escalate",
+      "reason": "An evergreen clause removes the exit. Must be surfaced and renegotiated."
+    },
+    {
+      "id": "M-R8",
+      "applies_to": "contract_term",
+      "when": { "min_term_months_exceeding": 12 },
+      "then": "escalate",
+      "reason": "Commitments beyond 12 months need the senior's explicit eye."
+    },
+    {
+      "id": "M-R9",
+      "applies_to": "price_increase",
+      "when": { "min_increase_pct": 8 },
+      "then": "escalate",
+      "requires_conditions": ["competing_quote", "benchmark_review"],
+      "reason": "No increase above 8% without evidence it is market rate (L02)."
+    },
+    {
+      "id": "M-R10",
+      "applies_to": "advance_payment",
+      "when": { "min_advance_pct": 30, "max_relationship_months": 24 },
+      "then": "escalate",
+      "reason": "Protect cash when there is no relationship history (L06)."
+    },
+    {
+      "id": "M-R11",
+      "applies_to": "one_time_spend",
+      "when": { "max_value_inr": 50000, "has_precedent": true },
+      "then": "approve",
+      "reason": "Small, precedented, reversible."
+    },
+    {
+      "id": "M-R12",
+      "applies_to": "one_time_spend",
+      "when": { "min_value_inr": 50000, "no_precedent": true },
+      "then": "escalate",
+      "reason": "New spend above ₹50,000 without precedent."
+    },
+    {
+      "id": "M-R13",
+      "applies_to": "out_of_scope",
+      "when": { "subject": "people_performance_appraisal" },
+      "then": "refuse",
+      "reason": "Viveka never rates people. Copying a manager's bias into pay is out of scope (EU AI Act high-risk)."
+    }
+  ],
+  "limits_table": [
+    { "case": "Renewal ≤ ₹5L · 0 breaches · 12m+ history", "action": "Viveka may approve", "signoff": "None" },
+    { "case": "Renewal ≤ ₹5L · 1 breach", "action": "Approve only with service credit + 90-day exit", "signoff": "Requester notified" },
+    { "case": "Renewal · 2+ breaches", "action": "Escalate (L01)", "signoff": "Meera" },
+    { "case": "Renewal > ₹5L", "action": "Escalate", "signoff": "Meera" },
+    { "case": "Auto-renewal or term > 12 months", "action": "Escalate", "signoff": "Meera" },
+    { "case": "New vendor", "action": "Escalate (no precedent)", "signoff": "Meera" },
+    { "case": "Vendor handling client data", "action": "Escalate + data checklist", "signoff": "Meera + DPO" },
+    { "case": "Price increase > 8%", "action": "Escalate + competing quote", "signoff": "Meera" },
+    { "case": "Advance > 30% to vendor < 2 yrs", "action": "Escalate", "signoff": "Meera" },
+    { "case": "One-time spend ≤ ₹50k with precedent", "action": "Viveka may approve", "signoff": "None" },
+    { "case": "One-time spend > ₹50k, no precedent", "action": "Escalate", "signoff": "Meera" },
+    { "case": "Any people-performance rating", "action": "Refuse — out of scope", "signoff": "N/A" }
+  ]
+}

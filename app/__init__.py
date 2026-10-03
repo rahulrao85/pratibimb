@@ -1,0 +1,3 @@
+"""
+Pratibimb FastAPI Application Package
+"""
