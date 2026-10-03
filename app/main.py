@@ -129,3 +129,10 @@ def record_override(payload: OverridePayload):
         return {"status": "success", "lesson": new_lesson}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+# Mount production React UI if built
+from fastapi.staticfiles import StaticFiles
+
+UI_DIST = Path(__file__).parent.parent / "ui" / "dist"
+if UI_DIST.exists():
+    app.mount("/", StaticFiles(directory=str(UI_DIST), html=True), name="ui")
