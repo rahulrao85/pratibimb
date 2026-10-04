@@ -4,9 +4,24 @@ Conducts adversarial scrutiny of contracts, vendor risk flags, commercial traps,
 and operational vulnerability patterns.
 """
 import json
+import re
 from pathlib import Path
-from typing import List, Dict, Any, Tuple
-from agents.models import VendorRequest, ChallengeItem
+from typing import List, Dict, Any, Optional, Tuple
+
+from agents import llm
+from agents.models import VendorRequest, ChallengeItem, ChallengeList
+
+SYSTEM = (
+    "You are the Challenger agent of Pratibimb, an AI junior that mirrors how Meera Nair decides vendor requests. "
+    "She 'reads the clause, not the email'. Read the contract clauses and the request like a sceptical senior and "
+    "list concrete risks only: auto-renewal or evergreen terms, missing SLA penalties or service credits, no exit or "
+    "termination for convenience, unclear data location, unvetted sub-processors, slow breach notification, large "
+    "advance payments, price increases, departed or unverified key people, open-ended costs. Each finding must cite "
+    "its source exactly in one of these forms: a contract clause written like 'CN-KESTREL-2025 §9.2', 'Request', or "
+    "'Vendor history'. Do not invent facts or give generic advice. Severity: high if it could cost money, data or the "
+    "exit; medium if it weakens leverage; low otherwise. Return an empty list if nothing material."
+)
+
 
 class ChallengerAgent:
     def __init__(self, data_dir: Path = None):
@@ -31,6 +46,48 @@ class ChallengerAgent:
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
             return {v["id"]: v for v in data.get("vendors", [])}
+
+    def contract_for(self, req: VendorRequest) -> Tuple[Optional[str], Dict[str, Any]]:
+        contract_id = req.contract_id or (
+            "CN-KESTREL-2025" if req.vendor_id == "V-KESTREL" else
+            "CN-BRIGHTLINE-2026" if req.vendor_id == "V-BRIGHTLINE" else
+            "CN-PARLO-DRAFT" if req.vendor_id == "V-PARLO" else None
+        )
+        return contract_id, (self.contracts.get(contract_id, {}) if contract_id else {})
+
+    def has_auto_renewal(self, req: VendorRequest) -> bool:
+        """Deterministic flag for mandate rule M-R7 (evergreen clause present)."""
+        _, contract = self.contract_for(req)
+        return any(re.search(r"automatically renew|evergreen", c.get("text", ""), re.I) for c in contract.get("clauses", []))
+
+    def challenge_llm(self, case: str, req: VendorRequest) -> Tuple[List[ChallengeItem], List[str]]:
+        contract_id, contract = self.contract_for(req)
+        vendor = self.vendors.get(req.vendor_id, {})
+        if contract:
+            clauses = "\n".join(f"{contract_id} §{c['number']} {c.get('title', '')}: {c.get('text', '')}" for c in contract.get("clauses", []))
+            contract_text = f"CONTRACT {contract_id} — {contract.get('title', '')}\n{clauses}"
+        else:
+            contract_text = "CONTRACT: none on file for this request."
+        vendor_text = (
+            f"VENDOR HISTORY: relationship {vendor.get('relationship_months', 'unknown')} months; "
+            f"risk flags: {', '.join(vendor.get('risk_flags', [])) or 'none'}"
+        )
+        out: ChallengeList = llm.generate_json("challenger", SYSTEM, f"{case}\n\n{contract_text}\n\n{vendor_text}", ChallengeList)
+
+        valid_clauses = {f"{contract_id} §{c['number']}" for c in contract.get("clauses", [])} if contract else set()
+        findings, citations = [], []
+        for ch in out.challenges:
+            src = ch.source.strip()
+            m = re.search(r"(CN-[A-Z0-9-]+)\s*§\s*([\d.]+)", src)
+            if m:
+                src = f"{m.group(1)} §{m.group(2)}"
+                if src not in valid_clauses:
+                    continue  # the model cited a clause that does not exist: drop the finding
+                citations.append(src)
+            elif src not in ("Request", "Vendor history"):
+                src = "Request"
+            findings.append(ChallengeItem(finding=ch.finding, source=src, severity=ch.severity))
+        return findings, list(dict.fromkeys(citations))
 
     def challenge(self, req: VendorRequest) -> Tuple[List[ChallengeItem], List[str]]:
         challenges: List[ChallengeItem] = []

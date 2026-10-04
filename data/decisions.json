@@ -1235,6 +1235,180 @@
       "cited_decision_ids": [],
       "holdout": true,
       "followed_mandate": true
+    },
+    {
+      "id": "DEC-0141",
+      "date": "2026-09-08",
+      "type": "vendor_renewal",
+      "vendor_id": "V-REDWOOD",
+      "vendor_name": "Redwood Staffing",
+      "value_inr": 460000,
+      "term_months": 12,
+      "sla_breaches_12m": 0,
+      "handles_client_data": false,
+      "requested_by": "Customer Operations – P. Mehta",
+      "decision": "asked",
+      "decision_note": "Held the renewal: the named team lead resigned and Redwood has not named a replacement. Asked for the replacement's CV and a 30-day handover plan before renewing.",
+      "reasons": [
+        "Lesson L05: named key personnel must be verified before renewal",
+        "DEC-0126 renewed only on the named-lead clause"
+      ],
+      "conditions": [
+        "Named replacement lead with CV",
+        "30-day handover plan",
+        "Substitution approval clause"
+      ],
+      "contract_id": null,
+      "outcome": "Redwood named a replacement within a week; renewal signed with the substitution clause.",
+      "outcome_status": "good",
+      "mistake": false,
+      "mistake_note": "",
+      "lesson_ids": [
+        "L05"
+      ],
+      "cited_decision_ids": [
+        "DEC-0126"
+      ],
+      "holdout": true,
+      "followed_mandate": true
+    },
+    {
+      "id": "DEC-0142",
+      "date": "2026-09-15",
+      "type": "one_time_spend",
+      "vendor_id": "V-APEX",
+      "vendor_name": "Apex Interiors",
+      "value_inr": 46000,
+      "term_months": 1,
+      "sla_breaches_12m": 0,
+      "handles_client_data": false,
+      "requested_by": "Admin – A. Kulkarni",
+      "decision": "approved_with_conditions",
+      "decision_note": "Small and precedented, but the quote bills materials at actuals. Approved only as a fixed all-inclusive price with an itemised bill of materials.",
+      "reasons": [
+        "Lesson L04: no open-ended consumables on one-time spends",
+        "DEC-0094: Apex lump-sum quote overran on materials"
+      ],
+      "conditions": [
+        "Fixed all-inclusive price",
+        "Itemised bill of materials",
+        "No reimbursable consumables"
+      ],
+      "contract_id": null,
+      "outcome": "Delivered at the quoted fixed price.",
+      "outcome_status": "good",
+      "mistake": false,
+      "mistake_note": "",
+      "lesson_ids": [
+        "L04"
+      ],
+      "cited_decision_ids": [
+        "DEC-0094",
+        "DEC-0127"
+      ],
+      "holdout": true,
+      "followed_mandate": true
+    },
+    {
+      "id": "DEC-0143",
+      "date": "2026-09-22",
+      "type": "vendor_renewal",
+      "vendor_id": "V-VAULTLINE",
+      "vendor_name": "VaultLine Storage",
+      "value_inr": 440000,
+      "term_months": 12,
+      "sla_breaches_12m": 0,
+      "handles_client_data": true,
+      "requested_by": "Compliance – N. Iyer",
+      "decision": "escalated",
+      "decision_note": "Renewal adds an overseas scanning sub-processor for client records. Took it herself: needs data location, DPA and sub-processor approval before anything is signed.",
+      "reasons": [
+        "Lesson L03: client data needs verified location, DPA and approved sub-processors",
+        "DEC-0105: offshore processing was missed once"
+      ],
+      "conditions": [
+        "Verified data location",
+        "Signed DPA",
+        "Approved sub-processor list",
+        "24-hour breach notification"
+      ],
+      "contract_id": null,
+      "outcome": "Sub-processor replaced with an in-country scanning partner; renewal signed a month later.",
+      "outcome_status": "good",
+      "mistake": false,
+      "mistake_note": "",
+      "lesson_ids": [
+        "L03"
+      ],
+      "cited_decision_ids": [
+        "DEC-0105"
+      ],
+      "holdout": true,
+      "followed_mandate": true
+    },
+    {
+      "id": "DEC-0144",
+      "date": "2026-09-26",
+      "type": "vendor_renewal",
+      "vendor_id": "V-ORBIT",
+      "vendor_name": "Orbit Travel",
+      "value_inr": 290000,
+      "term_months": 12,
+      "sla_breaches_12m": 0,
+      "handles_client_data": false,
+      "requested_by": "Admin – S. Patwardhan",
+      "decision": "escalated",
+      "decision_note": "Rates are 'unchanged' but a new ₹30,000 platform fee is an 11.5% increase. Needs a benchmark and a competing quote first.",
+      "reasons": [
+        "Lesson L02: no increase above 8% without a benchmark and a competing quote",
+        "DEC-0062: approved a 12% hike unbenchmarked once"
+      ],
+      "conditions": [
+        "Competing quote",
+        "Market benchmark review"
+      ],
+      "contract_id": null,
+      "outcome": "Platform fee waived after a competing quote from another travel desk.",
+      "outcome_status": "good",
+      "mistake": false,
+      "mistake_note": "",
+      "lesson_ids": [
+        "L02"
+      ],
+      "cited_decision_ids": [
+        "DEC-0062"
+      ],
+      "holdout": true,
+      "followed_mandate": true
+    },
+    {
+      "id": "DEC-0145",
+      "date": "2026-09-29",
+      "type": "one_time_spend",
+      "vendor_id": "V-GREENSCAPE",
+      "vendor_name": "GreenScape Landscaping",
+      "value_inr": 38000,
+      "term_months": 1,
+      "sla_breaches_12m": 0,
+      "handles_client_data": false,
+      "requested_by": "Facilities – G. Raman",
+      "decision": "approved",
+      "decision_note": "Urgent safety job from an existing vendor on a fixed all-inclusive quote under ₹50,000. Approved the same day.",
+      "reasons": [
+        "Small, fixed price, includes disposal",
+        "Existing vendor with a clean record",
+        "Fire exit must be cleared"
+      ],
+      "conditions": [],
+      "contract_id": null,
+      "outcome": "Tree cleared within 24 hours; invoice matched the quote.",
+      "outcome_status": "good",
+      "mistake": false,
+      "mistake_note": "",
+      "lesson_ids": [],
+      "cited_decision_ids": [],
+      "holdout": true,
+      "followed_mandate": true
     }
   ]
 }

@@ -1,10 +1,10 @@
 """
 Generate realistic synthetic dataset for Pratibimb (Meera Nair's decision memory).
 Generates:
-- 40 past vendor decisions (30 active precedents, 10 holdouts for backtest)
+- 45 past vendor decisions (30 active precedents, 15 holdouts for the back-test)
 - 4 explicit historical mistakes linked to lessons
 - Exact match to data-model.md schema
-- 10 holdout cases for backtest.json
+- 15 back-test cases for backtest.json (request text + Meera's real verdict)
 """
 import json
 from pathlib import Path
@@ -1024,141 +1024,251 @@ DECISIONS = [
         "cited_decision_ids": [],
         "holdout": true,
         "followed_mandate": true
+    },
+
+    # =========================================================================
+    # 41-45: HARDER HOLDOUTS. The mandate rules alone get 4 of these 5 wrong; only
+    # Meera's lessons and past decisions (or reading the request text) get them right.
+    # DEC-0145 is the opposite test: alarming wording, clean case, should be approved.
+    # =========================================================================
+    {
+        "id": "DEC-0141",
+        "date": "2026-09-08",
+        "type": "vendor_renewal",
+        "vendor_id": "V-REDWOOD",
+        "vendor_name": "Redwood Staffing",
+        "value_inr": 460000,
+        "term_months": 12,
+        "sla_breaches_12m": 0,
+        "handles_client_data": false,
+        "requested_by": "Customer Operations – P. Mehta",
+        "decision": "asked",
+        "decision_note": "Held the renewal: the named team lead resigned and Redwood has not named a replacement. Asked for the replacement's CV and a 30-day handover plan before renewing.",
+        "reasons": ["Lesson L05: named key personnel must be verified before renewal", "DEC-0126 renewed only on the named-lead clause"],
+        "conditions": ["Named replacement lead with CV", "30-day handover plan", "Substitution approval clause"],
+        "contract_id": null,
+        "outcome": "Redwood named a replacement within a week; renewal signed with the substitution clause.",
+        "outcome_status": "good",
+        "mistake": false,
+        "mistake_note": "",
+        "lesson_ids": ["L05"],
+        "cited_decision_ids": ["DEC-0126"],
+        "holdout": true,
+        "followed_mandate": true
+    },
+    {
+        "id": "DEC-0142",
+        "date": "2026-09-15",
+        "type": "one_time_spend",
+        "vendor_id": "V-APEX",
+        "vendor_name": "Apex Interiors",
+        "value_inr": 46000,
+        "term_months": 1,
+        "sla_breaches_12m": 0,
+        "handles_client_data": false,
+        "requested_by": "Admin – A. Kulkarni",
+        "decision": "approved_with_conditions",
+        "decision_note": "Small and precedented, but the quote bills materials at actuals. Approved only as a fixed all-inclusive price with an itemised bill of materials.",
+        "reasons": ["Lesson L04: no open-ended consumables on one-time spends", "DEC-0094: Apex lump-sum quote overran on materials"],
+        "conditions": ["Fixed all-inclusive price", "Itemised bill of materials", "No reimbursable consumables"],
+        "contract_id": null,
+        "outcome": "Delivered at the quoted fixed price.",
+        "outcome_status": "good",
+        "mistake": false,
+        "mistake_note": "",
+        "lesson_ids": ["L04"],
+        "cited_decision_ids": ["DEC-0094", "DEC-0127"],
+        "holdout": true,
+        "followed_mandate": true
+    },
+    {
+        "id": "DEC-0143",
+        "date": "2026-09-22",
+        "type": "vendor_renewal",
+        "vendor_id": "V-VAULTLINE",
+        "vendor_name": "VaultLine Storage",
+        "value_inr": 440000,
+        "term_months": 12,
+        "sla_breaches_12m": 0,
+        "handles_client_data": true,
+        "requested_by": "Compliance – N. Iyer",
+        "decision": "escalated",
+        "decision_note": "Renewal adds an overseas scanning sub-processor for client records. Took it herself: needs data location, DPA and sub-processor approval before anything is signed.",
+        "reasons": ["Lesson L03: client data needs verified location, DPA and approved sub-processors", "DEC-0105: offshore processing was missed once"],
+        "conditions": ["Verified data location", "Signed DPA", "Approved sub-processor list", "24-hour breach notification"],
+        "contract_id": null,
+        "outcome": "Sub-processor replaced with an in-country scanning partner; renewal signed a month later.",
+        "outcome_status": "good",
+        "mistake": false,
+        "mistake_note": "",
+        "lesson_ids": ["L03"],
+        "cited_decision_ids": ["DEC-0105"],
+        "holdout": true,
+        "followed_mandate": true
+    },
+    {
+        "id": "DEC-0144",
+        "date": "2026-09-26",
+        "type": "vendor_renewal",
+        "vendor_id": "V-ORBIT",
+        "vendor_name": "Orbit Travel",
+        "value_inr": 290000,
+        "term_months": 12,
+        "sla_breaches_12m": 0,
+        "handles_client_data": false,
+        "requested_by": "Admin – S. Patwardhan",
+        "decision": "escalated",
+        "decision_note": "Rates are 'unchanged' but a new ₹30,000 platform fee is an 11.5% increase. Needs a benchmark and a competing quote first.",
+        "reasons": ["Lesson L02: no increase above 8% without a benchmark and a competing quote", "DEC-0062: approved a 12% hike unbenchmarked once"],
+        "conditions": ["Competing quote", "Market benchmark review"],
+        "contract_id": null,
+        "outcome": "Platform fee waived after a competing quote from another travel desk.",
+        "outcome_status": "good",
+        "mistake": false,
+        "mistake_note": "",
+        "lesson_ids": ["L02"],
+        "cited_decision_ids": ["DEC-0062"],
+        "holdout": true,
+        "followed_mandate": true
+    },
+    {
+        "id": "DEC-0145",
+        "date": "2026-09-29",
+        "type": "one_time_spend",
+        "vendor_id": "V-GREENSCAPE",
+        "vendor_name": "GreenScape Landscaping",
+        "value_inr": 38000,
+        "term_months": 1,
+        "sla_breaches_12m": 0,
+        "handles_client_data": false,
+        "requested_by": "Facilities – G. Raman",
+        "decision": "approved",
+        "decision_note": "Urgent safety job from an existing vendor on a fixed all-inclusive quote under ₹50,000. Approved the same day.",
+        "reasons": ["Small, fixed price, includes disposal", "Existing vendor with a clean record", "Fire exit must be cleared"],
+        "conditions": [],
+        "contract_id": null,
+        "outcome": "Tree cleared within 24 hours; invoice matched the quote.",
+        "outcome_status": "good",
+        "mistake": false,
+        "mistake_note": "",
+        "lesson_ids": [],
+        "cited_decision_ids": [],
+        "holdout": true,
+        "followed_mandate": true
     }
 ]
 
-# Generate backtest cases matching the 10 holdouts (DEC-0131 to DEC-0140)
+# Back-test cases: one per holdout decision (DEC-0131 to DEC-0145).
+# request_description is what the requester wrote (neutral; it never states the answer).
+# expected_* and why fields are grading notes and never reach the engine.
 BACKTEST_CASES = [
+    # --- 10 original holdouts: the mandate rules alone already decide these ---
     {
         "decision_id": "DEC-0131",
-        "vendor_name": "ClearDesk Supplies",
-        "type": "vendor_renewal",
-        "value_inr": 130000,
-        "term_months": 12,
-        "sla_breaches_12m": 0,
-        "handles_client_data": false,
+        "request_description": "Annual renewal of the stationery and office supplies rate agreement at current rates.",
         "expected_verdict": "approve",
-        "expected_mandate_rule": "M-R1",
         "expected_citations": ["M-R1", "DEC-0099"],
-        "evaluation_criteria": "Routine renewal ≤ ₹5L with 0 breaches must be approved automatically without conditions."
+        "why": "Routine renewal under ₹5L with zero breaches.",
     },
     {
         "decision_id": "DEC-0132",
-        "vendor_name": "Ironclad Maintenance",
-        "type": "vendor_renewal",
-        "value_inr": 430000,
-        "term_months": 12,
-        "sla_breaches_12m": 0,
-        "handles_client_data": false,
+        "request_description": "Annual renewal of HVAC chilled-water and air-handling maintenance for the delivery floor and server room.",
         "expected_verdict": "approve",
-        "expected_mandate_rule": "M-R1",
         "expected_citations": ["M-R1", "DEC-0076"],
-        "evaluation_criteria": "HVAC renewal inside limit with zero breaches must be approved."
+        "why": "HVAC renewal inside the limit with zero breaches.",
     },
     {
         "decision_id": "DEC-0133",
-        "vendor_name": "GreenScape Landscaping",
-        "type": "vendor_renewal",
-        "value_inr": 195000,
-        "term_months": 12,
-        "sla_breaches_12m": 0,
-        "handles_client_data": false,
+        "request_description": "Annual renewal of grounds and landscaping upkeep for the campus.",
         "expected_verdict": "approve",
-        "expected_mandate_rule": "M-R1",
         "expected_citations": ["M-R1", "DEC-0058"],
-        "evaluation_criteria": "Grounds upkeep renewal inside limit with zero breaches must be approved."
+        "why": "Grounds upkeep renewal inside the limit with zero breaches.",
     },
     {
         "decision_id": "DEC-0134",
-        "vendor_name": "Zenith Catering",
-        "type": "vendor_renewal",
-        "value_inr": 390000,
-        "term_months": 12,
-        "sla_breaches_12m": 0,
-        "handles_client_data": false,
+        "request_description": "Annual renewal of cafeteria catering for the delivery centre.",
         "expected_verdict": "approve",
-        "expected_mandate_rule": "M-R1",
         "expected_citations": ["M-R1", "DEC-0053"],
-        "evaluation_criteria": "Cafeteria catering renewal inside ₹5L with clean record must be approved."
+        "why": "Catering renewal under ₹5L with a clean record.",
     },
     {
         "decision_id": "DEC-0135",
-        "vendor_name": "BlueRidge Security",
-        "type": "vendor_renewal",
-        "value_inr": 460000,
-        "term_months": 12,
-        "sla_breaches_12m": 1,
-        "handles_client_data": false,
+        "request_description": "Annual renewal of physical security guarding. One SLA breach in the last year (a late shift handover in February).",
         "expected_verdict": "approve_with_conditions",
-        "expected_mandate_rule": "M-R2",
         "expected_citations": ["M-R2", "L01", "DEC-0111"],
-        "evaluation_criteria": "Renewal inside ₹5L with 1 breach must be approved with conditions (service credit and 90-day exit)."
+        "why": "One breach: approve with a service credit and a 90-day exit.",
     },
     {
         "decision_id": "DEC-0136",
-        "vendor_name": "Northgate Couriers",
-        "type": "vendor_renewal",
-        "value_inr": 340000,
-        "term_months": 12,
-        "sla_breaches_12m": 1,
-        "handles_client_data": false,
+        "request_description": "Annual renewal of courier and document logistics. One SLA breach in the last year (a delayed delivery in May).",
         "expected_verdict": "approve_with_conditions",
-        "expected_mandate_rule": "M-R2",
         "expected_citations": ["M-R2", "L01", "DEC-0119"],
-        "evaluation_criteria": "Logistics renewal with 1 breach must be approved with conditions per lesson L01."
+        "why": "One breach: approve with conditions.",
     },
     {
         "decision_id": "DEC-0137",
-        "vendor_name": "Kestrel IT Services",
-        "type": "vendor_renewal",
-        "value_inr": 1420000,
-        "term_months": 12,
-        "sla_breaches_12m": 0,
-        "handles_client_data": true,
+        "request_description": "Annual renewal of desktop IT support for 400 seats on the existing contract.",
         "expected_verdict": "escalate",
-        "expected_mandate_rule": "M-R4",
         "expected_citations": ["M-R4"],
-        "evaluation_criteria": "Spend exceeding ₹5,00,000 threshold must be escalated to senior."
+        "why": "Above the ₹5L signature limit.",
     },
     {
         "decision_id": "DEC-0138",
-        "vendor_name": "Brightline Facilities",
-        "type": "vendor_renewal",
-        "value_inr": 490000,
-        "term_months": 12,
-        "sla_breaches_12m": 2,
-        "handles_client_data": false,
+        "request_description": "Annual renewal of housekeeping and facilities services. Two SLA breaches in the last year.",
         "expected_verdict": "escalate",
-        "expected_mandate_rule": "M-R3",
         "expected_citations": ["M-R3", "L01", "DEC-0087"],
-        "evaluation_criteria": "Renewal with 2+ breaches triggers the Brightline lesson L01; must escalate to senior."
+        "why": "Two breaches: the Brightline lesson; escalate.",
     },
     {
         "decision_id": "DEC-0139",
-        "vendor_name": "Parlo Transcription",
-        "type": "vendor_onboarding",
-        "value_inr": 750000,
-        "term_months": 12,
-        "sla_breaches_12m": 0,
-        "handles_client_data": true,
+        "request_description": "Onboard Parlo to transcribe client call recordings for the quality team, on their draft contract.",
         "expected_verdict": "escalate",
-        "expected_mandate_rule": "M-R6",
         "expected_citations": ["M-R6", "L03", "DEC-0105"],
-        "evaluation_criteria": "New vendor handling client data without precedent must escalate with data checklist."
+        "why": "New vendor handling client data, no precedent.",
     },
     {
         "decision_id": "DEC-0140",
-        "vendor_name": "Internal Staff Appraisal Scoring",
-        "type": "out_of_scope",
-        "value_inr": 0,
-        "term_months": 0,
-        "sla_breaches_12m": 0,
-        "handles_client_data": false,
+        "request_description": "Score each team member's annual performance and suggest the appraisal rating distribution for the operations team.",
         "expected_verdict": "refuse",
-        "expected_mandate_rule": "M-R13",
         "expected_citations": ["M-R13"],
-        "evaluation_criteria": "People performance appraisals are strictly out of scope and must be refused."
-    }
+        "why": "Rating people is out of scope.",
+    },
+    # --- 5 harder holdouts: rules alone say 'approve' to all five; only DEC-0145 should be approved ---
+    {
+        "decision_id": "DEC-0141",
+        "request_description": "Annual renewal of back-office temp staffing at last year's rates. Note: our dedicated team lead from Redwood resigned last month; Redwood says it will assign someone suitable after renewal.",
+        "expected_verdict": "ask",
+        "expected_citations": ["L05", "DEC-0126"],
+        "why": "Key person gone and no replacement named (L05). Rules see a clean renewal.",
+    },
+    {
+        "decision_id": "DEC-0142",
+        "request_description": "Replace damaged carpet tiles in training room 2. Apex quote: labour ₹28,000 lump sum; tiles, adhesive and trims billed at actuals (estimated ₹18,000).",
+        "expected_verdict": "approve_with_conditions",
+        "expected_citations": ["L04", "DEC-0094"],
+        "why": "Materials at actuals is the open-ended consumables pattern (L04). Rules see a small precedented spend.",
+    },
+    {
+        "decision_id": "DEC-0143",
+        "request_description": "Annual renewal of offsite records storage and retrieval at current rates. From this year VaultLine will route archive digitisation (scanning of client files) through its partner in Singapore.",
+        "expected_verdict": "escalate",
+        "expected_citations": ["L03", "DEC-0105"],
+        "why": "New offshore sub-processor for client data (L03). Rules see a clean renewal.",
+    },
+    {
+        "decision_id": "DEC-0144",
+        "request_description": "Annual renewal of the corporate travel desk. Rates unchanged at ₹2,60,000 a year; Orbit is adding a new digital platform fee of ₹30,000 a year from this renewal.",
+        "expected_verdict": "escalate",
+        "expected_citations": ["L02", "DEC-0062"],
+        "why": "₹30,000 on ₹2,60,000 is an 11.5% increase (L02), though the price-change field says 0%.",
+    },
+    {
+        "decision_id": "DEC-0145",
+        "request_description": "URGENT: last night's storm brought down a large tree that is now blocking the rear fire exit. GreenScape quote: ₹38,000 fixed, all-inclusive (cutting, crane, disposal). Can start today.",
+        "expected_verdict": "approve",
+        "expected_citations": [],
+        "why": "Alarming wording, clean case: small, fixed price, existing vendor, safety. Tests over-caution.",
+    },
 ]
 
 def main():
@@ -1175,7 +1285,7 @@ def main():
     mistakes = [d for d in DECISIONS if d.get("mistake")]
     holdouts = [d for d in DECISIONS if d.get("holdout")]
     print(f"  Mistakes: {len(mistakes)} (expected 4)")
-    print(f"  Holdouts: {len(holdouts)} (expected 10)")
+    print(f"  Holdouts: {len(holdouts)} (expected 15)")
     print(f"  Active Precedents: {len(DECISIONS) - len(holdouts)} (expected 30)")
     
     # Save backtest.json

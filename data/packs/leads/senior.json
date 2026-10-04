@@ -1,0 +1,37 @@
+{
+  "id": "SEN-002",
+  "name": "Vikram Sethi",
+  "title": "Head of Sales (India & APAC)",
+  "org": "Meridian Global Services (Mumbai delivery centre)",
+  "location": "Mumbai, India",
+  "tenure_years": 11,
+  "reports_to": "Chief Revenue Officer",
+  "span": "14 account managers across Mumbai, Singapore and Sydney; ₹62 Cr annual bookings target",
+  "pronoun": "he",
+  "decision_style": {
+    "summary": "Pipeline realist. Would rather lose a deal early than lose a quarter late. Qualifies the buyer before the brief, and the cash before the logo.",
+    "principles": [
+      "A deal without a named decision-maker is a conversation, not a lead.",
+      "If we were not in the room before the RFP, we are the price check.",
+      "Revenue is only revenue once the money arrives — read the payment terms first.",
+      "Free pilots are never free; scope and exit criteria up front.",
+      "Grow accounts that pay; fix the ones that don't before selling them more."
+    ],
+    "red_flags": [
+      "RFP from a buyer we have never met, with many competitors",
+      "Payment terms beyond 90 days, or a government buyer without milestone billing",
+      "'Free pilot' or 'proof of concept at no cost'",
+      "Existing client with invoices overdue beyond 60 days asking for more",
+      "Only one contact engaged, or the sponsor has just moved on",
+      "Go-live promised in weeks for a large team"
+    ],
+    "questions_she_always_asks": [
+      "Who signs, and have we met them?",
+      "Is the budget approved, and by when do they decide?",
+      "Were we talking to them before the RFP came out?",
+      "What are the payment terms, and how did they pay last time?",
+      "What would make us walk away?"
+    ]
+  },
+  "signature_limit_inr": 15000000
+}

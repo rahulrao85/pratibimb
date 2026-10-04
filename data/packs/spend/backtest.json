@@ -1,0 +1,117 @@
+{
+  "backtest_cases": [
+    {
+      "decision_id": "FC-0131",
+      "request_description": "Printex stationery invoice 3% over PO for freight; GRN done.",
+      "expected_verdict": "approve",
+      "expected_citations": [],
+      "why": "Clean 3% variance."
+    },
+    {
+      "decision_id": "FC-0132",
+      "request_description": "CoolAir repaired a pantry AC; ₹80,000 invoice, no PO raised; GRN done.",
+      "expected_verdict": "approve_with_conditions",
+      "expected_citations": [],
+      "why": "₹80k no-PO repair."
+    },
+    {
+      "decision_id": "FC-0133",
+      "request_description": "NetSure CCTV upgrade invoiced at ₹2.4 lakh without a PO.",
+      "expected_verdict": "escalate",
+      "expected_citations": [],
+      "why": "₹2.4 L no-PO."
+    },
+    {
+      "decision_id": "FC-0134",
+      "request_description": "Metro Cabs invoice is 14% over the PO due to night-shift surcharges.",
+      "expected_verdict": "escalate",
+      "expected_citations": [],
+      "why": "14% variance."
+    },
+    {
+      "decision_id": "FC-0135",
+      "request_description": "Sparkle invoice 2% over PO; facilities has not confirmed the GRN yet.",
+      "expected_verdict": "ask",
+      "expected_citations": [],
+      "why": "No GRN."
+    },
+    {
+      "decision_id": "FC-0136",
+      "request_description": "Client dinner ₹9,000, slightly over per-diem; receipt attached.",
+      "expected_verdict": "approve",
+      "expected_citations": [],
+      "why": "Expense with receipt."
+    },
+    {
+      "decision_id": "FC-0137",
+      "request_description": "Taxi and meals claim ₹11,000; receipts lost.",
+      "expected_verdict": "ask",
+      "expected_citations": [],
+      "why": "No receipt."
+    },
+    {
+      "decision_id": "FC-0138",
+      "request_description": "IT network-switch spend will run 18% over the cost-centre budget.",
+      "expected_verdict": "escalate",
+      "expected_citations": [],
+      "why": "Overrun 18%."
+    },
+    {
+      "decision_id": "FC-0139",
+      "request_description": "Sales manager submitting his own ₹8,000 expense claim for his own approval.",
+      "expected_verdict": "refuse",
+      "expected_citations": [],
+      "why": "Self-approval."
+    },
+    {
+      "decision_id": "FC-0140",
+      "request_description": "GreenLeaf (MSME) catering invoice 2.5% over PO; accepted 38 days ago.",
+      "expected_verdict": "approve_with_conditions",
+      "expected_citations": [],
+      "why": "MSME day 38."
+    },
+    {
+      "decision_id": "FC-0141",
+      "request_description": "Soundwave AV invoice ₹96,000, no PO, for the 4th-floor conference room upgrade (Phase 2). Under the ₹1 lakh no-PO limit.",
+      "expected_verdict": "escalate",
+      "expected_citations": [
+        "FL01"
+      ],
+      "why": "Second invoice for the same AV upgrade (Phase 1 ₹94,500 last month): aggregated ₹1.9 L (FL01)."
+    },
+    {
+      "decision_id": "FC-0142",
+      "request_description": "Sparkle cleaning invoice 3.1% over PO; GRN done. The invoice says their bank account has changed and gives the new details.",
+      "expected_verdict": "ask",
+      "expected_citations": [
+        "FL02"
+      ],
+      "why": "Invoice carries new bank details: callback first (FL02)."
+    },
+    {
+      "decision_id": "FC-0143",
+      "request_description": "Facilities wants ergonomic chairs now, 7% over budget, 'so the remaining budget doesn't lapse at year-end'; funding from the pantry line.",
+      "expected_verdict": "ask",
+      "expected_citations": [
+        "FL03"
+      ],
+      "why": "March-style 'before it lapses' purchase: needs a use plan (FL03)."
+    },
+    {
+      "decision_id": "FC-0144",
+      "request_description": "Metro Cabs asks for a 20% advance for the festive fleet. They mention their drivers' salaries were delayed last month.",
+      "expected_verdict": "escalate",
+      "expected_citations": [
+        "FL04"
+      ],
+      "why": "20% advance, but supplier says drivers' salaries are delayed (FL04)."
+    },
+    {
+      "decision_id": "FC-0145",
+      "request_description": "URGENT: server-room AC failed overnight; CoolAir fixed it by 6 am. ₹42,000, no PO, rate card matches, GRN done.",
+      "expected_verdict": "approve_with_conditions",
+      "expected_citations": [],
+      "why": "URGENT server-room AC failure fixed overnight; rate card matches."
+    }
+  ]
+}

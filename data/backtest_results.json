@@ -1,0 +1,888 @@
+{
+  "run_at": "2026-10-04T15:49:03",
+  "pack": "vendor",
+  "model": "gemini-3.8-flash",
+  "modes": [
+    "rules",
+    "gemini"
+  ],
+  "scores": {
+    "rules": {
+      "all": {
+        "cases": 15,
+        "exact": 11,
+        "lenient": 11
+      },
+      "original_10": {
+        "cases": 10,
+        "exact": 10,
+        "lenient": 10
+      },
+      "hard_5": {
+        "cases": 5,
+        "exact": 1,
+        "lenient": 1
+      },
+      "unsafe_approvals": [
+        "DEC-0141",
+        "DEC-0142",
+        "DEC-0143",
+        "DEC-0144"
+      ],
+      "over_cautious": [],
+      "citation_recall": 0.87
+    },
+    "gemini": {
+      "all": {
+        "cases": 15,
+        "exact": 13,
+        "lenient": 14
+      },
+      "original_10": {
+        "cases": 10,
+        "exact": 10,
+        "lenient": 10
+      },
+      "hard_5": {
+        "cases": 5,
+        "exact": 3,
+        "lenient": 4
+      },
+      "unsafe_approvals": [],
+      "over_cautious": [
+        "DEC-0145"
+      ],
+      "citation_recall": 0.9
+    }
+  },
+  "cost": {
+    "live_calls": 8,
+    "cached_calls": 48,
+    "usd": 0.0205,
+    "inr": 1.8
+  },
+  "cases": [
+    {
+      "decision_id": "DEC-0131",
+      "vendor_name": "ClearDesk Supplies",
+      "set": "original",
+      "request": {
+        "date": "2026-07-05",
+        "type": "vendor_renewal",
+        "vendor_id": "V-CLEARDESK",
+        "vendor_name": "ClearDesk Supplies",
+        "value_inr": 130000,
+        "term_months": 12,
+        "sla_breaches_12m": 0,
+        "handles_client_data": false,
+        "requested_by": "Admin – S. Patwardhan",
+        "id": "BT-0131",
+        "description": "Annual renewal of the stationery and office supplies rate agreement at current rates."
+      },
+      "expected": "approve",
+      "expected_citations": [
+        "M-R1",
+        "DEC-0099"
+      ],
+      "why": "Routine renewal under ₹5L with zero breaches.",
+      "meera_note": "Annual stationery supplies rate agreement renewal. Clean track record, low value.",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Approve ClearDesk Supplies for ₹130,000: inside the mandate, clean record",
+        "citations": [
+          "M-R1",
+          "DEC-0099",
+          "DEC-0021",
+          "DEC-0130"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "approve",
+        "headline": "Approve annual rate agreement renewal for stationery supplies with ClearDesk at existing terms.",
+        "citations": [
+          "M-R1",
+          "DEC-0021",
+          "DEC-0099",
+          "DEC-0130"
+        ],
+        "lessons_applied": [],
+        "reasoning": "ClearDesk Supplies has maintained an unblemished delivery record with zero SLA breaches over their 27-month tenure. The contract holds rates flat at a 0% price increase and requires zero advance payment. This is a clean, low-value renewal well within the operational threshold.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "DEC-0132",
+      "vendor_name": "Ironclad Maintenance",
+      "set": "original",
+      "request": {
+        "date": "2026-07-18",
+        "type": "vendor_renewal",
+        "vendor_id": "V-IRONCLAD",
+        "vendor_name": "Ironclad Maintenance",
+        "value_inr": 430000,
+        "term_months": 12,
+        "sla_breaches_12m": 0,
+        "handles_client_data": false,
+        "requested_by": "Facilities – G. Raman",
+        "id": "BT-0132",
+        "description": "Annual renewal of HVAC chilled-water and air-handling maintenance for the delivery floor and server room."
+      },
+      "expected": "approve",
+      "expected_citations": [
+        "M-R1",
+        "DEC-0076"
+      ],
+      "why": "HVAC renewal inside the limit with zero breaches.",
+      "meera_note": "HVAC chilled water and air-handling maintenance renewal. Routine inside limit.",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Approve Ironclad Maintenance for ₹430,000: inside the mandate, clean record",
+        "citations": [
+          "M-R1",
+          "DEC-0041",
+          "DEC-0076",
+          "DEC-0087",
+          "L01"
+        ],
+        "lessons_applied": [
+          "L01"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "approve",
+        "headline": "Approve annual HVAC maintenance renewal under standard delegation limits with zero recorded SLA breaches.",
+        "citations": [
+          "M-R1",
+          "DEC-0041",
+          "DEC-0076"
+        ],
+        "lessons_applied": [],
+        "reasoning": "This is a clean, routine renewal under the ₹5,00,000 threshold with no price increase, zero advance payment, and no client data exposure. The vendor has maintained a flawless SLA track record over 23 months of service. Continued preventive maintenance supports server room uptime without introducing operational or financial risk.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "DEC-0133",
+      "vendor_name": "GreenScape Landscaping",
+      "set": "original",
+      "request": {
+        "date": "2026-08-02",
+        "type": "vendor_renewal",
+        "vendor_id": "V-GREENSCAPE",
+        "vendor_name": "GreenScape Landscaping",
+        "value_inr": 195000,
+        "term_months": 12,
+        "sla_breaches_12m": 0,
+        "handles_client_data": false,
+        "requested_by": "Admin – S. Patwardhan",
+        "id": "BT-0133",
+        "description": "Annual renewal of grounds and landscaping upkeep for the campus."
+      },
+      "expected": "approve",
+      "expected_citations": [
+        "M-R1",
+        "DEC-0058"
+      ],
+      "why": "Grounds upkeep renewal inside the limit with zero breaches.",
+      "meera_note": "Annual facility landscaping upkeep renewal. Routine low-value spend.",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Approve GreenScape Landscaping for ₹195,000: inside the mandate, clean record",
+        "citations": [
+          "M-R1",
+          "DEC-0058",
+          "DEC-0087",
+          "L01"
+        ],
+        "lessons_applied": [
+          "L01"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "approve",
+        "headline": "Approve annual campus landscaping renewal with GreenScape at zero price increase.",
+        "citations": [
+          "M-R1",
+          "DEC-0058"
+        ],
+        "lessons_applied": [],
+        "reasoning": "GreenScape has a clean 27-month operational record with zero SLA breaches and no price increase requested. The contract value is well within the delegated signature limit and carries zero advance payment or client data exposure.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "DEC-0134",
+      "vendor_name": "Zenith Catering",
+      "set": "original",
+      "request": {
+        "date": "2026-08-14",
+        "type": "vendor_renewal",
+        "vendor_id": "V-ZENITH",
+        "vendor_name": "Zenith Catering",
+        "value_inr": 390000,
+        "term_months": 12,
+        "sla_breaches_12m": 0,
+        "handles_client_data": false,
+        "requested_by": "Employee Welfare – M. D'Souza",
+        "id": "BT-0134",
+        "description": "Annual renewal of cafeteria catering for the delivery centre."
+      },
+      "expected": "approve",
+      "expected_citations": [
+        "M-R1",
+        "DEC-0053"
+      ],
+      "why": "Catering renewal under ₹5L with a clean record.",
+      "meera_note": "Staff canteen catering contract renewal. Inside ₹5L, clean hygiene certifications.",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Approve Zenith Catering for ₹390,000: inside the mandate, clean record",
+        "citations": [
+          "M-R1",
+          "DEC-0053",
+          "DEC-0033",
+          "DEC-0067"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "approve",
+        "headline": "Approve annual cafeteria catering renewal with Zenith Catering based on clean record and steady pricing.",
+        "citations": [
+          "M-R1",
+          "DEC-0033",
+          "DEC-0053",
+          "DEC-0067"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Zenith Catering has sustained a 32-month relationship with zero SLA breaches and no requested price increase. The contract value sits comfortably within signature limits and involves zero client data or advance payments. Past renewals have consistently demonstrated strong delivery and positive feedback.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "DEC-0135",
+      "vendor_name": "BlueRidge Security",
+      "set": "original",
+      "request": {
+        "date": "2026-08-25",
+        "type": "vendor_renewal",
+        "vendor_id": "V-BLUERIDGE",
+        "vendor_name": "BlueRidge Security",
+        "value_inr": 460000,
+        "term_months": 12,
+        "sla_breaches_12m": 1,
+        "handles_client_data": false,
+        "requested_by": "Facilities – G. Raman",
+        "id": "BT-0135",
+        "description": "Annual renewal of physical security guarding. One SLA breach in the last year (a late shift handover in February)."
+      },
+      "expected": "approve_with_conditions",
+      "expected_citations": [
+        "M-R2",
+        "L01",
+        "DEC-0111"
+      ],
+      "why": "One breach: approve with a service credit and a 90-day exit.",
+      "meera_note": "Renewal with 1 breach in last 12 months. Approved under M-R2 with strict service credit and 90-day exit clauses.",
+      "rules": {
+        "verdict": "approve_with_conditions",
+        "headline": "Approve BlueRidge Security only with protective conditions",
+        "citations": [
+          "M-R2",
+          "DEC-0111",
+          "DEC-0044",
+          "DEC-0087",
+          "L01"
+        ],
+        "lessons_applied": [
+          "L01"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "approve_with_conditions",
+        "headline": "Approve BlueRidge renewal subject to standard service credit deductions and 90-day convenience termination.",
+        "citations": [
+          "M-R2",
+          "DEC-0111",
+          "DEC-0044"
+        ],
+        "lessons_applied": [],
+        "reasoning": "BlueRidge remains a reliable partner with 37 months of tenure and flat pricing, but the past shift handover breach requires formal contractual safeguards. Under our renewal mandate, single-breach vendors must carry financial teeth to prevent operational drift. Imposing service credits and a 90-day termination right adequately protects our facility operations.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "DEC-0136",
+      "vendor_name": "Northgate Couriers",
+      "set": "original",
+      "request": {
+        "date": "2026-09-02",
+        "type": "vendor_renewal",
+        "vendor_id": "V-NORTHGATE",
+        "vendor_name": "Northgate Couriers",
+        "value_inr": 340000,
+        "term_months": 12,
+        "sla_breaches_12m": 1,
+        "handles_client_data": false,
+        "requested_by": "Logistics – K. Bansal",
+        "id": "BT-0136",
+        "description": "Annual renewal of courier and document logistics. One SLA breach in the last year (a delayed delivery in May)."
+      },
+      "expected": "approve_with_conditions",
+      "expected_citations": [
+        "M-R2",
+        "L01",
+        "DEC-0119"
+      ],
+      "why": "One breach: approve with conditions.",
+      "meera_note": "Renewal with 1 SLA delay. Approved conditionally under M-R2 with active service credits.",
+      "rules": {
+        "verdict": "approve_with_conditions",
+        "headline": "Approve Northgate Couriers only with protective conditions",
+        "citations": [
+          "M-R2",
+          "DEC-0081",
+          "DEC-0119",
+          "DEC-0050",
+          "L01"
+        ],
+        "lessons_applied": [
+          "L01"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "approve_with_conditions",
+        "headline": "Approve renewal with mandatory SLA breach service credits and a 90-day termination clause.",
+        "citations": [
+          "M-R2",
+          "DEC-0119",
+          "DEC-0081",
+          "DEC-0050"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Northgate Couriers has maintained a 33-month relationship with no price increase, but the single SLA breach requires contractual safeguards. In line with M-R2, the agreement must incorporate strict penalties to prevent recurring delivery delays. Enforcing these terms protects operations while keeping an established vendor accountable.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "DEC-0137",
+      "vendor_name": "Kestrel IT Services",
+      "set": "original",
+      "request": {
+        "date": "2026-09-12",
+        "type": "vendor_renewal",
+        "vendor_id": "V-KESTREL",
+        "vendor_name": "Kestrel IT Services",
+        "value_inr": 1420000,
+        "term_months": 12,
+        "sla_breaches_12m": 0,
+        "handles_client_data": true,
+        "contract_id": "CN-KESTREL-2025",
+        "requested_by": "IT Infrastructure – R. Deshmukh",
+        "id": "BT-0137",
+        "description": "Annual renewal of desktop IT support for 400 seats on the existing contract."
+      },
+      "expected": "escalate",
+      "expected_citations": [
+        "M-R4"
+      ],
+      "why": "Above the ₹5L signature limit.",
+      "meera_note": "Value of ₹14.2 lakh substantially exceeds senior signature limit of ₹5.0 lakh. Must escalate to senior.",
+      "rules": {
+        "verdict": "escalate",
+        "headline": "Escalate Kestrel IT Services to Meera: outside the mandate",
+        "citations": [
+          "M-R4",
+          "M-R7",
+          "DEC-0012",
+          "DEC-0128",
+          "DEC-0062",
+          "CN-KESTREL-2025 §9.2",
+          "CN-KESTREL-2025 §10.3",
+          "L02"
+        ],
+        "lessons_applied": [
+          "L02"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "escalate",
+        "headline": "Escalate Kestrel IT renewal to Meera due to value limit, evergreen lock-in, and missing data protections",
+        "citations": [
+          "M-R4",
+          "M-R7",
+          "L03",
+          "DEC-0105",
+          "CN-KESTREL-2025 §9.2",
+          "CN-KESTREL-2025 §10.3",
+          "CN-KESTREL-2025 §7.4",
+          "CN-KESTREL-2025 §5.5"
+        ],
+        "lessons_applied": [
+          "L03"
+        ],
+        "reasoning": "At ₹1,420,000, this renewal exceeds our delegation-of-authority threshold and contains an unacceptable evergreen renewal clause with restrictive exit terms. Furthermore, because the vendor handles client data via privileged terminal access without explicit DPA safeguards or sub-processor governance, formal executive approval and contractual remediation are required before proceeding.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "DEC-0138",
+      "vendor_name": "Brightline Facilities",
+      "set": "original",
+      "request": {
+        "date": "2026-09-20",
+        "type": "vendor_renewal",
+        "vendor_id": "V-BRIGHTLINE",
+        "vendor_name": "Brightline Facilities",
+        "value_inr": 490000,
+        "term_months": 12,
+        "sla_breaches_12m": 2,
+        "handles_client_data": false,
+        "requested_by": "Admin – A. Kulkarni",
+        "id": "BT-0138",
+        "description": "Annual renewal of housekeeping and facilities services. Two SLA breaches in the last year."
+      },
+      "expected": "escalate",
+      "expected_citations": [
+        "M-R3",
+        "L01",
+        "DEC-0087"
+      ],
+      "why": "Two breaches: the Brightline lesson; escalate.",
+      "meera_note": "Vendor recorded 2 SLA breaches. Under Lesson L01 and rule M-R3, renewal cannot be approved automatically; must escalate to Meera with penalty clauses.",
+      "rules": {
+        "verdict": "escalate",
+        "headline": "Escalate Brightline Facilities to Meera: outside the mandate",
+        "citations": [
+          "M-R3",
+          "DEC-0087",
+          "DEC-0049",
+          "DEC-0129",
+          "L01"
+        ],
+        "lessons_applied": [
+          "L01"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "escalate",
+        "headline": "Escalate renewal to Meera due to two past SLA breaches requiring mandatory service-credit and exit terms.",
+        "citations": [
+          "M-R3",
+          "L01",
+          "DEC-0081",
+          "DEC-0087",
+          "DEC-0129"
+        ],
+        "lessons_applied": [
+          "L01"
+        ],
+        "reasoning": "Brightline Facilities has recorded two SLA breaches in the past twelve months, which indicates a recurring process problem under our operating rules. This renewal cannot proceed routinely without Meera's explicit sign-off, protective penalty clauses, and market benchmarking. We must enforce mandatory service credits, a clear termination path, and a competing quote before executing.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "DEC-0139",
+      "vendor_name": "Parlo Transcription",
+      "set": "original",
+      "request": {
+        "date": "2026-09-28",
+        "type": "vendor_onboarding",
+        "vendor_id": "V-PARLO",
+        "vendor_name": "Parlo Transcription",
+        "value_inr": 750000,
+        "term_months": 12,
+        "sla_breaches_12m": 0,
+        "handles_client_data": true,
+        "contract_id": "CN-PARLO-DRAFT",
+        "requested_by": "Customer Operations – P. Mehta",
+        "id": "BT-0139",
+        "description": "Onboard Parlo to transcribe client call recordings for the quality team, on their draft contract."
+      },
+      "expected": "escalate",
+      "expected_citations": [
+        "M-R6",
+        "L03",
+        "DEC-0105"
+      ],
+      "why": "New vendor handling client data, no precedent.",
+      "meera_note": "New vendor handling client customer call data. No precedent exists and draft contract lacks explicit data residency and DPA. Must ask checklist questions and escalate.",
+      "rules": {
+        "verdict": "escalate",
+        "headline": "Escalate Parlo Transcription to Meera: outside the mandate",
+        "citations": [
+          "M-R5",
+          "M-R6",
+          "DEC-0105",
+          "DEC-0062",
+          "CN-PARLO-DRAFT §9.2",
+          "CN-PARLO-DRAFT §12.1",
+          "L03",
+          "L02"
+        ],
+        "lessons_applied": [
+          "L03",
+          "L02"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "escalate",
+        "headline": "Escalate onboarding of Parlo Transcription due to unvetted sub-processors and missing data residency controls.",
+        "citations": [
+          "M-R5",
+          "M-R6",
+          "L03",
+          "DEC-0105",
+          "CN-PARLO-DRAFT §8.1",
+          "CN-PARLO-DRAFT §9.2",
+          "CN-PARLO-DRAFT §12.1",
+          "CN-PARLO-DRAFT §4.3"
+        ],
+        "lessons_applied": [
+          "L03"
+        ],
+        "reasoning": "Parlo will handle client call recordings, but their draft contract permits unbounded data hosting and unapproved third-party sub-processors without our consent. Furthermore, their 14-day breach notification and unannounced 30% advance clause fall far short of our operational standards. Per Meera's mandate, onboarding a zero-history vendor touching client data requires senior sign-off with strict contractual safeguards.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "DEC-0140",
+      "vendor_name": "Internal Staff Appraisal Scoring",
+      "set": "original",
+      "request": {
+        "date": "2026-10-01",
+        "type": "out_of_scope",
+        "vendor_id": "OUT_OF_SCOPE",
+        "vendor_name": "Internal Staff Appraisal Scoring",
+        "value_inr": 0,
+        "term_months": 0,
+        "sla_breaches_12m": 0,
+        "handles_client_data": false,
+        "requested_by": "Ops Manager – K. Varma",
+        "id": "BT-0140",
+        "description": "Score each team member's annual performance and suggest the appraisal rating distribution for the operations team."
+      },
+      "expected": "refuse",
+      "expected_citations": [
+        "M-R13"
+      ],
+      "why": "Rating people is out of scope.",
+      "meera_note": "Request submitted to score employee annual performance and recommend appraisal distribution. Refused as strictly out of scope.",
+      "rules": {
+        "verdict": "refuse",
+        "headline": "Refuse: rating people's performance is outside Pratibimb's scope",
+        "citations": [
+          "M-R13"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Pratibimb never rates people (mandate rule M-R13).",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "refuse",
+        "headline": "Refuse: rating people's performance is outside Pratibimb's scope",
+        "citations": [
+          "M-R13"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Pratibimb never rates people (mandate rule M-R13).",
+        "engine": "rules"
+      }
+    },
+    {
+      "decision_id": "DEC-0141",
+      "vendor_name": "Redwood Staffing",
+      "set": "hard",
+      "request": {
+        "date": "2026-09-08",
+        "type": "vendor_renewal",
+        "vendor_id": "V-REDWOOD",
+        "vendor_name": "Redwood Staffing",
+        "value_inr": 460000,
+        "term_months": 12,
+        "sla_breaches_12m": 0,
+        "handles_client_data": false,
+        "requested_by": "Customer Operations – P. Mehta",
+        "id": "BT-0141",
+        "description": "Annual renewal of back-office temp staffing at last year's rates. Note: our dedicated team lead from Redwood resigned last month; Redwood says it will assign someone suitable after renewal."
+      },
+      "expected": "ask",
+      "expected_citations": [
+        "L05",
+        "DEC-0126"
+      ],
+      "why": "Key person gone and no replacement named (L05). Rules see a clean renewal.",
+      "meera_note": "Held the renewal: the named team lead resigned and Redwood has not named a replacement. Asked for the replacement's CV and a 30-day handover plan before renewing.",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Approve Redwood Staffing for ₹460,000: inside the mandate, clean record",
+        "citations": [
+          "M-R1",
+          "DEC-0108",
+          "DEC-0126",
+          "DEC-0087",
+          "L05",
+          "L01"
+        ],
+        "lessons_applied": [
+          "L05",
+          "L01"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "ask",
+        "headline": "Hold renewal until Redwood identifies and confirms the replacement team lead.",
+        "citations": [
+          "M-R1",
+          "L05",
+          "DEC-0126",
+          "DEC-0108"
+        ],
+        "lessons_applied": [
+          "L05"
+        ],
+        "reasoning": "A key person named on the contract who has already left is a direct operational red flag that we do not sign off on based on verbal promises. We need the replacement vetted and locked into the contract with clear substitution rights before approving renewal terms. Never renew on an open staffing dependency when continuity is at stake.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "DEC-0142",
+      "vendor_name": "Apex Interiors",
+      "set": "hard",
+      "request": {
+        "date": "2026-09-15",
+        "type": "one_time_spend",
+        "vendor_id": "V-APEX",
+        "vendor_name": "Apex Interiors",
+        "value_inr": 46000,
+        "term_months": 1,
+        "sla_breaches_12m": 0,
+        "handles_client_data": false,
+        "requested_by": "Admin – A. Kulkarni",
+        "id": "BT-0142",
+        "description": "Replace damaged carpet tiles in training room 2. Apex quote: labour ₹28,000 lump sum; tiles, adhesive and trims billed at actuals (estimated ₹18,000)."
+      },
+      "expected": "approve_with_conditions",
+      "expected_citations": [
+        "L04",
+        "DEC-0094"
+      ],
+      "why": "Materials at actuals is the open-ended consumables pattern (L04). Rules see a small precedented spend.",
+      "meera_note": "Small and precedented, but the quote bills materials at actuals. Approved only as a fixed all-inclusive price with an itemised bill of materials.",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Approve Apex Interiors for ₹46,000: inside the mandate, clean record",
+        "citations": [
+          "M-R11",
+          "DEC-0094",
+          "DEC-0127",
+          "L04"
+        ],
+        "lessons_applied": [
+          "L04"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "approve_with_conditions",
+        "headline": "Approve subject to hard cap on materials and itemized bill of materials.",
+        "citations": [
+          "M-R11",
+          "L04",
+          "DEC-0094",
+          "DEC-0127"
+        ],
+        "lessons_applied": [
+          "L04"
+        ],
+        "reasoning": "We cannot permit open-ended actuals on fitout work, as prior consumables billing without a ceiling led to unexpected cost overruns. While the scope is routine and low risk, materials must have a strictly binding maximum price before issuing the purchase order. Requiring an itemized bill of materials protects us against bracket creep while keeping work on schedule.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "DEC-0143",
+      "vendor_name": "VaultLine Storage",
+      "set": "hard",
+      "request": {
+        "date": "2026-09-22",
+        "type": "vendor_renewal",
+        "vendor_id": "V-VAULTLINE",
+        "vendor_name": "VaultLine Storage",
+        "value_inr": 440000,
+        "term_months": 12,
+        "sla_breaches_12m": 0,
+        "handles_client_data": true,
+        "requested_by": "Compliance – N. Iyer",
+        "id": "BT-0143",
+        "description": "Annual renewal of offsite records storage and retrieval at current rates. From this year VaultLine will route archive digitisation (scanning of client files) through its partner in Singapore."
+      },
+      "expected": "escalate",
+      "expected_citations": [
+        "L03",
+        "DEC-0105"
+      ],
+      "why": "New offshore sub-processor for client data (L03). Rules see a clean renewal.",
+      "meera_note": "Renewal adds an overseas scanning sub-processor for client records. Took it herself: needs data location, DPA and sub-processor approval before anything is signed.",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Approve VaultLine Storage for ₹440,000: inside the mandate, clean record",
+        "citations": [
+          "M-R1",
+          "DEC-0012",
+          "DEC-0128",
+          "DEC-0062",
+          "L02"
+        ],
+        "lessons_applied": [
+          "L02"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "escalate",
+        "headline": "Escalate renewal due to unvetted offshore digitisation of client records in Singapore without a formal DPA.",
+        "citations": [
+          "M-R1",
+          "L03",
+          "DEC-0105"
+        ],
+        "lessons_applied": [
+          "L03"
+        ],
+        "reasoning": "While VaultLine has a clean 52-month track record, routing client archive digitisation to an external Singapore partner breaches our requirement that whoever touches client data must be formally vetted and bound to strict residency rules. We cannot treat this as a routine renewal without an approved sub-processor list, a signed DPA, and 24-hour breach notification terms. This requires Meera's direct review against our data protection standards before any commitment is signed.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "DEC-0144",
+      "vendor_name": "Orbit Travel",
+      "set": "hard",
+      "request": {
+        "date": "2026-09-26",
+        "type": "vendor_renewal",
+        "vendor_id": "V-ORBIT",
+        "vendor_name": "Orbit Travel",
+        "value_inr": 290000,
+        "term_months": 12,
+        "sla_breaches_12m": 0,
+        "handles_client_data": false,
+        "requested_by": "Admin – S. Patwardhan",
+        "id": "BT-0144",
+        "description": "Annual renewal of the corporate travel desk. Rates unchanged at ₹2,60,000 a year; Orbit is adding a new digital platform fee of ₹30,000 a year from this renewal."
+      },
+      "expected": "escalate",
+      "expected_citations": [
+        "L02",
+        "DEC-0062"
+      ],
+      "why": "₹30,000 on ₹2,60,000 is an 11.5% increase (L02), though the price-change field says 0%.",
+      "meera_note": "Rates are 'unchanged' but a new ₹30,000 platform fee is an 11.5% increase. Needs a benchmark and a competing quote first.",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Approve Orbit Travel for ₹290,000: inside the mandate, clean record",
+        "citations": [
+          "M-R1",
+          "DEC-0038",
+          "DEC-0087",
+          "L06",
+          "L01"
+        ],
+        "lessons_applied": [
+          "L06",
+          "L01"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "ask",
+        "headline": "Ask requester to justify the 11.5% fee hike and clarify renewal terms before approval",
+        "citations": [
+          "M-R1",
+          "DEC-0038",
+          "L02"
+        ],
+        "lessons_applied": [
+          "L02"
+        ],
+        "reasoning": "The headline rates may appear unchanged, but adding a ₹30,000 platform fee increases our overall commitment by over 11.5%, breaching our 8% threshold. We need to verify if this platform fee is optional, benchmark it against competing quotes, and review the underlying contract terms before committing. I will not sign off on hidden price hikes without seeing the paper and competitive justification.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "DEC-0145",
+      "vendor_name": "GreenScape Landscaping",
+      "set": "hard",
+      "request": {
+        "date": "2026-09-29",
+        "type": "one_time_spend",
+        "vendor_id": "V-GREENSCAPE",
+        "vendor_name": "GreenScape Landscaping",
+        "value_inr": 38000,
+        "term_months": 1,
+        "sla_breaches_12m": 0,
+        "handles_client_data": false,
+        "requested_by": "Facilities – G. Raman",
+        "id": "BT-0145",
+        "description": "URGENT: last night's storm brought down a large tree that is now blocking the rear fire exit. GreenScape quote: ₹38,000 fixed, all-inclusive (cutting, crane, disposal). Can start today."
+      },
+      "expected": "approve",
+      "expected_citations": [],
+      "why": "Alarming wording, clean case: small, fixed price, existing vendor, safety. Tests over-caution.",
+      "meera_note": "Urgent safety job from an existing vendor on a fixed all-inclusive quote under ₹50,000. Approved the same day.",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Approve GreenScape Landscaping for ₹38,000: inside the mandate, clean record",
+        "citations": [
+          "M-R11",
+          "DEC-0058",
+          "DEC-0094",
+          "L04"
+        ],
+        "lessons_applied": [
+          "L04"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "approve_with_conditions",
+        "headline": "Approve urgent fire exit clearance with strict fixed-cost confirmation",
+        "citations": [
+          "M-R11",
+          "DEC-0058",
+          "DEC-0094",
+          "L04"
+        ],
+        "lessons_applied": [
+          "L04"
+        ],
+        "reasoning": "GreenScape is a trusted vendor handling a critical safety hazard blocking the rear fire exit, and the work must start immediately. While the mandate floor allows outright approval, our policy requires locking in one-time service engagements to ensure no hidden consumables or disposal reimbursables arise. The PO must formalize the quoted ₹38,000 as a fixed, fully-loaded cap before payment.",
+        "engine": "gemini-3.8-flash"
+      }
+    }
+  ]
+}

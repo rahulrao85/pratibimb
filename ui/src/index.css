@@ -1,124 +1,60 @@
-/* Pratibimb UI Stylesheet adhering to G-Universe Design System */
-@import '/design-tokens.css';
+/* Pratibimb — project styles on top of the Govu design system.
+   Base tokens and components come from /govu-tokens.css (linked in index.html):
+   Aurora (light: white + blue + orange) and Voltage (dark: black + yellow + green), switched by <html data-theme>.
+   This file only adds project tokens and classes built from those tokens. */
 
-* {
-  box-sizing: border-box;
+:root {
+  --info: var(--primary-color);
+  --info-light: var(--primary-light);
+  --overlay: rgba(20, 22, 28, 0.55);
+}
+:root[data-theme="dark"] {
+  --overlay: rgba(0, 0, 0, 0.72);
+}
+
+p, ul, ol, h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  padding: 0;
 }
 
-body {
-  font-family: var(--font-primary);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  -webkit-font-smoothing: antialiased;
+input, select, textarea, button {
+  font: inherit;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  letter-spacing: -0.02em;
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-color) !important;
+  box-shadow: var(--focus-ring);
 }
 
-/* Glassmorphism Card Base */
+/* Large content panels: Govu glass surface, no lift (lift is for things you click) */
 .glass-card {
   background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   box-shadow: var(--card-shadow);
   transition: var(--transition);
 }
-
 .glass-card:hover {
-  box-shadow: var(--hover-shadow);
-  border-color: rgba(37, 99, 235, 0.2);
+  border-color: var(--border-strong);
 }
 
-/* Button Component Styles */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.25rem;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: var(--transition);
-  border: none;
-  text-decoration: none;
-}
-
-.btn-primary {
-  background: var(--primary-color);
-  color: #ffffff;
-}
-
-.btn-primary:hover {
-  background: var(--primary-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-}
-
-.btn-secondary:hover {
-  background: var(--primary-light);
-  color: var(--primary-color);
-  border-color: var(--primary-color);
-}
-
-/* Tags & Badges */
+/* Status tags: Govu pill + semantic colours */
 .tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.25rem 0.65rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  gap: var(--space-1);
+  white-space: nowrap;
 }
+.tag-success { background: var(--success-light); color: var(--success); border-color: color-mix(in srgb, var(--success) 25%, transparent); }
+.tag-warning { background: var(--warning-light); color: var(--warning); border-color: color-mix(in srgb, var(--warning) 25%, transparent); }
+.tag-danger  { background: var(--danger-light);  color: var(--danger);  border-color: color-mix(in srgb, var(--danger) 25%, transparent); }
+.tag-info    { background: var(--info-light);    color: var(--info);    border-color: color-mix(in srgb, var(--info) 25%, transparent); }
 
-.tag-success {
-  background: var(--success-light);
-  color: var(--success);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-}
-
-.tag-warning {
-  background: var(--warning-light);
-  color: var(--warning);
-  border: 1px solid rgba(245, 158, 11, 0.2);
-}
-
-.tag-danger {
-  background: var(--danger-light);
-  color: var(--danger);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-}
-
-.tag-info {
-  background: var(--info-light);
-  color: var(--info);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-/* App Container Layout */
+/* Layout */
 .app-container {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--space-7) var(--space-6);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -128,7 +64,131 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding-bottom: var(--space-5);
   border-bottom: 1px solid var(--border-color);
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-7);
+}
+
+/* Brand left, controls right, section tabs on their own row */
+.app-header > .nav-tabs {
+  order: 3;
+  flex-basis: 100%;
+}
+.nav-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  background: var(--bg-inset);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+}
+.nav-tabs .nav-link {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  gap: var(--space-2);
+}
+.nav-tabs .nav-link.active {
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Back-test rows: 5 columns on desktop, stacked on phones */
+.bt-k {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: var(--space-4);
+  }
+  .nav-tabs {
+    border-radius: var(--radius-md);
+  }
+  .bt-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  }
+  .bt-row .tag {
+    white-space: normal;
+  }
+  .bt-row > div:first-child {
+    grid-column: 1 / -1;
+  }
+  .bt-row > svg {
+    display: none;
+  }
+}
+
+/* Senior switcher: one company, three seniors, each with their own Pratibimb */
+.senior-switch {
+  order: 2;
+  flex-basis: 100%;
+  display: grid;
+  gap: var(--space-2);
+}
+.senior-switch-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.senior-switch-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: var(--space-3);
+}
+.senior-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  text-align: left;
+  font: inherit;
+}
+.senior-avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  background: var(--bg-inset);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+.senior-option.is-selected .senior-avatar {
+  background: var(--primary-color);
+  color: var(--primary-contrast);
+  border-color: var(--primary-color);
+}
+.senior-name {
+  display: block;
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+.senior-role {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.senior-switch,
+.senior-switch-options > *,
+.senior-option {
+  min-width: 0;
 }

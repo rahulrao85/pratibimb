@@ -1,0 +1,879 @@
+{
+  "run_at": "2026-10-04T15:49:15",
+  "pack": "leads",
+  "model": "gemini-3.8-flash",
+  "modes": [
+    "rules",
+    "gemini"
+  ],
+  "scores": {
+    "rules": {
+      "all": {
+        "cases": 15,
+        "exact": 11,
+        "lenient": 11
+      },
+      "original_10": {
+        "cases": 10,
+        "exact": 10,
+        "lenient": 10
+      },
+      "hard_5": {
+        "cases": 5,
+        "exact": 1,
+        "lenient": 1
+      },
+      "unsafe_approvals": [
+        "SL-0141",
+        "SL-0142",
+        "SL-0143",
+        "SL-0144"
+      ],
+      "over_cautious": [],
+      "citation_recall": 1.0
+    },
+    "gemini": {
+      "all": {
+        "cases": 15,
+        "exact": 15,
+        "lenient": 15
+      },
+      "original_10": {
+        "cases": 10,
+        "exact": 10,
+        "lenient": 10
+      },
+      "hard_5": {
+        "cases": 5,
+        "exact": 5,
+        "lenient": 5
+      },
+      "unsafe_approvals": [],
+      "over_cautious": [],
+      "citation_recall": 1.0
+    }
+  },
+  "cost": {
+    "live_calls": 4,
+    "cached_calls": 48,
+    "usd": 0.0099,
+    "inr": 0.87
+  },
+  "cases": [
+    {
+      "decision_id": "SL-0131",
+      "vendor_name": "Orchid Retail",
+      "set": "original",
+      "request": {
+        "date": "2026-07-02",
+        "type": "existing_client_upsell",
+        "entity_id": "A-ORCHID",
+        "entity_name": "Orchid Retail",
+        "amount_inr": 2900000,
+        "requested_by": "Account manager",
+        "service_line": "customer_support",
+        "budget_confirmed": true,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 45,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0131",
+        "description": "Orchid wants 10 more support seats at the current rates; their COO approved the budget."
+      },
+      "expected": "approve",
+      "expected_citations": [],
+      "why": "Orchid adding 10 seats.",
+      "meera_note": "Orchid adding 10 seats.",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Qualify: Orchid Retail, ₹29,00,000, inside the mandate",
+        "citations": [
+          "S-R1",
+          "SL-0001",
+          "SL-0027",
+          "SL-0009",
+          "SL04"
+        ],
+        "lessons_applied": [
+          "SL04"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "approve",
+        "headline": "Qualify clean 10-seat expansion for Orchid Retail with COO sign-off.",
+        "citations": [
+          "S-R1",
+          "SL-0001",
+          "SL-0027"
+        ],
+        "lessons_applied": [],
+        "reasoning": "This is a routine upsell with an established client that has no overdue invoices and confirmed COO budget. The payment terms are well within standard limits and the service line is core. We should proceed immediately to contracting at the agreed rates.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "SL-0132",
+      "vendor_name": "Cobalt Fintech",
+      "set": "original",
+      "request": {
+        "date": "2026-07-09",
+        "type": "inbound_enquiry",
+        "entity_id": "A-COBALT",
+        "entity_name": "Cobalt Fintech",
+        "amount_inr": 3600000,
+        "requested_by": "Account manager",
+        "service_line": "it_service_desk",
+        "budget_confirmed": true,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 45,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0132",
+        "description": "Cobalt Fintech enquiry for an L1 IT service desk; CTO engaged, budget approved."
+      },
+      "expected": "approve",
+      "expected_citations": [],
+      "why": "Clean fintech desk enquiry.",
+      "meera_note": "Clean fintech desk enquiry.",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Qualify: Cobalt Fintech, ₹36,00,000, inside the mandate",
+        "citations": [
+          "S-R1",
+          "SL-0013",
+          "SL-0008",
+          "SL-0002",
+          "SL03"
+        ],
+        "lessons_applied": [
+          "SL03"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "approve",
+        "headline": "Qualify Cobalt Fintech's L1 IT service desk enquiry immediately.",
+        "citations": [
+          "S-R1",
+          "SL-0002",
+          "SL-0013"
+        ],
+        "lessons_applied": [],
+        "reasoning": "This is a clean, routine deal with an existing client where the CTO is directly engaged and the budget is already confirmed. Payment terms of 45 days and manageable competition of two vendors fit our core criteria perfectly. With no outstanding red flags or mandate blocks, this should proceed through the standard pipeline without friction.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "SL-0133",
+      "vendor_name": "Palmyra Hotels",
+      "set": "original",
+      "request": {
+        "date": "2026-07-15",
+        "type": "inbound_enquiry",
+        "entity_id": "A-PALMYRA",
+        "entity_name": "Palmyra Hotels",
+        "amount_inr": 2100000,
+        "requested_by": "Account manager",
+        "service_line": "customer_support",
+        "budget_confirmed": true,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 80,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0133",
+        "description": "Palmyra Hotels wants a seasonal reservations desk; budget approved, GM signing, asks for 80-day payment terms."
+      },
+      "expected": "approve_with_conditions",
+      "expected_citations": [],
+      "why": "80-day terms.",
+      "meera_note": "80-day terms.",
+      "rules": {
+        "verdict": "approve_with_conditions",
+        "headline": "Qualify with conditions: Palmyra Hotels, only with the conditions below",
+        "citations": [
+          "S-R2",
+          "SL-0022",
+          "SL-0010",
+          "SL-0008",
+          "SL03"
+        ],
+        "lessons_applied": [
+          "SL03"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "approve_with_conditions",
+        "headline": "Qualify seasonal desk with mandatory milestone billing and verified credit protections.",
+        "citations": [
+          "S-R2",
+          "SL-0007",
+          "SL-0010",
+          "SL-0022"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Palmyra Hotels has an engaged GM and confirmed budget, making this a qualified opportunity. However, 80-day payment terms pose working capital risks for a seasonal deployment. We will proceed only with advance milestones and a clear credit check to protect our cash flow.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "SL-0134",
+      "vendor_name": "Nilgiri Foods",
+      "set": "original",
+      "request": {
+        "date": "2026-07-22",
+        "type": "inbound_enquiry",
+        "entity_id": "A-NILGIRI",
+        "entity_name": "Nilgiri Foods",
+        "amount_inr": 2500000,
+        "requested_by": "Account manager",
+        "service_line": "finance_ops",
+        "budget_confirmed": false,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 45,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0134",
+        "description": "Nilgiri Foods is interested in finance-ops support but has not got a budget line yet."
+      },
+      "expected": "ask",
+      "expected_citations": [],
+      "why": "No budget yet.",
+      "meera_note": "No budget yet.",
+      "rules": {
+        "verdict": "ask",
+        "headline": "Hold Nilgiri Foods: information missing",
+        "citations": [
+          "S-R3",
+          "SL-0005",
+          "SL-0018",
+          "SL-0008",
+          "SL03"
+        ],
+        "lessons_applied": [
+          "SL03"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "ask",
+        "headline": "Ask the requester to confirm budget approval status and timeline before committing sales pursuit effort.",
+        "citations": [
+          "S-R3",
+          "SL-0005",
+          "SL-0026"
+        ],
+        "lessons_applied": [],
+        "reasoning": "We do not deploy pursuit bandwidth on unbudgeted initiatives without understanding the funding path and timeline. While a decision-maker is engaged and commercial terms look standard, we need to verify whether this is an active buying project or an exploratory price check against two competitors. Clarifying the budget owner and allocation schedule upfront will determine if this deal is real.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "SL-0135",
+      "vendor_name": "Mercury Edtech",
+      "set": "original",
+      "request": {
+        "date": "2026-07-30",
+        "type": "inbound_enquiry",
+        "entity_id": "A-MERCURY",
+        "entity_name": "Mercury Edtech",
+        "amount_inr": 1900000,
+        "requested_by": "Account manager",
+        "service_line": "data_operations",
+        "budget_confirmed": true,
+        "decision_maker_engaged": false,
+        "competitors": 2,
+        "payment_terms_days": 45,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0135",
+        "description": "Mercury Edtech: an analyst asked for a proposal for data operations; no senior contact yet."
+      },
+      "expected": "ask",
+      "expected_citations": [],
+      "why": "Only an analyst engaged.",
+      "meera_note": "Only an analyst engaged.",
+      "rules": {
+        "verdict": "ask",
+        "headline": "Hold Mercury Edtech: information missing",
+        "citations": [
+          "S-R4",
+          "SL-0008",
+          "SL-0020",
+          "SL-0013",
+          "SL03"
+        ],
+        "lessons_applied": [
+          "SL03"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "ask",
+        "headline": "Ask the account manager to establish decision-maker access before submitting a proposal.",
+        "citations": [
+          "S-R4",
+          "SL-0013",
+          "SL-0020"
+        ],
+        "lessons_applied": [],
+        "reasoning": "A deal without a named decision-maker is merely a conversation, not a qualified lead. We should not expend solutioning effort for an analyst request without knowing who owns the budget and signs off. Once we verify the economic buyer and decision timeline, we can evaluate whether to proceed.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "SL-0136",
+      "vendor_name": "Lumina Bank",
+      "set": "original",
+      "request": {
+        "date": "2026-08-06",
+        "type": "existing_client_upsell",
+        "entity_id": "A-LUMINA",
+        "entity_name": "Lumina Bank",
+        "amount_inr": 19000000,
+        "requested_by": "Account manager",
+        "service_line": "finance_ops",
+        "budget_confirmed": true,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 45,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0136",
+        "description": "Lumina Bank wants to extend reconciliation and add month-end close: ₹1.9 Cr a year."
+      },
+      "expected": "escalate",
+      "expected_citations": [],
+      "why": "Above ₹1.5 Cr.",
+      "meera_note": "Above ₹1.5 Cr.",
+      "rules": {
+        "verdict": "escalate",
+        "headline": "Escalate Lumina Bank to Vikram: outside the mandate",
+        "citations": [
+          "S-R5",
+          "SL-0006",
+          "SL-0021",
+          "SL-0024"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "escalate",
+        "headline": "Escalate ₹1.9 Cr Lumina Bank upsell to Vikram Sethi due to contract value exceeding delegated authority.",
+        "citations": [
+          "S-R5",
+          "SL-0021",
+          "SL-0024"
+        ],
+        "lessons_applied": [],
+        "reasoning": "This is a solid upsell opportunity with a clean existing banking client and sound commercial terms. However, at ₹1.9 Cr ACV, it surpasses the ₹1.5 Cr threshold for account manager sign-off and requires formal approval. We should verify overdue invoice status before final sign-off.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "SL-0137",
+      "vendor_name": "Indus Ports Authority",
+      "set": "original",
+      "request": {
+        "date": "2026-08-13",
+        "type": "partner_referral",
+        "entity_id": "A-INDUS",
+        "entity_name": "Indus Ports Authority",
+        "amount_inr": 9000000,
+        "requested_by": "Account manager",
+        "service_line": "data_operations",
+        "budget_confirmed": true,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 90,
+        "government_entity": true,
+        "response_days": 20,
+        "id": "BT-0137",
+        "description": "Partner referral from Indus Ports Authority for data-entry work at 90-day terms."
+      },
+      "expected": "escalate",
+      "expected_citations": [],
+      "why": "Government buyer.",
+      "meera_note": "Government buyer.",
+      "rules": {
+        "verdict": "escalate",
+        "headline": "Escalate Indus Ports Authority to Vikram: outside the mandate",
+        "citations": [
+          "S-R2",
+          "S-R6",
+          "SL-0004",
+          "SL-0029",
+          "SL-0017",
+          "SL02"
+        ],
+        "lessons_applied": [
+          "SL02"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "escalate",
+        "headline": "Escalate Indus Ports Authority lead to Vikram due to government entity procurement rules and extended payment risks.",
+        "citations": [
+          "S-R2",
+          "S-R6",
+          "SL02",
+          "SL-0004",
+          "SL-0017",
+          "SL-0029"
+        ],
+        "lessons_applied": [
+          "SL02"
+        ],
+        "reasoning": "Indus Ports Authority is a public sector entity requesting 90-day payment terms without clear billing safeguards, presenting significant working-capital exposure. Under our mandate and lessons learned from past public-sector contracts, all government accounts require executive approval and strict cash-flow protections before proceeding. Vikram must evaluate whether we can enforce milestone billing or an advance before qualifying this bid.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "SL-0138",
+      "vendor_name": "Other / new prospect",
+      "set": "original",
+      "request": {
+        "date": "2026-08-20",
+        "type": "inbound_enquiry",
+        "entity_id": "A-OTHER",
+        "entity_name": "Other / new prospect",
+        "amount_inr": 7000000,
+        "requested_by": "Account manager",
+        "service_line": "new_capability",
+        "budget_confirmed": true,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 45,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0138",
+        "description": "Enquiry for us to build and run an AI model red-teaming team."
+      },
+      "expected": "escalate",
+      "expected_citations": [],
+      "why": "Not a service we deliver.",
+      "meera_note": "Not a service we deliver.",
+      "rules": {
+        "verdict": "escalate",
+        "headline": "Escalate Other / new prospect to Vikram: outside the mandate",
+        "citations": [
+          "S-R7",
+          "SL-0008",
+          "SL-0015",
+          "SL-0002",
+          "SL03"
+        ],
+        "lessons_applied": [
+          "SL03"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "escalate",
+        "headline": "Escalate to Vikram and delivery leadership to evaluate entering an unbuilt AI red-teaming capability.",
+        "citations": [
+          "S-R7",
+          "SL-0015"
+        ],
+        "lessons_applied": [],
+        "reasoning": "This opportunity involves building and running an AI model red-teaming team, which is a new capability outside our current delivery footprint. Under our mandate, pursuing an unproven capability bet requires direct sign-off from sales leadership and delivery heads. While the commercial terms and budget look sound, we cannot commit delivery resources without leadership review.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "SL-0139",
+      "vendor_name": "Zephyr Airlines",
+      "set": "original",
+      "request": {
+        "date": "2026-08-27",
+        "type": "inbound_enquiry",
+        "entity_id": "A-ZEPHYR",
+        "entity_name": "Zephyr Airlines",
+        "amount_inr": 4000000,
+        "requested_by": "Account manager",
+        "service_line": "customer_support",
+        "budget_confirmed": true,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 45,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0139",
+        "description": "Zephyr Airlines has sent a new customer-support enquiry."
+      },
+      "expected": "refuse",
+      "expected_citations": [],
+      "why": "Do-not-pursue account.",
+      "meera_note": "Do-not-pursue account.",
+      "rules": {
+        "verdict": "refuse",
+        "headline": "Refuse: rating people's performance is outside Pratibimb's scope",
+        "citations": [
+          "S-R1",
+          "S-R10"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Pratibimb never rates people (mandate rule M-R13).",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "refuse",
+        "headline": "Refuse: rating people's performance is outside Pratibimb's scope",
+        "citations": [
+          "S-R1",
+          "S-R10"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Pratibimb never rates people (mandate rule M-R13).",
+        "engine": "rules"
+      }
+    },
+    {
+      "decision_id": "SL-0140",
+      "vendor_name": "Other / new prospect",
+      "set": "original",
+      "request": {
+        "date": "2026-09-03",
+        "type": "out_of_scope",
+        "entity_id": "A-OTHER",
+        "entity_name": "Other / new prospect",
+        "amount_inr": 0,
+        "requested_by": "Account manager",
+        "service_line": "customer_support",
+        "budget_confirmed": true,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 45,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0140",
+        "description": "Please rank our account managers by performance so we can decide bonuses."
+      },
+      "expected": "refuse",
+      "expected_citations": [],
+      "why": "Asked to rank account managers for bonuses.",
+      "meera_note": "Asked to rank account managers for bonuses.",
+      "rules": {
+        "verdict": "refuse",
+        "headline": "Refuse: rating people's performance is outside Pratibimb's scope",
+        "citations": [
+          "S-R11"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Pratibimb never rates people (mandate rule M-R13).",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "refuse",
+        "headline": "Refuse: rating people's performance is outside Pratibimb's scope",
+        "citations": [
+          "S-R11"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Pratibimb never rates people (mandate rule M-R13).",
+        "engine": "rules"
+      }
+    },
+    {
+      "decision_id": "SL-0141",
+      "vendor_name": "Vertex Logistics",
+      "set": "hard",
+      "request": {
+        "date": "2026-09-08",
+        "type": "existing_client_upsell",
+        "entity_id": "A-VERTEX",
+        "entity_name": "Vertex Logistics",
+        "amount_inr": 5200000,
+        "requested_by": "Account manager",
+        "service_line": "customer_support",
+        "budget_confirmed": true,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 45,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0141",
+        "description": "Vertex Logistics wants 15 more tracking-desk seats at the same 45-day terms. Note from finance: their last two invoices are 75 days overdue."
+      },
+      "expected": "ask",
+      "expected_citations": [
+        "SL04"
+      ],
+      "why": "Upsell held: two invoices 75 days overdue (SL04).",
+      "meera_note": "Upsell held: two invoices 75 days overdue (SL04).",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Qualify: Vertex Logistics, ₹52,00,000, inside the mandate",
+        "citations": [
+          "S-R1",
+          "SL-0009",
+          "SL-0019",
+          "SL-0001",
+          "SL04"
+        ],
+        "lessons_applied": [
+          "SL04"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "ask",
+        "headline": "Hold the upsell until the 75-day overdue invoices are cleared or secured.",
+        "citations": [
+          "S-R1",
+          "SL04",
+          "SL-0009",
+          "SL-0019"
+        ],
+        "lessons_applied": [
+          "SL04"
+        ],
+        "reasoning": "We grow accounts that pay and fix the ones that do not before expanding them. Vertex Logistics currently has two invoices overdue by 75 days, which presents an unacceptable credit risk under our rules. We need a confirmed clearance plan or settlement from their finance team before committing additional capacity.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "SL-0142",
+      "vendor_name": "Garnet Pharma",
+      "set": "hard",
+      "request": {
+        "date": "2026-09-12",
+        "type": "inbound_enquiry",
+        "entity_id": "A-GARNET",
+        "entity_name": "Garnet Pharma",
+        "amount_inr": 2600000,
+        "requested_by": "Account manager",
+        "service_line": "data_operations",
+        "budget_confirmed": true,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 45,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0142",
+        "description": "Garnet Pharma wants to try our data-cleansing team: they ask for a 6-week free pilot before signing anything."
+      },
+      "expected": "approve_with_conditions",
+      "expected_citations": [
+        "SL03"
+      ],
+      "why": "Wanted a free 6-week pilot; offered paid pilot (SL03).",
+      "meera_note": "Wanted a free 6-week pilot; offered paid pilot (SL03).",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Qualify: Garnet Pharma, ₹26,00,000, inside the mandate",
+        "citations": [
+          "S-R1",
+          "SL-0025",
+          "SL-0008",
+          "SL-0011",
+          "SL03"
+        ],
+        "lessons_applied": [
+          "SL03"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "approve_with_conditions",
+        "headline": "Qualify subject to converting the proposed free pilot into a paid pilot with explicit exit criteria.",
+        "citations": [
+          "S-R1",
+          "SL03",
+          "SL-0008",
+          "SL-0018"
+        ],
+        "lessons_applied": [
+          "SL03"
+        ],
+        "reasoning": "We do not do free pilots under any circumstances, as they lead to scope creep and uncommitted buyers. This deal fits our core service and budget mandate, but it can only proceed if structured as a paid pilot with fixed duration and measurable sign-off criteria. The pilot fees can be credited against the annual contract once the full agreement is executed.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "SL-0143",
+      "vendor_name": "Other / new prospect",
+      "set": "hard",
+      "request": {
+        "date": "2026-09-17",
+        "type": "partner_referral",
+        "entity_id": "A-OTHER",
+        "entity_name": "Other / new prospect",
+        "amount_inr": 6400000,
+        "requested_by": "Account manager",
+        "service_line": "customer_support",
+        "budget_confirmed": true,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 60,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0143",
+        "description": "Partner referral: 50-seat consumer helpdesk for a power distributor. The partner mentions the buyer is a subsidiary of the state electricity board."
+      },
+      "expected": "escalate",
+      "expected_citations": [
+        "SL02"
+      ],
+      "why": "Buyer turned out to be a state-board subsidiary (SL02).",
+      "meera_note": "Buyer turned out to be a state-board subsidiary (SL02).",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Qualify: Other / new prospect, ₹64,00,000, inside the mandate",
+        "citations": [
+          "S-R1",
+          "SL-0004",
+          "SL-0010",
+          "SL-0009",
+          "SL02",
+          "SL04"
+        ],
+        "lessons_applied": [
+          "SL02",
+          "SL04"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "escalate",
+        "headline": "Escalate to Vikram due to state electricity board subsidiary ownership requiring strict milestone billing safeguards.",
+        "citations": [
+          "S-R1",
+          "SL02",
+          "SL-0004",
+          "SL-0017"
+        ],
+        "lessons_applied": [
+          "SL02"
+        ],
+        "reasoning": "Although marked as a non-government entity, this power distributor is a subsidiary of a state electricity board and carries public sector collection risks. Under our policy, any state-owned or PSU subsidiary requires explicit milestone billing or a mobilisation advance before we commit delivery resources. Vikram's direct review is needed to validate commercial protections and confirm whether our team has direct access to the signatory rather than relying entirely on partner assurances.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "SL-0144",
+      "vendor_name": "Kaveri Health",
+      "set": "hard",
+      "request": {
+        "date": "2026-09-23",
+        "type": "inbound_enquiry",
+        "entity_id": "A-KAVERI",
+        "entity_name": "Kaveri Health",
+        "amount_inr": 4400000,
+        "requested_by": "Account manager",
+        "service_line": "customer_support",
+        "budget_confirmed": true,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 45,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0144",
+        "description": "Kaveri Health support desk expansion is ready to sign: budget approved. Our sponsor, their COO, left last week; procurement is now handling it."
+      },
+      "expected": "ask",
+      "expected_citations": [],
+      "why": "Sponsor left last week; only procurement remains.",
+      "meera_note": "Sponsor left last week; only procurement remains.",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Qualify: Kaveri Health, ₹44,00,000, inside the mandate",
+        "citations": [
+          "S-R1",
+          "SL-0007",
+          "SL-0030",
+          "SL-0016",
+          "SL01"
+        ],
+        "lessons_applied": [
+          "SL01"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "ask",
+        "headline": "Ask the account manager to confirm the new signatory and procurement status after COO departure",
+        "citations": [
+          "S-R1",
+          "SL-0030"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Our internal champion and COO just exited, handing the transaction over to procurement at the final hour. In line with my principle that a deal without an identified decision-maker is merely a conversation, we must clarify who owns the sign-off and ensure the commercial terms remain untouched before progressing.",
+        "engine": "gemini-3.8-flash"
+      }
+    },
+    {
+      "decision_id": "SL-0145",
+      "vendor_name": "Tarang Telecom",
+      "set": "hard",
+      "request": {
+        "date": "2026-09-29",
+        "type": "existing_client_upsell",
+        "entity_id": "A-TARANG",
+        "entity_name": "Tarang Telecom",
+        "amount_inr": 3200000,
+        "requested_by": "Account manager",
+        "service_line": "it_service_desk",
+        "budget_confirmed": true,
+        "decision_maker_engaged": true,
+        "competitors": 2,
+        "payment_terms_days": 45,
+        "government_entity": false,
+        "response_days": 20,
+        "id": "BT-0145",
+        "description": "URGENT: Tarang's CIO wants 20 more service-desk seats from next month. Budget approved, PO ready, same terms."
+      },
+      "expected": "approve",
+      "expected_citations": [],
+      "why": "URGENT but clean: CIO wants 20 seats next month, PO ready.",
+      "meera_note": "URGENT but clean: CIO wants 20 seats next month, PO ready.",
+      "rules": {
+        "verdict": "approve",
+        "headline": "Qualify: Tarang Telecom, ₹32,00,000, inside the mandate",
+        "citations": [
+          "S-R1",
+          "SL-0014",
+          "SL-0002",
+          "SL-0009",
+          "SL04"
+        ],
+        "lessons_applied": [
+          "SL04"
+        ],
+        "reasoning": "Decided by mandate rules alone.",
+        "engine": "rules"
+      },
+      "gemini": {
+        "verdict": "approve",
+        "headline": "Qualify expansion lead for 20 additional service-desk seats with Tarang Telecom immediately.",
+        "citations": [
+          "S-R1",
+          "SL-0001",
+          "SL-0014"
+        ],
+        "lessons_applied": [],
+        "reasoning": "Tarang Telecom is an established, reliable account with no payment issues, and this expansion operates under existing agreed terms. The CIO is directly engaged, budget is approved, and the mandate fully supports direct expansion within this threshold. Delivery precedents confirm that standard seat expansions for this account convert and execute cleanly.",
+        "engine": "gemini-3.8-flash"
+      }
+    }
+  ]
+}

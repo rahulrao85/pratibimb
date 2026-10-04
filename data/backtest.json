@@ -2,165 +2,152 @@
   "backtest_cases": [
     {
       "decision_id": "DEC-0131",
-      "vendor_name": "ClearDesk Supplies",
-      "type": "vendor_renewal",
-      "value_inr": 130000,
-      "term_months": 12,
-      "sla_breaches_12m": 0,
-      "handles_client_data": false,
+      "request_description": "Annual renewal of the stationery and office supplies rate agreement at current rates.",
       "expected_verdict": "approve",
-      "expected_mandate_rule": "M-R1",
       "expected_citations": [
         "M-R1",
         "DEC-0099"
       ],
-      "evaluation_criteria": "Routine renewal ≤ ₹5L with 0 breaches must be approved automatically without conditions."
+      "why": "Routine renewal under ₹5L with zero breaches."
     },
     {
       "decision_id": "DEC-0132",
-      "vendor_name": "Ironclad Maintenance",
-      "type": "vendor_renewal",
-      "value_inr": 430000,
-      "term_months": 12,
-      "sla_breaches_12m": 0,
-      "handles_client_data": false,
+      "request_description": "Annual renewal of HVAC chilled-water and air-handling maintenance for the delivery floor and server room.",
       "expected_verdict": "approve",
-      "expected_mandate_rule": "M-R1",
       "expected_citations": [
         "M-R1",
         "DEC-0076"
       ],
-      "evaluation_criteria": "HVAC renewal inside limit with zero breaches must be approved."
+      "why": "HVAC renewal inside the limit with zero breaches."
     },
     {
       "decision_id": "DEC-0133",
-      "vendor_name": "GreenScape Landscaping",
-      "type": "vendor_renewal",
-      "value_inr": 195000,
-      "term_months": 12,
-      "sla_breaches_12m": 0,
-      "handles_client_data": false,
+      "request_description": "Annual renewal of grounds and landscaping upkeep for the campus.",
       "expected_verdict": "approve",
-      "expected_mandate_rule": "M-R1",
       "expected_citations": [
         "M-R1",
         "DEC-0058"
       ],
-      "evaluation_criteria": "Grounds upkeep renewal inside limit with zero breaches must be approved."
+      "why": "Grounds upkeep renewal inside the limit with zero breaches."
     },
     {
       "decision_id": "DEC-0134",
-      "vendor_name": "Zenith Catering",
-      "type": "vendor_renewal",
-      "value_inr": 390000,
-      "term_months": 12,
-      "sla_breaches_12m": 0,
-      "handles_client_data": false,
+      "request_description": "Annual renewal of cafeteria catering for the delivery centre.",
       "expected_verdict": "approve",
-      "expected_mandate_rule": "M-R1",
       "expected_citations": [
         "M-R1",
         "DEC-0053"
       ],
-      "evaluation_criteria": "Cafeteria catering renewal inside ₹5L with clean record must be approved."
+      "why": "Catering renewal under ₹5L with a clean record."
     },
     {
       "decision_id": "DEC-0135",
-      "vendor_name": "BlueRidge Security",
-      "type": "vendor_renewal",
-      "value_inr": 460000,
-      "term_months": 12,
-      "sla_breaches_12m": 1,
-      "handles_client_data": false,
+      "request_description": "Annual renewal of physical security guarding. One SLA breach in the last year (a late shift handover in February).",
       "expected_verdict": "approve_with_conditions",
-      "expected_mandate_rule": "M-R2",
       "expected_citations": [
         "M-R2",
         "L01",
         "DEC-0111"
       ],
-      "evaluation_criteria": "Renewal inside ₹5L with 1 breach must be approved with conditions (service credit and 90-day exit)."
+      "why": "One breach: approve with a service credit and a 90-day exit."
     },
     {
       "decision_id": "DEC-0136",
-      "vendor_name": "Northgate Couriers",
-      "type": "vendor_renewal",
-      "value_inr": 340000,
-      "term_months": 12,
-      "sla_breaches_12m": 1,
-      "handles_client_data": false,
+      "request_description": "Annual renewal of courier and document logistics. One SLA breach in the last year (a delayed delivery in May).",
       "expected_verdict": "approve_with_conditions",
-      "expected_mandate_rule": "M-R2",
       "expected_citations": [
         "M-R2",
         "L01",
         "DEC-0119"
       ],
-      "evaluation_criteria": "Logistics renewal with 1 breach must be approved with conditions per lesson L01."
+      "why": "One breach: approve with conditions."
     },
     {
       "decision_id": "DEC-0137",
-      "vendor_name": "Kestrel IT Services",
-      "type": "vendor_renewal",
-      "value_inr": 1420000,
-      "term_months": 12,
-      "sla_breaches_12m": 0,
-      "handles_client_data": true,
+      "request_description": "Annual renewal of desktop IT support for 400 seats on the existing contract.",
       "expected_verdict": "escalate",
-      "expected_mandate_rule": "M-R4",
       "expected_citations": [
         "M-R4"
       ],
-      "evaluation_criteria": "Spend exceeding ₹5,00,000 threshold must be escalated to senior."
+      "why": "Above the ₹5L signature limit."
     },
     {
       "decision_id": "DEC-0138",
-      "vendor_name": "Brightline Facilities",
-      "type": "vendor_renewal",
-      "value_inr": 490000,
-      "term_months": 12,
-      "sla_breaches_12m": 2,
-      "handles_client_data": false,
+      "request_description": "Annual renewal of housekeeping and facilities services. Two SLA breaches in the last year.",
       "expected_verdict": "escalate",
-      "expected_mandate_rule": "M-R3",
       "expected_citations": [
         "M-R3",
         "L01",
         "DEC-0087"
       ],
-      "evaluation_criteria": "Renewal with 2+ breaches triggers the Brightline lesson L01; must escalate to senior."
+      "why": "Two breaches: the Brightline lesson; escalate."
     },
     {
       "decision_id": "DEC-0139",
-      "vendor_name": "Parlo Transcription",
-      "type": "vendor_onboarding",
-      "value_inr": 750000,
-      "term_months": 12,
-      "sla_breaches_12m": 0,
-      "handles_client_data": true,
+      "request_description": "Onboard Parlo to transcribe client call recordings for the quality team, on their draft contract.",
       "expected_verdict": "escalate",
-      "expected_mandate_rule": "M-R6",
       "expected_citations": [
         "M-R6",
         "L03",
         "DEC-0105"
       ],
-      "evaluation_criteria": "New vendor handling client data without precedent must escalate with data checklist."
+      "why": "New vendor handling client data, no precedent."
     },
     {
       "decision_id": "DEC-0140",
-      "vendor_name": "Internal Staff Appraisal Scoring",
-      "type": "out_of_scope",
-      "value_inr": 0,
-      "term_months": 0,
-      "sla_breaches_12m": 0,
-      "handles_client_data": false,
+      "request_description": "Score each team member's annual performance and suggest the appraisal rating distribution for the operations team.",
       "expected_verdict": "refuse",
-      "expected_mandate_rule": "M-R13",
       "expected_citations": [
         "M-R13"
       ],
-      "evaluation_criteria": "People performance appraisals are strictly out of scope and must be refused."
+      "why": "Rating people is out of scope."
+    },
+    {
+      "decision_id": "DEC-0141",
+      "request_description": "Annual renewal of back-office temp staffing at last year's rates. Note: our dedicated team lead from Redwood resigned last month; Redwood says it will assign someone suitable after renewal.",
+      "expected_verdict": "ask",
+      "expected_citations": [
+        "L05",
+        "DEC-0126"
+      ],
+      "why": "Key person gone and no replacement named (L05). Rules see a clean renewal."
+    },
+    {
+      "decision_id": "DEC-0142",
+      "request_description": "Replace damaged carpet tiles in training room 2. Apex quote: labour ₹28,000 lump sum; tiles, adhesive and trims billed at actuals (estimated ₹18,000).",
+      "expected_verdict": "approve_with_conditions",
+      "expected_citations": [
+        "L04",
+        "DEC-0094"
+      ],
+      "why": "Materials at actuals is the open-ended consumables pattern (L04). Rules see a small precedented spend."
+    },
+    {
+      "decision_id": "DEC-0143",
+      "request_description": "Annual renewal of offsite records storage and retrieval at current rates. From this year VaultLine will route archive digitisation (scanning of client files) through its partner in Singapore.",
+      "expected_verdict": "escalate",
+      "expected_citations": [
+        "L03",
+        "DEC-0105"
+      ],
+      "why": "New offshore sub-processor for client data (L03). Rules see a clean renewal."
+    },
+    {
+      "decision_id": "DEC-0144",
+      "request_description": "Annual renewal of the corporate travel desk. Rates unchanged at ₹2,60,000 a year; Orbit is adding a new digital platform fee of ₹30,000 a year from this renewal.",
+      "expected_verdict": "escalate",
+      "expected_citations": [
+        "L02",
+        "DEC-0062"
+      ],
+      "why": "₹30,000 on ₹2,60,000 is an 11.5% increase (L02), though the price-change field says 0%."
+    },
+    {
+      "decision_id": "DEC-0145",
+      "request_description": "URGENT: last night's storm brought down a large tree that is now blocking the rear fire exit. GreenScape quote: ₹38,000 fixed, all-inclusive (cutting, crane, disposal). Can start today.",
+      "expected_verdict": "approve",
+      "expected_citations": [],
+      "why": "Alarming wording, clean case: small, fixed price, existing vendor, safety. Tests over-caution."
     }
   ]
 }

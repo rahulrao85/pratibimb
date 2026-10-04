@@ -1,0 +1,157 @@
+{
+  "entities": [
+    {
+      "id": "A-HELIOS",
+      "name": "Helios Insurance",
+      "industry": "insurance",
+      "relationship_months": 0,
+      "flags": [
+        "new_logo"
+      ],
+      "note": "Large private insurer; no prior contact."
+    },
+    {
+      "id": "A-ORCHID",
+      "name": "Orchid Retail",
+      "industry": "retail",
+      "relationship_months": 30,
+      "flags": [],
+      "avg_payment_days": 38,
+      "note": "Customer-support client since 2024; pays on time."
+    },
+    {
+      "id": "A-TARANG",
+      "name": "Tarang Telecom",
+      "industry": "telecom",
+      "relationship_months": 18,
+      "flags": [],
+      "avg_payment_days": 44
+    },
+    {
+      "id": "A-NILGIRI",
+      "name": "Nilgiri Foods",
+      "industry": "fmcg",
+      "relationship_months": 0,
+      "flags": [
+        "new_logo"
+      ]
+    },
+    {
+      "id": "A-SAHYADRI",
+      "name": "Sahyadri Power Distribution",
+      "industry": "utilities",
+      "relationship_months": 0,
+      "flags": [
+        "state_owned"
+      ]
+    },
+    {
+      "id": "A-VERTEX",
+      "name": "Vertex Logistics",
+      "industry": "logistics",
+      "relationship_months": 26,
+      "flags": [
+        "overdue_history"
+      ],
+      "avg_payment_days": 71
+    },
+    {
+      "id": "A-KAVERI",
+      "name": "Kaveri Health",
+      "industry": "healthcare",
+      "relationship_months": 0,
+      "flags": [
+        "new_logo"
+      ]
+    },
+    {
+      "id": "A-LUMINA",
+      "name": "Lumina Bank",
+      "industry": "banking",
+      "relationship_months": 40,
+      "flags": [],
+      "avg_payment_days": 31
+    },
+    {
+      "id": "A-ZEPHYR",
+      "name": "Zephyr Airlines",
+      "industry": "aviation",
+      "relationship_months": 0,
+      "flags": [
+        "do_not_pursue"
+      ],
+      "note": "₹38 L unpaid from a 2023 engagement; legal notice served."
+    },
+    {
+      "id": "A-MERCURY",
+      "name": "Mercury Edtech",
+      "industry": "education",
+      "relationship_months": 0,
+      "flags": [
+        "new_logo"
+      ]
+    },
+    {
+      "id": "A-INDUS",
+      "name": "Indus Ports Authority",
+      "industry": "government",
+      "relationship_months": 0,
+      "flags": [
+        "government"
+      ]
+    },
+    {
+      "id": "A-PALMYRA",
+      "name": "Palmyra Hotels",
+      "industry": "hospitality",
+      "relationship_months": 22,
+      "flags": [],
+      "avg_payment_days": 52
+    },
+    {
+      "id": "A-GARNET",
+      "name": "Garnet Pharma",
+      "industry": "pharma",
+      "relationship_months": 0,
+      "flags": [
+        "new_logo"
+      ]
+    },
+    {
+      "id": "A-COBALT",
+      "name": "Cobalt Fintech",
+      "industry": "fintech",
+      "relationship_months": 14,
+      "flags": [],
+      "avg_payment_days": 40
+    },
+    {
+      "id": "A-STRAITS",
+      "name": "Straits Mutual (Singapore)",
+      "industry": "insurance",
+      "relationship_months": 16,
+      "flags": [],
+      "avg_payment_days": 33,
+      "note": "Singapore insurer; policy-servicing desk from Mumbai."
+    },
+    {
+      "id": "A-SOUTHERNX",
+      "name": "Southern Cross Energy (Australia)",
+      "industry": "utilities",
+      "relationship_months": 0,
+      "flags": [
+        "new_logo"
+      ],
+      "note": "Australian retailer exploring offshore billing support."
+    },
+    {
+      "id": "A-OTHER",
+      "name": "Other / new prospect",
+      "industry": "other",
+      "relationship_months": 0,
+      "flags": [
+        "new_logo"
+      ]
+    }
+  ]
+}

@@ -50,3 +50,11 @@ ui/dist-ssr/
 *.swo
 .DS_Store
 Thumbs.db
+
+# Pratibimb LLM response cache and usage log
+.cache/*
+!.cache/README.md
+
+# Demo runtime state (Meera's overrides during a live demo; reset via /api/demo/reset)
+data/overrides.json
+data/backtest_results_*.json

@@ -1,120 +1,92 @@
 import React from 'react';
-import { Sparkles, Sun, Moon, HelpCircle, ShieldCheck } from 'lucide-react';
+import { HelpCircle, Brain, ScrollText, Inbox, FileText, Target } from 'lucide-react';
+import { firstName } from '../labels.js';
 
-export default function Navbar({ activeTab, setActiveTab, darkMode, toggleDarkMode, onOpenPitch }) {
+export default function Navbar({ activeTab, setActiveTab, theme, toggleTheme, onOpenPitch, packs = [], packId, onSwitchPack, senior }) {
+  const first = firstName(senior?.name);
   const tabs = [
-    { id: 'memory', label: '1. How Meera Decides', icon: '🧠' },
-    { id: 'mandate', label: '2. Mandate & Limits', icon: '📜' },
-    { id: 'inbox', label: '3. Request Inbox', icon: '📥' },
-    { id: 'record', label: '4. Decision File & Learning', icon: '📑' },
-    { id: 'backtest', label: '5. Back-Test Proof', icon: '🎯' },
+    { id: 'memory', label: `How ${first} Decides`, Icon: Brain },
+    { id: 'mandate', label: 'Mandate', Icon: ScrollText },
+    { id: 'inbox', label: 'Requests', Icon: Inbox },
+    { id: 'record', label: 'Decision File', Icon: FileText },
+    { id: 'backtest', label: 'Back-Test', Icon: Target },
   ];
 
   return (
-    <header className="app-header" style={{ marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <div 
-          onClick={() => setActiveTab('inbox')} 
-          style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.65rem' }}
-        >
-          <div style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: 'var(--radius-md)',
-            background: 'linear-gradient(135deg, var(--primary-color), var(--accent-color))',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            fontWeight: 700,
-            fontSize: '1.2rem',
-            boxShadow: '0 4px 12px rgba(37, 99, 235, 0.3)'
-          }}>
-            प्र
-          </div>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
-                Pratibimb
-              </span>
-              <span className="tag tag-info" style={{ fontSize: '0.7rem' }}>
-                Gemini 3.8 Flash
-              </span>
-            </div>
-            <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-              The Senior Decision Mirror · AI Builder Cup 2026
-            </p>
-          </div>
-        </div>
+    <header className="app-header">
+      <button
+        onClick={() => setActiveTab('inbox')}
+        aria-label="Pratibimb home"
+        style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', background: 'none', border: 0, padding: 0, cursor: 'pointer', textAlign: 'left', color: 'inherit' }}
+      >
+        <span style={{
+          width: '44px', height: '44px', borderRadius: 'var(--radius-sm)', flexShrink: 0,
+          background: 'var(--primary-color)', color: 'var(--primary-contrast)',
+          display: 'grid', placeItems: 'center',
+          fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 'var(--text-lg)',
+          boxShadow: '0 6px 18px var(--glow)'
+        }}>
+          प्र
+        </span>
+        <span>
+          <span style={{ display: 'block', fontFamily: 'var(--font-heading)', fontSize: 'var(--text-xl)', fontWeight: 700, letterSpacing: 'var(--tracking-tight)', lineHeight: 1.1 }}>
+            Pratibimb
+          </span>
+          <span style={{ display: 'block', fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
+            The AI mirror of a senior decision-maker
+          </span>
+        </span>
+      </button>
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', flexWrap: 'wrap' }}>
+        <button className="btn btn-secondary" onClick={onOpenPitch} style={{ padding: 'var(--space-2) var(--space-4)' }}>
+          <HelpCircle size={16} aria-hidden="true" />
+          <span>The Pitch</span>
+        </button>
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          role="switch"
+          aria-checked={theme === 'dark'}
+          aria-label={theme === 'dark' ? 'Switch to Aurora (light)' : 'Switch to Voltage (dark)'}
+          title={theme === 'dark' ? 'Voltage · switch to light' : 'Aurora · switch to dark'}
+        />
       </div>
 
-      {/* Navigation tabs */}
-      <nav style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap', background: 'var(--bg-inset)', padding: '0.25rem', borderRadius: 'var(--radius-md)' }}>
-        {tabs.map(tab => (
+      {packs.length > 0 && (
+        <div className="senior-switch" role="radiogroup" aria-label="Whose Pratibimb">
+          <span className="senior-switch-label">Meridian Global Services · whose Pratibimb?</span>
+          <div className="senior-switch-options">
+            {packs.map(p => {
+              const on = p.id === packId;
+              return (
+                <button key={p.id} role="radio" aria-checked={on} onClick={() => onSwitchPack(p.id)}
+                  className={`senior-option selectable${on ? ' is-selected' : ''}`}>
+                  <span className="senior-avatar" aria-hidden="true">{p.senior.split(' ').map(w => w[0]).join('')}</span>
+                  <span style={{ minWidth: 0 }}>
+                    <span className="senior-name">{p.senior}</span>
+                    <span className="senior-role">{p.senior_title} · {p.label}</span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      <nav className="nav-tabs" aria-label="Sections">
+        {tabs.map(({ id, label, Icon }) => (
           <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              padding: '0.45rem 0.85rem',
-              borderRadius: 'var(--radius-sm)',
-              fontSize: '0.8rem',
-              fontWeight: 600,
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'var(--transition)',
-              background: activeTab === tab.id ? 'var(--bg-secondary)' : 'transparent',
-              color: activeTab === tab.id ? 'var(--primary-color)' : 'var(--text-secondary)',
-              boxShadow: activeTab === tab.id ? 'var(--shadow-sm)' : 'none'
-            }}
+            key={id}
+            className={`nav-link${activeTab === id ? ' active' : ''}`}
+            aria-current={activeTab === id ? 'page' : undefined}
+            onClick={() => setActiveTab(id)}
           >
-            <span>{tab.icon}</span>
-            <span>{tab.label}</span>
+            <Icon size={15} aria-hidden="true" />
+            <span>{label}</span>
           </button>
         ))}
       </nav>
-
-      {/* Right controls */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-        <button
-          className="btn btn-secondary"
-          onClick={onOpenPitch}
-          style={{ padding: '0.45rem 0.75rem', fontSize: '0.8rem' }}
-          title="Concept Pitch & Architecture"
-        >
-          <HelpCircle size={16} />
-          <span>The Pitch</span>
-        </button>
-
-        <button
-          className="btn btn-secondary"
-          onClick={toggleDarkMode}
-          style={{ padding: '0.45rem 0.75rem', fontSize: '0.8rem' }}
-          title="Toggle Dark Mode"
-        >
-          {darkMode ? <Sun size={16} /> : <Moon size={16} />}
-        </button>
-
-        <div 
-          style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '0.4rem', 
-            fontSize: '0.75rem', 
-            background: 'var(--success-light)', 
-            color: 'var(--success)', 
-            padding: '0.35rem 0.75rem', 
-            borderRadius: 'var(--radius-full)',
-            border: '1px solid rgba(16, 185, 129, 0.2)',
-            fontWeight: 600
-          }}
-        >
-          <ShieldCheck size={14} />
-          <span>Meera Nair (Senior)</span>
-        </div>
-      </div>
     </header>
   );
 }

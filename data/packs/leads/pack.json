@@ -1,0 +1,73 @@
+{
+  "id": "leads",
+  "label": "Lead qualification",
+  "noun": "sales lead",
+  "domain": "which sales enquiries and RFPs get a pursuit team and a proposal",
+  "entity_label": "Prospect",
+  "amount_label": "Est. annual contract value",
+  "verdict_labels": {
+    "approve": "Qualify",
+    "approve_with_conditions": "Qualify with conditions",
+    "ask": "Ask",
+    "escalate": "Escalate to Vikram",
+    "refuse": "Disqualify"
+  },
+  "request_types": {
+    "inbound_enquiry": "Inbound enquiry",
+    "rfp_invitation": "RFP invitation",
+    "existing_client_upsell": "Existing-client upsell",
+    "partner_referral": "Partner referral",
+    "out_of_scope": "Rate a salesperson (out of scope)"
+  },
+  "fields": [
+    {
+      "name": "service_line",
+      "label": "Service line",
+      "type": "enum",
+      "options": [
+        "finance_ops",
+        "customer_support",
+        "it_service_desk",
+        "data_operations",
+        "new_capability"
+      ]
+    },
+    {
+      "name": "budget_confirmed",
+      "label": "Budget confirmed",
+      "type": "bool"
+    },
+    {
+      "name": "decision_maker_engaged",
+      "label": "Decision-maker engaged",
+      "type": "bool"
+    },
+    {
+      "name": "competitors",
+      "label": "Competing vendors",
+      "type": "int"
+    },
+    {
+      "name": "payment_terms_days",
+      "label": "Payment terms (days)",
+      "type": "int"
+    },
+    {
+      "name": "government_entity",
+      "label": "Government / PSU buyer",
+      "type": "bool"
+    },
+    {
+      "name": "response_days",
+      "label": "Days to respond",
+      "type": "int"
+    }
+  ],
+  "similarity_fields": [
+    "service_line",
+    "government_entity",
+    "budget_confirmed",
+    "decision_maker_engaged"
+  ],
+  "document_label": "RFP / enquiry"
+}

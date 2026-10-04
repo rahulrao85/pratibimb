@@ -1,18 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pratibimb — The AI Mirror of Senior Decision-Making</title>
-    <!-- Fonts -->
+    <title>Pratibimb — the AI mirror of a senior decision-maker</title>
+    <meta name="description" content="Pratibimb learns how a senior decides, gives a cited verdict on every request inside her mandate, and leaves the final call with her." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Govu design: apply the stored theme before first paint so the page never flashes the wrong look -->
+    <script>
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem('theme'); } catch (e) {}
+        document.documentElement.dataset.theme = t || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/design-tokens.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/govu-tokens.css" />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <noscript>
+        <main style="font-family: system-ui, sans-serif; max-width: 760px; margin: 40px auto; padding: 0 16px; line-height: 1.6">
+          <h1>Pratibimb — the AI mirror of a senior decision-maker</h1>
+          <p>Pratibimb learns how a senior decides from their past decisions, outcomes and mistakes, and gives a first-level
+          verdict on every new request with citations. The senior always makes the final call; overrides become lessons.</p>
+          <p>One fictional company, Meridian Global Services (Mumbai), and three seniors: Meera Nair (Head of Delivery
+          Operations, vendor approvals), Vikram Sethi (Head of Sales, lead qualification), Kavya Iyer (Financial Controller,
+          spend &amp; payment exceptions). Built on Gemini 3.8 Flash (Vertex AI), Google ADK, Cloud Firestore, Cloud Trace and
+          Cloud Run. Blind back-test: 44 of 45 held-out decisions, 0 unsafe approvals (rules alone: 33 of 45). All data is synthetic.</p>
+          <p>Enable JavaScript to use the live app.</p>
+        </main>
+      </noscript>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

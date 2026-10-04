@@ -75,18 +75,18 @@ def validate():
 
     # Decisions
     decisions = parsed.get("decisions.json", {}).get("decisions", [])
-    assert len(decisions) == 40, f"Expected exactly 40 decisions, got {len(decisions)}"
+    assert len(decisions) == 45, f"Expected exactly 45 decisions, got {len(decisions)}"
     mistakes = [d for d in decisions if d.get("mistake")]
     assert len(mistakes) == 4, f"Expected exactly 4 mistakes, got {len(mistakes)}"
     holdouts = [d for d in decisions if d.get("holdout")]
-    assert len(holdouts) == 10, f"Expected exactly 10 holdouts, got {len(holdouts)}"
+    assert len(holdouts) == 15, f"Expected exactly 15 holdouts, got {len(holdouts)}"
 
     # Lessons
     lessons = parsed.get("lessons.json", {}).get("lessons", [])
-    assert len(lessons) == 6, f"Expected exactly 6 lessons, got {len(lessons)}"
     lesson_ids = {l["id"] for l in lessons}
     expected_lessons = {"L01", "L02", "L03", "L04", "L05", "L06"}
-    assert lesson_ids == expected_lessons, f"Lessons set mismatch: {lesson_ids}"
+    # lessons.json is the read-only baseline; lessons taught by overrides live in the Store, per sandbox.
+    assert expected_lessons == lesson_ids, f"Baseline lessons missing: {expected_lessons - lesson_ids}"
 
     # Requests
     requests = parsed.get("requests.json", {}).get("requests", [])
@@ -96,18 +96,20 @@ def validate():
 
     # Backtest
     backtest = parsed.get("backtest.json", {}).get("backtest_cases", [])
-    assert len(backtest) == 10, f"Expected exactly 10 backtest cases, got {len(backtest)}"
+    assert len(backtest) == 15, f"Expected exactly 15 backtest cases, got {len(backtest)}"
     holdout_ids = [d["id"] for d in holdouts]
     backtest_ids = [b["decision_id"] for b in backtest]
     assert backtest_ids == holdout_ids, f"Backtest case IDs do not match holdout decision IDs"
+    for b in backtest:
+        assert b.get("request_description"), f"{b['decision_id']} has no request_description"
 
     print("ALL MOCK DATA VALIDATION CHECKS PASSED SUCCESSFULLY!")
     print(f"  - Validated {len(files)} JSON files cleanly.")
-    print(f"  - 40 decisions confirmed (30 active precedents, 10 holdouts, 4 historical mistakes).")
-    print(f"  - 6 lessons confirmed (L01-L06).")
+    print(f"  - 45 decisions confirmed (30 active precedents, 15 holdouts, 4 historical mistakes).")
+    print(f"  - {len(lessons)} lessons confirmed (baseline L01-L06 present).")
     print(f"  - 3 contracts confirmed (including Kestrel clause 9.2).")
     print(f"  - 3 live demo requests confirmed.")
-    print(f"  - 10 holdout backtest cases verified against holdouts.")
+    print(f"  - 15 holdout backtest cases verified against holdouts.")
     return True, results, []
 
 if __name__ == "__main__":

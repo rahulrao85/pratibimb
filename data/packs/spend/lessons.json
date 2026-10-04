@@ -1,0 +1,64 @@
+{
+  "lessons": [
+    {
+      "id": "FL01",
+      "title": "Aggregate split invoices",
+      "rule": "Invoices from the same supplier for the same job within 60 days are added together before applying the ₹1 lakh no-PO limit.",
+      "trigger": "No-PO invoice where the same supplier billed related work recently, or the invoice mentions a phase or part",
+      "action_required": "Escalate on the aggregate amount; one PO for the whole job.",
+      "source_decision_ids": [
+        "FC-0003"
+      ],
+      "version": 1,
+      "status": "approved",
+      "created": "2025-04-01",
+      "approved_by": "Kavya Iyer",
+      "half_life_days": 540
+    },
+    {
+      "id": "FL02",
+      "title": "Bank changes by callback only",
+      "rule": "Any new or changed bank details on an invoice or email are verified by a phone call to the number on the supplier master before paying.",
+      "trigger": "Invoice or request mentions new, changed or updated bank details",
+      "action_required": "Hold & ask: callback verification before payment.",
+      "source_decision_ids": [
+        "FC-0004"
+      ],
+      "version": 1,
+      "status": "approved",
+      "created": "2025-04-01",
+      "approved_by": "Kavya Iyer",
+      "half_life_days": 540
+    },
+    {
+      "id": "FL03",
+      "title": "No 'use it or lose it' spend",
+      "rule": "Spend justified by the budget lapsing needs a business case showing use in the next quarter.",
+      "trigger": "Overrun or purchase justified by year-end, budget lapse, or using up budget",
+      "action_required": "Ask for the use plan before approving.",
+      "source_decision_ids": [
+        "FC-0011"
+      ],
+      "version": 1,
+      "status": "approved",
+      "created": "2025-04-01",
+      "approved_by": "Kavya Iyer",
+      "half_life_days": 540
+    },
+    {
+      "id": "FL04",
+      "title": "No advances to distressed suppliers",
+      "rule": "If a supplier signals cash trouble (delayed salaries, cash crunch, client not paying), no advance regardless of percentage.",
+      "trigger": "Advance or early payment where the supplier mentions cash flow difficulty",
+      "action_required": "Escalate; offer pay-in-arrears or milestone payment instead.",
+      "source_decision_ids": [
+        "FC-0009"
+      ],
+      "version": 1,
+      "status": "approved",
+      "created": "2025-04-01",
+      "approved_by": "Kavya Iyer",
+      "half_life_days": 540
+    }
+  ]
+}

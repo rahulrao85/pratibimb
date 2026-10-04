@@ -1,0 +1,64 @@
+{
+  "lessons": [
+    {
+      "id": "SL01",
+      "title": "No column-fodder RFPs",
+      "rule": "Bid on an RFP only if we were engaged with a sponsor before it was issued; with 5+ competitors and no prior contact, decline.",
+      "trigger": "rfp_invitation, or any lead where we had no contact before the request and there are many competitors",
+      "action_required": "Escalate as no-bid unless a sponsor is named; record why.",
+      "source_decision_ids": [
+        "SL-0003"
+      ],
+      "version": 1,
+      "status": "approved",
+      "created": "2025-04-01",
+      "approved_by": "Vikram Sethi",
+      "half_life_days": 540
+    },
+    {
+      "id": "SL02",
+      "title": "Government payment cycles",
+      "rule": "Government, PSU or state-owned buyers (including subsidiaries, and GeM-portal bids) need milestone billing or a mobilisation advance before we qualify.",
+      "trigger": "Buyer is government, a PSU, state-owned, or a subsidiary of one",
+      "action_required": "Escalate with billing safeguards; never accept certification-only payment.",
+      "source_decision_ids": [
+        "SL-0004"
+      ],
+      "version": 1,
+      "status": "approved",
+      "created": "2025-04-01",
+      "approved_by": "Vikram Sethi",
+      "half_life_days": 540
+    },
+    {
+      "id": "SL03",
+      "title": "Paid pilots only",
+      "rule": "Any 'free pilot' or no-cost proof of concept becomes a paid pilot with fixed scope, duration and exit criteria.",
+      "trigger": "Request mentions a free pilot, PoC at no cost, or trial before commitment",
+      "action_required": "Qualify only with paid-pilot conditions.",
+      "source_decision_ids": [
+        "SL-0008"
+      ],
+      "version": 1,
+      "status": "approved",
+      "created": "2025-04-01",
+      "approved_by": "Vikram Sethi",
+      "half_life_days": 540
+    },
+    {
+      "id": "SL04",
+      "title": "Clear overdue before expanding",
+      "rule": "Never expand an account with invoices overdue beyond 60 days until cleared or secured.",
+      "trigger": "Existing client with invoices overdue beyond 60 days",
+      "action_required": "Ask: hold the upsell until overdue is cleared or an advance is agreed.",
+      "source_decision_ids": [
+        "SL-0009"
+      ],
+      "version": 1,
+      "status": "approved",
+      "created": "2025-04-01",
+      "approved_by": "Vikram Sethi",
+      "half_life_days": 540
+    }
+  ]
+}

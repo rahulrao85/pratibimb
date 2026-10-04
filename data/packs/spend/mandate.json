@@ -1,0 +1,349 @@
+{
+  "id": "MAN-KAVYA-2026",
+  "senior_id": "SEN-003",
+  "currency": "INR",
+  "effective_from": "2026-04-01",
+  "notes": "Delegation to accounts-payable managers. Pratibimb may recommend approval only where a rule allows it; every other exception goes to Kavya with a decision file. Kavya makes every final call. Any ask, escalate or reject rule overrides an earlier approve.",
+  "rules": [
+    {
+      "id": "F-R1",
+      "applies_to": [
+        "price_variance"
+      ],
+      "when": [
+        {
+          "field": "variance_pct",
+          "op": "<=",
+          "value": 5
+        },
+        {
+          "field": "amount_inr",
+          "op": "<=",
+          "value": 50000
+        }
+      ],
+      "then": "approve",
+      "reason": "Variance within 5% on a small invoice: normal rounding and freight."
+    },
+    {
+      "id": "F-R2",
+      "applies_to": [
+        "invoice_without_po"
+      ],
+      "when": [
+        {
+          "field": "amount_inr",
+          "op": "<=",
+          "value": 100000
+        }
+      ],
+      "then": "approve_with_conditions",
+      "requires_conditions": [
+        "Retro PO within 3 working days",
+        "Reason recorded by the budget owner"
+      ],
+      "reason": "Small no-PO invoice: pay, but close the control gap (policy POL-AP-2026 §2.1)."
+    },
+    {
+      "id": "F-R3",
+      "applies_to": [
+        "invoice_without_po"
+      ],
+      "when": [
+        {
+          "field": "amount_inr",
+          "op": ">",
+          "value": 100000
+        }
+      ],
+      "then": "escalate",
+      "reason": "No-PO invoice above ₹1 lakh."
+    },
+    {
+      "id": "F-R4",
+      "applies_to": [
+        "price_variance"
+      ],
+      "when": [
+        {
+          "field": "variance_pct",
+          "op": ">",
+          "value": 5
+        }
+      ],
+      "then": "escalate",
+      "reason": "Variance above 5% needs a revised PO or Kavya's sign-off."
+    },
+    {
+      "id": "F-R5",
+      "applies_to": "*",
+      "when": [
+        {
+          "field": "grn_matched",
+          "op": "==",
+          "value": false
+        }
+      ],
+      "then": "ask",
+      "reason": "Nobody has confirmed the goods or service arrived: no payment without a GRN."
+    },
+    {
+      "id": "F-R6",
+      "applies_to": "*",
+      "when": [
+        {
+          "field": "gst_in_2b",
+          "op": "==",
+          "value": false
+        }
+      ],
+      "then": "approve_with_conditions",
+      "requires_conditions": [
+        "Pay the base amount; hold the GST portion until the invoice shows in GSTR-2B"
+      ],
+      "reason": "Input tax credit is only claimable once the supplier has filed: protect the GST."
+    },
+    {
+      "id": "F-R7",
+      "applies_to": [
+        "expense_exception"
+      ],
+      "when": [
+        {
+          "field": "amount_inr",
+          "op": "<=",
+          "value": 15000
+        },
+        {
+          "field": "receipt_attached",
+          "op": "==",
+          "value": true
+        }
+      ],
+      "then": "approve",
+      "reason": "Small expense exception with a receipt."
+    },
+    {
+      "id": "F-R8",
+      "applies_to": [
+        "expense_exception"
+      ],
+      "when": [
+        {
+          "field": "receipt_attached",
+          "op": "==",
+          "value": false
+        }
+      ],
+      "then": "ask",
+      "reason": "No receipt, no reimbursement."
+    },
+    {
+      "id": "F-R9",
+      "applies_to": [
+        "budget_overrun"
+      ],
+      "when": [
+        {
+          "field": "variance_pct",
+          "op": "<=",
+          "value": 10
+        },
+        {
+          "field": "amount_inr",
+          "op": "<=",
+          "value": 500000
+        }
+      ],
+      "then": "approve_with_conditions",
+      "requires_conditions": [
+        "Funding moved from a named cost line",
+        "Budget owner's written reason"
+      ],
+      "reason": "Overrun within 10%: allowed if funded by a reallocation."
+    },
+    {
+      "id": "F-R10",
+      "applies_to": [
+        "budget_overrun"
+      ],
+      "when": [
+        {
+          "field": "variance_pct",
+          "op": ">",
+          "value": 10
+        }
+      ],
+      "then": "escalate",
+      "reason": "Overrun above 10% of the cost-centre budget."
+    },
+    {
+      "id": "F-R11",
+      "applies_to": [
+        "advance_payment"
+      ],
+      "when": [
+        {
+          "field": "advance_pct",
+          "op": "<=",
+          "value": 30
+        },
+        {
+          "field": "entity.relationship_months",
+          "op": ">=",
+          "value": 12
+        }
+      ],
+      "then": "approve",
+      "reason": "Advance up to 30% to a supplier with a year of history."
+    },
+    {
+      "id": "F-R12",
+      "applies_to": [
+        "advance_payment"
+      ],
+      "when": [
+        {
+          "field": "advance_pct",
+          "op": ">",
+          "value": 30
+        }
+      ],
+      "then": "escalate",
+      "reason": "Advance above 30%."
+    },
+    {
+      "id": "F-R13",
+      "applies_to": [
+        "advance_payment"
+      ],
+      "when": [
+        {
+          "field": "entity.relationship_months",
+          "op": "<",
+          "value": 12
+        }
+      ],
+      "then": "escalate",
+      "reason": "Advance to a supplier with under a year of history."
+    },
+    {
+      "id": "F-R14",
+      "applies_to": "*",
+      "when": [
+        {
+          "field": "supplier_msme",
+          "op": "==",
+          "value": true
+        },
+        {
+          "field": "days_since_invoice",
+          "op": ">=",
+          "value": 30
+        }
+      ],
+      "then": "approve_with_conditions",
+      "requires_conditions": [
+        "Pay within 45 days of acceptance (MSMED Act; Income-tax Act s.43B(h))"
+      ],
+      "reason": "MSME supplier nearing the 45-day legal limit: late payment costs interest and the tax deduction."
+    },
+    {
+      "id": "F-R15",
+      "applies_to": "*",
+      "when": [
+        {
+          "field": "requester_is_approver",
+          "op": "==",
+          "value": true
+        }
+      ],
+      "then": "refuse",
+      "reason": "Segregation of duties: nobody approves their own request."
+    },
+    {
+      "id": "F-R16",
+      "applies_to": "*",
+      "when": [
+        {
+          "field": "amount_inr",
+          "op": ">",
+          "value": 500000
+        }
+      ],
+      "then": "escalate",
+      "reason": "Above Kavya's delegated ₹5 lakh."
+    },
+    {
+      "id": "F-R17",
+      "applies_to": [
+        "out_of_scope"
+      ],
+      "when": [],
+      "then": "refuse",
+      "reason": "Pratibimb never rates or ranks people (EU AI Act high-risk)."
+    }
+  ],
+  "limits_table": [
+    {
+      "case": "Price variance ≤ 5% on invoices ≤ ₹50k",
+      "action": "Recommend approve",
+      "signoff": "Kavya, one-click confirm"
+    },
+    {
+      "case": "No-PO invoice ≤ ₹1 lakh",
+      "action": "Approve with retro PO in 3 days",
+      "signoff": "Kavya, one-click confirm"
+    },
+    {
+      "case": "No-PO invoice > ₹1 lakh, or variance > 5%",
+      "action": "Escalate",
+      "signoff": "Kavya"
+    },
+    {
+      "case": "No GRN (receipt not confirmed)",
+      "action": "Hold & ask",
+      "signoff": "AP manager"
+    },
+    {
+      "case": "Invoice not in GSTR-2B",
+      "action": "Pay base, hold GST",
+      "signoff": "Kavya, one-click confirm"
+    },
+    {
+      "case": "MSME supplier, invoice 30+ days old",
+      "action": "Pay before day 45",
+      "signoff": "Kavya, one-click confirm"
+    },
+    {
+      "case": "Budget overrun ≤ 10% with reallocation",
+      "action": "Approve with conditions",
+      "signoff": "Kavya, one-click confirm"
+    },
+    {
+      "case": "Budget overrun > 10%",
+      "action": "Escalate",
+      "signoff": "Kavya"
+    },
+    {
+      "case": "Advance ≤ 30% to a supplier of 12+ months",
+      "action": "Recommend approve",
+      "signoff": "Kavya, one-click confirm"
+    },
+    {
+      "case": "Advance > 30%, or supplier < 12 months",
+      "action": "Escalate",
+      "signoff": "Kavya"
+    },
+    {
+      "case": "Anything above ₹5 lakh",
+      "action": "Escalate",
+      "signoff": "Kavya"
+    },
+    {
+      "case": "Requester approving own request",
+      "action": "Reject",
+      "signoff": "N/A"
+    }
+  ]
+}

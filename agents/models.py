@@ -35,6 +35,62 @@ class VerdictResponse(BaseModel):
     questions_for_requester: List[str] = Field(default_factory=list, description="Interviewer questions for missing information")
     recommended_conditions: List[str] = Field(default_factory=list, description="Required clauses or stipulations attached to decision")
     citations: List[str] = Field(default_factory=list, description="Mandatory list of all cited decisions, rules, clauses, and lessons")
+    reasoning: str = Field("", description="Plain-English explanation, the way the senior would put it")
+    lessons_applied: List[str] = Field(default_factory=list, description="Lesson IDs that shaped this verdict")
+    engine: str = Field("rules", description="'gemini-3.8-flash' when Gemini agents decided, 'rules' for the deterministic baseline")
+    cost_usd: float = Field(0.0, description="Gemini cost of this verdict (0 when cached or rules-only)")
+    cost_inr: float = Field(0.0, description="Same, in INR")
+    elapsed_ms: int = Field(0, description="Wall-clock time to reach the verdict")
+    mandate_floor: str = Field("", description="Least restrictive verdict the mandate allows")
+    llm_verdict: str = Field("", description="What Gemini proposed before the mandate floor was applied")
+    dropped_citations: List[str] = Field(default_factory=list, description="Citations Gemini gave that match no real ID (removed)")
+    agent_trace: List[dict] = Field(default_factory=list, description="ADK workflow timeline: node, start_ms, ms")
+    orchestrator: str = Field("", description="What ran the agents, e.g. 'Google ADK Workflow'")
+    trace_id: str = Field("", description="OpenTelemetry trace id (Cloud Trace on the deployed app)")
+
+
+# ---- Structured outputs the Gemini agents must return ----
+
+class PrecedentJudgement(BaseModel):
+    decision_id: str
+    relevance: float = Field(..., description="0.0 to 1.0")
+    how_meera_decided: str
+    takeaway: str
+
+
+class LessonJudgement(BaseModel):
+    lesson_id: str
+    why: str
+
+
+class PrecedentReasoning(BaseModel):
+    relevant_precedents: List[PrecedentJudgement]
+    applicable_lessons: List[LessonJudgement]
+
+
+class ChallengeList(BaseModel):
+    challenges: List[ChallengeItem]
+
+
+class QuestionList(BaseModel):
+    questions: List[str]
+
+
+class DeciderOutput(BaseModel):
+    verdict: VerdictType
+    headline: str
+    confidence: ConfidenceType
+    reasoning: str
+    recommended_conditions: List[str]
+    citations: List[str]
+    questions_if_asking: List[str] = Field(default_factory=list, description="If verdict is 'ask': the questions to put to the requester")
+
+
+class LessonDraft(BaseModel):
+    title: str
+    rule: str
+    trigger: str
+    action_required: str
 
 class VendorRequest(BaseModel):
     id: str

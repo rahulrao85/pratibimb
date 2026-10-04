@@ -1,0 +1,15 @@
+# Secrets and local state never enter the image
+.env
+.env.*
+*.env
+.git
+.venv
+**/__pycache__
+**/node_modules
+ui/dist
+.cache/usage.jsonl
+data/overrides.json
+data/backtest_results_*.json
+tests
+.pytest_cache
+.cache/state

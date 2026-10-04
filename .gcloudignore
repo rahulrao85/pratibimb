@@ -1,0 +1,16 @@
+# Upload set for `gcloud run deploy --source .` (mirrors .dockerignore; .cache/llm IS uploaded on purpose)
+.env
+.env.*
+*.env
+.git
+.gitignore
+.venv/
+**/__pycache__/
+**/node_modules/
+ui/dist/
+.cache/usage.jsonl
+data/overrides.json
+data/backtest_results_*.json
+tests/
+.pytest_cache/
+.cache/state/

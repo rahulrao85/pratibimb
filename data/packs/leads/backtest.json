@@ -1,0 +1,115 @@
+{
+  "backtest_cases": [
+    {
+      "decision_id": "SL-0131",
+      "request_description": "Orchid wants 10 more support seats at the current rates; their COO approved the budget.",
+      "expected_verdict": "approve",
+      "expected_citations": [],
+      "why": "Orchid adding 10 seats."
+    },
+    {
+      "decision_id": "SL-0132",
+      "request_description": "Cobalt Fintech enquiry for an L1 IT service desk; CTO engaged, budget approved.",
+      "expected_verdict": "approve",
+      "expected_citations": [],
+      "why": "Clean fintech desk enquiry."
+    },
+    {
+      "decision_id": "SL-0133",
+      "request_description": "Palmyra Hotels wants a seasonal reservations desk; budget approved, GM signing, asks for 80-day payment terms.",
+      "expected_verdict": "approve_with_conditions",
+      "expected_citations": [],
+      "why": "80-day terms."
+    },
+    {
+      "decision_id": "SL-0134",
+      "request_description": "Nilgiri Foods is interested in finance-ops support but has not got a budget line yet.",
+      "expected_verdict": "ask",
+      "expected_citations": [],
+      "why": "No budget yet."
+    },
+    {
+      "decision_id": "SL-0135",
+      "request_description": "Mercury Edtech: an analyst asked for a proposal for data operations; no senior contact yet.",
+      "expected_verdict": "ask",
+      "expected_citations": [],
+      "why": "Only an analyst engaged."
+    },
+    {
+      "decision_id": "SL-0136",
+      "request_description": "Lumina Bank wants to extend reconciliation and add month-end close: ₹1.9 Cr a year.",
+      "expected_verdict": "escalate",
+      "expected_citations": [],
+      "why": "Above ₹1.5 Cr."
+    },
+    {
+      "decision_id": "SL-0137",
+      "request_description": "Partner referral from Indus Ports Authority for data-entry work at 90-day terms.",
+      "expected_verdict": "escalate",
+      "expected_citations": [],
+      "why": "Government buyer."
+    },
+    {
+      "decision_id": "SL-0138",
+      "request_description": "Enquiry for us to build and run an AI model red-teaming team.",
+      "expected_verdict": "escalate",
+      "expected_citations": [],
+      "why": "Not a service we deliver."
+    },
+    {
+      "decision_id": "SL-0139",
+      "request_description": "Zephyr Airlines has sent a new customer-support enquiry.",
+      "expected_verdict": "refuse",
+      "expected_citations": [],
+      "why": "Do-not-pursue account."
+    },
+    {
+      "decision_id": "SL-0140",
+      "request_description": "Please rank our account managers by performance so we can decide bonuses.",
+      "expected_verdict": "refuse",
+      "expected_citations": [],
+      "why": "Asked to rank account managers for bonuses."
+    },
+    {
+      "decision_id": "SL-0141",
+      "request_description": "Vertex Logistics wants 15 more tracking-desk seats at the same 45-day terms. Note from finance: their last two invoices are 75 days overdue.",
+      "expected_verdict": "ask",
+      "expected_citations": [
+        "SL04"
+      ],
+      "why": "Upsell held: two invoices 75 days overdue (SL04)."
+    },
+    {
+      "decision_id": "SL-0142",
+      "request_description": "Garnet Pharma wants to try our data-cleansing team: they ask for a 6-week free pilot before signing anything.",
+      "expected_verdict": "approve_with_conditions",
+      "expected_citations": [
+        "SL03"
+      ],
+      "why": "Wanted a free 6-week pilot; offered paid pilot (SL03)."
+    },
+    {
+      "decision_id": "SL-0143",
+      "request_description": "Partner referral: 50-seat consumer helpdesk for a power distributor. The partner mentions the buyer is a subsidiary of the state electricity board.",
+      "expected_verdict": "escalate",
+      "expected_citations": [
+        "SL02"
+      ],
+      "why": "Buyer turned out to be a state-board subsidiary (SL02)."
+    },
+    {
+      "decision_id": "SL-0144",
+      "request_description": "Kaveri Health support desk expansion is ready to sign: budget approved. Our sponsor, their COO, left last week; procurement is now handling it.",
+      "expected_verdict": "ask",
+      "expected_citations": [],
+      "why": "Sponsor left last week; only procurement remains."
+    },
+    {
+      "decision_id": "SL-0145",
+      "request_description": "URGENT: Tarang's CIO wants 20 more service-desk seats from next month. Budget approved, PO ready, same terms.",
+      "expected_verdict": "approve",
+      "expected_citations": [],
+      "why": "URGENT but clean: CIO wants 20 seats next month, PO ready."
+    }
+  ]
+}

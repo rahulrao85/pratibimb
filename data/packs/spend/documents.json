@@ -1,0 +1,84 @@
+{
+  "documents": [
+    {
+      "id": "POL-AP-2026",
+      "title": "Accounts-payable policy (FY 2026-27)",
+      "clauses": [
+        {
+          "number": "2.1",
+          "title": "No-PO invoices",
+          "text": "Invoices without a purchase order may be paid up to ₹1,00,000 with a retro PO raised within 3 working days."
+        },
+        {
+          "number": "2.4",
+          "title": "Splitting",
+          "text": "Splitting one requirement into several invoices or POs to stay under a limit is prohibited; invoices from the same supplier for the same work within 60 days are aggregated."
+        },
+        {
+          "number": "4.2",
+          "title": "Bank changes",
+          "text": "Any change to supplier bank details must be confirmed by a phone call to the number on the supplier master before the next payment."
+        },
+        {
+          "number": "5.1",
+          "title": "MSME suppliers",
+          "text": "MSME-registered suppliers are paid within 45 days of acceptance (MSMED Act s.15; Income-tax Act s.43B(h))."
+        },
+        {
+          "number": "6.3",
+          "title": "Year-end spend",
+          "text": "Spend in the last month of the financial year above budget needs a business case showing use in the next quarter."
+        }
+      ]
+    },
+    {
+      "id": "INV-SOUNDWAVE-2291",
+      "entity_id": "P-SOUNDWAVE",
+      "title": "Soundwave AV — invoice 2291",
+      "clauses": [
+        {
+          "number": "1",
+          "title": "Description",
+          "text": "Conference room AV upgrade, 4th floor — Phase 2 (displays and cabling)."
+        },
+        {
+          "number": "2",
+          "title": "Amount",
+          "text": "₹96,000 plus GST at 18%."
+        },
+        {
+          "number": "3",
+          "title": "Reference",
+          "text": "Phase 1 of the same upgrade was billed on invoice 2274 dated 12-Sep-2026 for ₹94,500."
+        },
+        {
+          "number": "4",
+          "title": "Bank",
+          "text": "HDFC Bank, account as per supplier master."
+        }
+      ]
+    },
+    {
+      "id": "INV-SPARKLE-0815",
+      "entity_id": "P-SPARKLE",
+      "title": "Sparkle Facility Services — invoice 0815",
+      "clauses": [
+        {
+          "number": "1",
+          "title": "Description",
+          "text": "Deep cleaning, floors 2–5, September 2026."
+        },
+        {
+          "number": "2",
+          "title": "Amount",
+          "text": "₹42,800 plus GST, against PO 4471 for ₹41,500 (3.1% variance: extra consumables)."
+        },
+        {
+          "number": "3",
+          "title": "Bank",
+          "text": "Please note our NEW bank account with effect from this invoice: Axis Bank, A/c ending 7781. Kindly update your records."
+        }
+      ]
+    }
+  ]
+}

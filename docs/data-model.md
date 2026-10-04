@@ -13,9 +13,10 @@ Auditability and explainability are first-class architectural features.
 | Vendor | `vendors.json` | `id` (V-####) | Vendor master, risk flags, relationship age, SLA history. |
 | Contract | `contracts.json` | `id` (CN-####) | Grounded legal source of truth. Clause-level citations. |
 | Decision | `decisions.json` | `id` (DEC-####) | Episodic memory. Request + reason + outcome + mistake links. |
-| Lesson | `lessons.json` | `id` (L01–L06) | Curated governance lessons approved by senior post-mistake. |
+| Lesson | `lessons.json` | `id` (L01…) | Lessons approved by the senior: L01–L06 from past mistakes, L07+ from live overrides. |
 | Request | `requests.json` | `id` (REQ-###) | Live incoming vendor requests for evaluation. |
-| Backtest | `backtest.json` | `decision_id` | 10 held-out cases with ground truth senior decisions. |
+| Backtest | `backtest.json` | `decision_id` | 15 held-out cases: the requester's text (`request_description`) + the senior's verdict. |
+| Override | `overrides.json` | `id` (OVR-###) | Runtime only: the senior's overrides, filed as precedents (gitignored; reset via `/api/demo/reset`). |
 
 ## 2. Decision Record Schema
 
@@ -29,7 +30,7 @@ Auditability and explainability are first-class architectural features.
   "term_months": 12,
   "sla_breaches_12m": 2,
   "requested_by": "Admin – A. Kulkarni",
-  "decision": "approved",             // approved | approved_with_conditions | rejected | escalated
+  "decision": "approved",             // approved | approved_with_conditions | asked | escalated | rejected
   "decision_note": "Approved renewal despite 2 breaches due to lack of immediate supplier alternatives.",
   "reasons": ["Essential facility service", "Vendor committed verbally to fix performance"],
   "conditions": [],
@@ -85,7 +86,11 @@ Auditability and explainability are first-class architectural features.
     "90-day termination for convenience without penalty",
     "Cap term to 12 months"
   ],
-  "citations": [ "DEC-0087", "L01", "CN-KESTREL-2025 §9.2", "M-R3" ]
+  "citations": [ "DEC-0087", "L01", "CN-KESTREL-2025 §9.2", "M-R3" ],
+  "reasoning": "Two breaches and a 24-month evergreen clause…",   // in the senior's voice
+  "lessons_applied": [ "L01", "L03" ],
+  "engine": "gemini-3.8-flash",       // or "rules" (baseline / PRATIBIMB_LLM=off / daily cap reached)
+  "cost_usd": 0.0042, "cost_inr": 0.37, "elapsed_ms": 5933
 }
 ```
 

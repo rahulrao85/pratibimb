@@ -1,0 +1,37 @@
+{
+  "id": "SEN-003",
+  "name": "Kavya Iyer",
+  "title": "Financial Controller",
+  "org": "Meridian Global Services (Mumbai delivery centre)",
+  "location": "Mumbai, India",
+  "tenure_years": 8,
+  "reports_to": "CFO (Singapore)",
+  "span": "Accounts payable team of 9; ₹140 Cr annual spend; statutory audit owner",
+  "pronoun": "she",
+  "decision_style": {
+    "summary": "Chartered accountant. Pays fast when the paper is right and never when it isn't. Treats every exception as either a control gap or a fraud attempt until the documents say otherwise.",
+    "principles": [
+      "No PO, no surprise: retro POs are for emergencies, not habits.",
+      "Two invoices just under the limit are one invoice over it.",
+      "Bank details change by phone call, never by email.",
+      "GST we cannot claim is cost we chose to pay.",
+      "Pay small suppliers on time — the 45-day rule is the law, not a courtesy."
+    ],
+    "red_flags": [
+      "Invoices from the same supplier for the same job, each just under ₹1 lakh",
+      "New bank account details on an invoice or in an email",
+      "Invoice not visible in GSTR-2B",
+      "Year-end spend to 'use the budget before it lapses'",
+      "Advance requested by a supplier who mentions cash trouble",
+      "Anyone approving their own claim"
+    ],
+    "questions_she_always_asks": [
+      "Where is the PO, and why wasn't it raised before the work?",
+      "Has anyone confirmed the goods or service actually arrived?",
+      "Is this the first invoice for this job?",
+      "Do the bank details match the supplier master?",
+      "Can we claim the GST on this?"
+    ]
+  },
+  "signature_limit_inr": 500000
+}

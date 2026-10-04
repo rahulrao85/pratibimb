@@ -1,0 +1,87 @@
+{
+  "id": "spend",
+  "label": "Spend & payment exceptions",
+  "noun": "spend exception",
+  "domain": "invoice, budget, expense and advance-payment exceptions the accounts-payable team cannot clear alone",
+  "entity_label": "Supplier",
+  "amount_label": "Amount",
+  "verdict_labels": {
+    "approve": "Approve payment",
+    "approve_with_conditions": "Approve with conditions",
+    "ask": "Hold & ask",
+    "escalate": "Escalate to Kavya",
+    "refuse": "Reject"
+  },
+  "request_types": {
+    "invoice_without_po": "Invoice without PO",
+    "price_variance": "Price variance vs PO",
+    "budget_overrun": "Budget overrun",
+    "expense_exception": "Expense exception",
+    "advance_payment": "Advance / early payment",
+    "out_of_scope": "Rate a team member (out of scope)"
+  },
+  "fields": [
+    {
+      "name": "cost_centre",
+      "label": "Cost centre",
+      "type": "enum",
+      "options": [
+        "delivery",
+        "it",
+        "facilities",
+        "sales",
+        "admin"
+      ]
+    },
+    {
+      "name": "grn_matched",
+      "label": "Goods/service receipt confirmed (GRN)",
+      "type": "bool"
+    },
+    {
+      "name": "variance_pct",
+      "label": "Variance vs PO / budget (%)",
+      "type": "float"
+    },
+    {
+      "name": "gst_in_2b",
+      "label": "Invoice visible in GSTR-2B",
+      "type": "bool"
+    },
+    {
+      "name": "receipt_attached",
+      "label": "Receipt attached",
+      "type": "bool"
+    },
+    {
+      "name": "supplier_msme",
+      "label": "Supplier is MSME-registered",
+      "type": "bool"
+    },
+    {
+      "name": "days_since_invoice",
+      "label": "Days since invoice accepted",
+      "type": "int"
+    },
+    {
+      "name": "advance_pct",
+      "label": "Advance (%)",
+      "type": "int"
+    },
+    {
+      "name": "requester_is_approver",
+      "label": "Requester would approve own request",
+      "type": "bool"
+    }
+  ],
+  "similarity_fields": [
+    "cost_centre",
+    "grn_matched",
+    "gst_in_2b",
+    "supplier_msme"
+  ],
+  "document_label": "Invoice / policy",
+  "standing_documents": [
+    "POL-AP-2026"
+  ]
+}

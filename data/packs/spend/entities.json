@@ -1,0 +1,100 @@
+{
+  "entities": [
+    {
+      "id": "P-SOUNDWAVE",
+      "name": "Soundwave AV Systems",
+      "category": "audio-visual",
+      "relationship_months": 20,
+      "msme": true,
+      "flags": []
+    },
+    {
+      "id": "P-SPARKLE",
+      "name": "Sparkle Facility Services",
+      "category": "housekeeping",
+      "relationship_months": 44,
+      "msme": true,
+      "flags": []
+    },
+    {
+      "id": "P-BYTEFORGE",
+      "name": "ByteForge Infotech",
+      "category": "IT hardware",
+      "relationship_months": 31,
+      "msme": false,
+      "flags": []
+    },
+    {
+      "id": "P-COOLAIR",
+      "name": "CoolAir HVAC Services",
+      "category": "HVAC repair",
+      "relationship_months": 27,
+      "msme": true,
+      "flags": []
+    },
+    {
+      "id": "P-METRO",
+      "name": "Metro Cabs Corporate",
+      "category": "employee transport",
+      "relationship_months": 38,
+      "msme": false,
+      "flags": []
+    },
+    {
+      "id": "P-DESKCRAFT",
+      "name": "DeskCraft Furniture",
+      "category": "furniture",
+      "relationship_months": 15,
+      "msme": true,
+      "flags": []
+    },
+    {
+      "id": "P-PRINTEX",
+      "name": "Printex Stationers",
+      "category": "stationery",
+      "relationship_months": 52,
+      "msme": true,
+      "flags": []
+    },
+    {
+      "id": "P-CLOUDNINE",
+      "name": "CloudNine Software",
+      "category": "SaaS licences",
+      "relationship_months": 9,
+      "msme": false,
+      "flags": []
+    },
+    {
+      "id": "P-GREENLEAF",
+      "name": "GreenLeaf Caterers",
+      "category": "catering",
+      "relationship_months": 36,
+      "msme": true,
+      "flags": []
+    },
+    {
+      "id": "P-NETSURE",
+      "name": "NetSure Security Systems",
+      "category": "CCTV & access",
+      "relationship_months": 41,
+      "msme": false,
+      "flags": []
+    },
+    {
+      "id": "P-EMPLOYEE",
+      "name": "Employee reimbursement",
+      "category": "expenses",
+      "relationship_months": 999,
+      "msme": false,
+      "flags": []
+    },
+    {
+      "id": "P-OTHER",
+      "name": "Other / new supplier",
+      "category": "other",
+      "relationship_months": 0,
+      "msme": false,
+      "flags": []
+    }
+  ]
+}

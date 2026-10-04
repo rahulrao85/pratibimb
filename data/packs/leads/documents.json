@@ -1,0 +1,85 @@
+{
+  "documents": [
+    {
+      "id": "RFP-HELIOS-2026",
+      "entity_id": "A-HELIOS",
+      "title": "Helios Insurance — RFP for claims-processing support (180 seats)",
+      "clauses": [
+        {
+          "number": "1.2",
+          "title": "Participants",
+          "text": "This RFP has been issued to six (6) shortlisted vendors through the procurement portal."
+        },
+        {
+          "number": "3.4",
+          "title": "Liability",
+          "text": "The Supplier's liability under this agreement shall be unlimited, including indirect and consequential losses."
+        },
+        {
+          "number": "5.1",
+          "title": "Payment",
+          "text": "Undisputed invoices shall be paid within one hundred and twenty (120) days of receipt."
+        },
+        {
+          "number": "6.2",
+          "title": "Transition",
+          "text": "Full service go-live is required within four (4) weeks of award for all 180 seats."
+        },
+        {
+          "number": "8.3",
+          "title": "Service credits",
+          "text": "A service credit of 10% of the monthly fee applies for each SLA missed, uncapped."
+        },
+        {
+          "number": "11.1",
+          "title": "Submission",
+          "text": "Responses are due within eight (8) calendar days of issue."
+        }
+      ]
+    },
+    {
+      "id": "ENQ-ORCHID-2026",
+      "entity_id": "A-ORCHID",
+      "title": "Orchid Retail — email: add Hindi chat support",
+      "clauses": [
+        {
+          "number": "1",
+          "title": "Request",
+          "text": "Expand the existing customer-support team by 12 seats to cover Hindi chat, from 1 November."
+        },
+        {
+          "number": "2",
+          "title": "Budget",
+          "text": "Budget approved by our COO, Ms. R. Shah, who will sign the change order."
+        },
+        {
+          "number": "3",
+          "title": "Terms",
+          "text": "Same rates and 45-day payment terms as the current statement of work."
+        }
+      ]
+    },
+    {
+      "id": "ENQ-SAHYADRI-2026",
+      "entity_id": "A-SAHYADRI",
+      "title": "Sahyadri Power — partner referral note",
+      "clauses": [
+        {
+          "number": "1",
+          "title": "Referral",
+          "text": "Referred by our implementation partner for consumer billing-dispute handling, 60 seats."
+        },
+        {
+          "number": "2",
+          "title": "Buyer",
+          "text": "Sahyadri Power Distribution is a subsidiary of the state electricity board."
+        },
+        {
+          "number": "3",
+          "title": "Commercials",
+          "text": "Payment on monthly certification by the user department; L1 (lowest price) selection."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "id": "MAN-VIKRAM-2026",
+  "senior_id": "SEN-002",
+  "currency": "INR",
+  "effective_from": "2026-04-01",
+  "notes": "Delegation to account managers. Pratibimb may recommend qualifying only where a rule allows it; every other lead goes to Vikram with a decision file. Vikram makes every final call. Any ask, escalate or disqualify rule overrides an earlier qualify.",
+  "rules": [
+    {
+      "id": "S-R1",
+      "applies_to": [
+        "inbound_enquiry",
+        "partner_referral",
+        "existing_client_upsell"
+      ],
+      "when": [
+        {
+          "field": "amount_inr",
+          "op": "<=",
+          "value": 15000000
+        },
+        {
+          "field": "budget_confirmed",
+          "op": "==",
+          "value": true
+        },
+        {
+          "field": "decision_maker_engaged",
+          "op": "==",
+          "value": true
+        },
+        {
+          "field": "payment_terms_days",
+          "op": "<=",
+          "value": 60
+        },
+        {
+          "field": "service_line",
+          "op": "!=",
+          "value": "new_capability"
+        }
+      ],
+      "then": "approve",
+      "reason": "Core service, inside ₹1.5 Cr, budget and decision-maker confirmed, normal payment terms."
+    },
+    {
+      "id": "S-R2",
+      "applies_to": [
+        "inbound_enquiry",
+        "partner_referral",
+        "existing_client_upsell"
+      ],
+      "when": [
+        {
+          "field": "amount_inr",
+          "op": "<=",
+          "value": 15000000
+        },
+        {
+          "field": "budget_confirmed",
+          "op": "==",
+          "value": true
+        },
+        {
+          "field": "decision_maker_engaged",
+          "op": "==",
+          "value": true
+        },
+        {
+          "field": "payment_terms_days",
+          "op": ">",
+          "value": 60
+        },
+        {
+          "field": "payment_terms_days",
+          "op": "<=",
+          "value": 90
+        },
+        {
+          "field": "service_line",
+          "op": "!=",
+          "value": "new_capability"
+        }
+      ],
+      "then": "approve_with_conditions",
+      "requires_conditions": [
+        "Credit check on the buyer",
+        "Milestone or advance billing"
+      ],
+      "reason": "Good lead, slow payer terms: qualify only with credit protection."
+    },
+    {
+      "id": "S-R3",
+      "applies_to": "*",
+      "when": [
+        {
+          "field": "budget_confirmed",
+          "op": "==",
+          "value": false
+        }
+      ],
+      "then": "ask",
+      "reason": "No confirmed budget: find out before spending pursuit effort."
+    },
+    {
+      "id": "S-R4",
+      "applies_to": "*",
+      "when": [
+        {
+          "field": "decision_maker_engaged",
+          "op": "==",
+          "value": false
+        }
+      ],
+      "then": "ask",
+      "reason": "No decision-maker engaged: a conversation, not a lead."
+    },
+    {
+      "id": "S-R5",
+      "applies_to": "*",
+      "when": [
+        {
+          "field": "amount_inr",
+          "op": ">",
+          "value": 15000000
+        }
+      ],
+      "then": "escalate",
+      "reason": "Above the ₹1.5 Cr account-manager authority."
+    },
+    {
+      "id": "S-R6",
+      "applies_to": "*",
+      "when": [
+        {
+          "field": "government_entity",
+          "op": "==",
+          "value": true
+        }
+      ],
+      "then": "escalate",
+      "requires_conditions": [
+        "Milestone billing or mobilisation advance",
+        "EMD and penalty review"
+      ],
+      "reason": "Government and PSU buyers: procurement rules and payment cycles need Vikram (lesson SL02)."
+    },
+    {
+      "id": "S-R7",
+      "applies_to": "*",
+      "when": [
+        {
+          "field": "service_line",
+          "op": "==",
+          "value": "new_capability"
+        }
+      ],
+      "then": "escalate",
+      "reason": "We do not deliver this today: a capability bet needs Vikram and delivery."
+    },
+    {
+      "id": "S-R8",
+      "applies_to": "*",
+      "when": [
+        {
+          "field": "payment_terms_days",
+          "op": ">",
+          "value": 90
+        }
+      ],
+      "then": "escalate",
+      "reason": "Payment terms beyond 90 days."
+    },
+    {
+      "id": "S-R9",
+      "applies_to": [
+        "rfp_invitation"
+      ],
+      "when": [],
+      "then": "escalate",
+      "reason": "Every RFP response is a ₹-lakhs effort: Vikram decides bid / no-bid (lesson SL01)."
+    },
+    {
+      "id": "S-R10",
+      "applies_to": "*",
+      "when": [
+        {
+          "field": "entity.flags",
+          "op": "contains",
+          "value": "do_not_pursue"
+        }
+      ],
+      "then": "refuse",
+      "reason": "Account on the do-not-pursue list (unpaid dues or conduct issue)."
+    },
+    {
+      "id": "S-R11",
+      "applies_to": [
+        "out_of_scope"
+      ],
+      "when": [],
+      "then": "refuse",
+      "reason": "Pratibimb never rates or ranks people (EU AI Act high-risk)."
+    }
+  ],
+  "limits_table": [
+    {
+      "case": "Core service ≤ ₹1.5 Cr · budget + decision-maker confirmed · ≤ 60-day terms",
+      "action": "Recommend qualify",
+      "signoff": "Vikram, one-click confirm"
+    },
+    {
+      "case": "Same, 61–90-day terms",
+      "action": "Qualify only with credit check + milestone billing",
+      "signoff": "Vikram, one-click confirm"
+    },
+    {
+      "case": "Budget or decision-maker not confirmed",
+      "action": "Ask",
+      "signoff": "Account manager"
+    },
+    {
+      "case": "Above ₹1.5 Cr",
+      "action": "Escalate",
+      "signoff": "Vikram"
+    },
+    {
+      "case": "Any RFP invitation",
+      "action": "Escalate (bid / no-bid)",
+      "signoff": "Vikram"
+    },
+    {
+      "case": "Government / PSU buyer",
+      "action": "Escalate + billing safeguards",
+      "signoff": "Vikram + Finance"
+    },
+    {
+      "case": "New capability we don't deliver",
+      "action": "Escalate",
+      "signoff": "Vikram + Delivery"
+    },
+    {
+      "case": "Payment terms > 90 days",
+      "action": "Escalate",
+      "signoff": "Vikram"
+    },
+    {
+      "case": "Do-not-pursue account",
+      "action": "Disqualify",
+      "signoff": "N/A"
+    },
+    {
+      "case": "Rate or rank a salesperson",
+      "action": "Refuse — out of scope",
+      "signoff": "N/A"
+    }
+  ]
+}

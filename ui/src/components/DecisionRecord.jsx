@@ -1,35 +1,73 @@
-import React, { useState } from 'react';
-import { 
-  CheckCircle2, 
-  AlertTriangle, 
-  XCircle, 
-  HelpCircle, 
-  ShieldAlert, 
-  BookOpen, 
-  Scale, 
-  FileText, 
+import React, { useEffect, useState } from 'react';
+import AgentTimeline from './AgentTimeline.jsx';
+import { verdictLabel, firstName, isRuleId } from '../labels.js';
+import {
+  CheckCircle2,
+  AlertTriangle,
+  XCircle,
+  HelpCircle,
+  ShieldAlert,
+  BookOpen,
+  Scale,
+  FileText,
   RotateCcw,
   Sparkles,
   ArrowRight,
   UserCheck
 } from 'lucide-react';
 
-export default function DecisionRecord({ verdict, request, onRecordOverride, overrideSuccess }) {
+const VERDICTS = ['approve', 'approve_with_conditions', 'ask', 'escalate', 'refuse'];
+
+// A ready-made override for each senior's clean demo case, so the learning loop can be shown in one click
+const OVERRIDE_DEFAULTS = {
+  vendor: {
+    note: "The vendor's key account manager just left. I would have held renewal until a senior replacement was named and contractually locked.",
+    rule: "For service vendors with named key personnel, verify named persons are active and contractually bound before renewal.",
+  },
+  leads: {
+    note: "We have only three Hindi-certified agents today. Before we promise Hindi chat from 1 November, delivery must confirm we can staff it.",
+    rule: "Before qualifying an upsell that needs a new language or skill, delivery confirms capacity and a ramp-up date.",
+  },
+  spend: {
+    note: "Courier is already included in Printex's rate contract, and this is the third month they've added it. Ask them to remove it before we pay.",
+    rule: "Recurring add-on charges that the rate contract already covers are held until the supplier removes them.",
+  },
+};
+
+export default function DecisionRecord({ verdict, request, pack, senior, onRecordOverride, overrideSuccess, onRerun, onResetDemo, isAnalyzing }) {
+  const packId = pack?.id || 'vendor';
+  const first = senior?.name ? firstName(senior.name) : 'Meera';
+  const fullName = senior?.name || 'Meera Nair';
+  const he = senior?.pronoun === 'he';
+  const subj = he ? 'he' : 'she';
+  const pos = he ? 'his' : 'her';
+  const vl = (v) => verdictLabel(pack, v);
   const [showOverrideForm, setShowOverrideForm] = useState(false);
-  const [overrideNote, setOverrideNote] = useState(
-    "The vendor's key account manager just left. I would have held renewal until a senior replacement was named and contractually locked."
-  );
-  const [proposedRule, setProposedRule] = useState(
-    "For service vendors with named key personnel, verify named persons are active and contractually bound before renewal."
-  );
+  const [seniorDecision, setSeniorDecision] = useState('ask');
+  const [verdictBefore, setVerdictBefore] = useState(null);
+  const [confirmed, setConfirmed] = useState(false);
+  const [overrideNote, setOverrideNote] = useState(OVERRIDE_DEFAULTS[packId]?.note || '');
+  const [proposedRule, setProposedRule] = useState(OVERRIDE_DEFAULTS[packId]?.rule || '');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Every citation opens its source: rule, lesson, past decision or document clause
+  const [sources, setSources] = useState({});
+  const [openCite, setOpenCite] = useState(null);
+  useEffect(() => {
+    fetch(`/api/sources?pack=${packId}`).then(r => r.json()).then(d => setSources(d.sources || {})).catch(() => {});
+    setOpenCite(null);
+  }, [packId, verdict?.request_id, overrideSuccess?.id]);
+  useEffect(() => {
+    setOverrideNote(OVERRIDE_DEFAULTS[packId]?.note || '');
+    setProposedRule(OVERRIDE_DEFAULTS[packId]?.rule || '');
+    setShowOverrideForm(false); setConfirmed(false); setVerdictBefore(null);
+  }, [packId]);
 
   if (!verdict) {
     return (
-      <div className="glass-card" style={{ padding: '3rem', textAlign: 'center' }}>
-        <HelpCircle size={48} style={{ color: 'var(--text-muted)', margin: '0 auto 1rem' }} />
-        <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>No Active Decision File</h3>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', maxWidth: '420px', margin: '0 auto 1.5rem' }}>
+      <div className="glass-card" style={{ padding: 'var(--space-8)', textAlign: 'center' }}>
+        <HelpCircle size={48} style={{ color: 'var(--text-muted)', margin: '0 auto var(--space-4)' }} />
+        <h3 style={{ fontSize: 'var(--text-xl)', marginBottom: 'var(--space-2)' }}>No Active Decision File</h3>
+        <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', maxWidth: '420px', margin: '0 auto var(--space-6)' }}>
           Please select a vendor request from the <strong>Request Inbox</strong> and click "Run Pratibimb Scrutiny" to generate a one-page audit-ready decision file.
         </p>
       </div>
@@ -57,36 +95,39 @@ export default function DecisionRecord({ verdict, request, onRecordOverride, ove
   const handleOverrideSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setVerdictBefore(verdict.verdict);
     await onRecordOverride({
       request_id: verdict.request_id,
       engine_verdict: verdict.verdict,
-      senior_decision: 'escalate_with_condition',
+      senior_decision: seniorDecision,
       senior_override_note: overrideNote,
       proposed_rule: proposedRule,
-      senior_name: 'Meera Nair'
+      senior_name: fullName,
+      request
     });
     setIsSubmitting(false);
+    setShowOverrideForm(false);
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
       {/* Decision File Master Card */}
-      <div className="glass-card" style={{ padding: '2rem', borderTop: `4px solid ${theme.border}` }}>
+      <div className="glass-card" style={{ padding: 'var(--space-7)', borderTop: `4px solid ${theme.border}` }}>
         {/* Document Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1.25rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-4)', borderBottom: '1px solid var(--border-color)', paddingBottom: 'var(--space-5)', marginBottom: 'var(--space-6)' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.25rem' }}>
-              <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '0.9rem', color: 'var(--primary-color)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-1)' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 'var(--text-sm)', color: 'var(--primary-color)' }}>
                 DECISION FILE: PRATIBIMB-{verdict.request_id}
               </span>
-              <span className="tag tag-info" style={{ fontSize: '0.65rem' }}>
+              <span className="tag tag-info" style={{ fontSize: 'var(--text-xs)' }}>
                 Confidence: {verdict.confidence?.toUpperCase()}
               </span>
             </div>
-            <h2 style={{ fontSize: '1.4rem', color: 'var(--text-primary)', marginTop: '0.25rem' }}>
-              {request?.vendor_name || 'Vendor Decision File'}
+            <h2 style={{ fontSize: 'var(--text-xl)', color: 'var(--text-primary)', marginTop: 'var(--space-1)' }}>
+              {request?.vendor_name || request?.entity_name || 'Decision File'}
             </h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Subject: {request?.description || 'Vendor Evaluation'} · Requester: {request?.requested_by || 'Operations Team'}
             </p>
           </div>
@@ -96,19 +137,19 @@ export default function DecisionRecord({ verdict, request, onRecordOverride, ove
             background: theme.bg,
             border: `1px solid ${theme.border}`,
             color: theme.color,
-            padding: '0.75rem 1.5rem',
+            padding: 'var(--space-3) var(--space-6)',
             borderRadius: 'var(--radius-md)',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.75rem'
+            gap: 'var(--space-3)'
           }}>
             {theme.icon}
             <div>
-              <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>
+              <div style={{ fontSize: 'var(--text-xs)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>
                 Synthesized Verdict
               </div>
-              <strong style={{ fontSize: '1.15rem', letterSpacing: '0.02em' }}>
-                {verdict.verdict.replace(/_/g, ' ').toUpperCase()}
+              <strong style={{ fontSize: 'var(--text-lg)', letterSpacing: '0.02em' }}>
+                {vl(verdict.verdict).toUpperCase()}
               </strong>
             </div>
           </div>
@@ -117,59 +158,76 @@ export default function DecisionRecord({ verdict, request, onRecordOverride, ove
         {/* Executive Headline */}
         <div style={{
           background: 'var(--bg-inset)',
-          padding: '1rem 1.25rem',
+          padding: 'var(--space-4) var(--space-5)',
           borderRadius: 'var(--radius-sm)',
-          fontSize: '1rem',
+          fontSize: 'var(--text-base)',
           fontWeight: 600,
           color: 'var(--text-primary)',
           borderLeft: `4px solid ${theme.border}`,
-          marginBottom: '1.5rem'
+          marginBottom: 'var(--space-6)'
         }}>
           {verdict.headline}
         </div>
 
+        {/* Why: the reasoning in Meera's voice, and what produced it */}
+        {verdict.reasoning && (
+          <p style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 'var(--space-3)' }}>
+            {verdict.reasoning}
+          </p>
+        )}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)', alignItems: 'center', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: 'var(--space-6)' }}>
+          <span className="tag tag-info" style={{ fontSize: 'var(--text-xs)' }}>{verdict.engine === 'rules' ? 'Rules only' : `Gemini agents · ${verdict.engine}`}</span>
+          {verdict.lessons_applied?.length > 0 && (
+            <span>Lessons applied: <strong style={{ fontFamily: 'var(--font-mono)' }}>{verdict.lessons_applied.join(', ')}</strong></span>
+          )}
+          {verdict.elapsed_ms > 0 && <span>· {verdict.elapsed_ms < 1000 ? `${verdict.elapsed_ms} ms` : `${(verdict.elapsed_ms / 1000).toFixed(1)} s`}</span>}
+          <span>· {verdict.cost_inr > 0 ? `₹${verdict.cost_inr.toFixed(2)} in Gemini calls` : 'no new Gemini cost (cached or rules)'}</span>
+        </div>
+
+        <AgentTimeline verdict={verdict} pack={pack} />
+
         {/* Two-Column Grid: Mandate Check & Precedents */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
           {/* Mandate Check */}
-          <div style={{ background: 'var(--bg-inset)', padding: '1.25rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
-            <h3 style={{ fontSize: '0.95rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--primary-color)' }}>
+          <div style={{ background: 'var(--bg-inset)', padding: 'var(--space-5)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
+            <h3 style={{ fontSize: 'var(--text-base)', marginBottom: 'var(--space-3)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', color: 'var(--primary-color)' }}>
               <Scale size={18} />
               <span>Mandate Limits Evaluation</span>
             </h3>
-            <div style={{ marginBottom: '0.65rem' }}>
+            <div style={{ marginBottom: 'var(--space-3)' }}>
               <span className={`tag ${verdict.mandate_check?.within_limits ? 'tag-success' : 'tag-danger'}`}>
                 {verdict.mandate_check?.within_limits ? '✓ Within Delegated Authority' : '⚠️ Limits Exceeded / Escalation Required'}
               </span>
             </div>
             {verdict.mandate_check?.breaches?.length > 0 ? (
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.825rem' }}>
+              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', fontSize: 'var(--text-xs)' }}>
                 {verdict.mandate_check.breaches.map((b, idx) => (
-                  <li key={idx} style={{ color: 'var(--danger)', display: 'flex', gap: '0.4rem' }}>
+                  <li key={idx} style={{ color: 'var(--danger)', display: 'flex', gap: 'var(--space-2)' }}>
                     <span>•</span>
                     <span>{b}</span>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)' }}>
-                Request complies with all delegation thresholds (≤ ₹5,00,000, 0 breaches, standard 12m term).
+              <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
+                Inside {first}'s delegated authority under {(verdict.citations || []).filter(isRuleId).join(', ') || `${pos} mandate`}. {first} still confirms the verdict.
               </p>
             )}
           </div>
 
           {/* Precedents Cited */}
-          <div style={{ background: 'var(--bg-inset)', padding: '1.25rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
-            <h3 style={{ fontSize: '0.95rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--primary-color)' }}>
+          <div style={{ background: 'var(--bg-inset)', padding: 'var(--space-5)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
+            <h3 style={{ fontSize: 'var(--text-base)', marginBottom: 'var(--space-3)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', color: 'var(--primary-color)' }}>
               <BookOpen size={18} />
               <span>Episodic Precedents Grounding</span>
             </h3>
             {verdict.precedents?.length > 0 ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
                 {verdict.precedents.map((p, idx) => (
-                  <div key={idx} style={{ fontSize: '0.8rem', paddingBottom: '0.5rem', borderBottom: idx < verdict.precedents.length - 1 ? '1px solid var(--border-color)' : 'none' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.2rem' }}>
+                  <div key={idx} style={{ fontSize: 'var(--text-xs)', paddingBottom: 'var(--space-2)', borderBottom: idx < verdict.precedents.length - 1 ? '1px solid var(--border-color)' : 'none' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-1)' }}>
                       <strong style={{ fontFamily: 'var(--font-mono)', color: 'var(--primary-color)' }}>{p.decision_id}</strong>
-                      <span className={`tag ${p.outcome_status === 'bad' ? 'tag-danger' : 'tag-success'}`} style={{ fontSize: '0.65rem' }}>
+                      <span className={`tag ${p.outcome_status === 'bad' ? 'tag-danger' : 'tag-success'}`} style={{ fontSize: 'var(--text-xs)' }}>
                         {p.outcome_status.toUpperCase()}
                       </span>
                     </div>
@@ -178,7 +236,7 @@ export default function DecisionRecord({ verdict, request, onRecordOverride, ove
                 ))}
               </div>
             ) : (
-              <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)' }}>
+              <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
                 No prior direct precedent on file. Case evaluated as novel counterparty.
               </p>
             )}
@@ -187,21 +245,28 @@ export default function DecisionRecord({ verdict, request, onRecordOverride, ove
 
         {/* Contract Challenges (Adversarial Findings) */}
         {verdict.challenges?.length > 0 && (
-          <div style={{ marginBottom: '1.5rem', background: 'rgba(239, 68, 68, 0.05)', padding: '1.25rem', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(239, 68, 68, 0.2)' }}>
-            <h3 style={{ fontSize: '0.95rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--danger)' }}>
+          <div style={{ marginBottom: 'var(--space-6)', background: 'var(--danger-light)', padding: 'var(--space-5)', borderRadius: 'var(--radius-sm)', border: '1px solid color-mix(in srgb, var(--danger) 25%, transparent)' }}>
+            <h3 style={{ fontSize: 'var(--text-base)', marginBottom: 'var(--space-3)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', color: 'var(--danger)' }}>
               <ShieldAlert size={18} />
               <span>Challenger Agent Contractual Scrutiny ({verdict.challenges.length} Findings)</span>
             </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
               {verdict.challenges.map((c, idx) => (
-                <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', fontSize: '0.85rem' }}>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-2) var(--space-4)', fontSize: 'var(--text-sm)' }}>
+                  <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
                     <span style={{ color: 'var(--danger)', fontWeight: 700 }}>{idx + 1}.</span>
                     <span>{c.finding}</span>
                   </div>
-                  <span className="tag tag-danger" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', whiteSpace: 'nowrap' }}>
-                    {c.source}
-                  </span>
+                  {sources[c.source] ? (
+                    <button type="button" className="tag tag-danger" onClick={() => setOpenCite(c.source)}
+                      title="Open the clause" style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', whiteSpace: 'nowrap', cursor: 'pointer' }}>
+                      {c.source}
+                    </button>
+                  ) : (
+                    <span className="tag tag-danger" style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', whiteSpace: 'nowrap' }}>
+                      {c.source}
+                    </span>
+                  )}
                 </div>
               ))}
             </div>
@@ -210,14 +275,14 @@ export default function DecisionRecord({ verdict, request, onRecordOverride, ove
 
         {/* Probing Questions for Requester */}
         {verdict.questions_for_requester?.length > 0 && (
-          <div style={{ marginBottom: '1.5rem', background: 'var(--accent-light)', padding: '1.25rem', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(14, 165, 233, 0.2)' }}>
-            <h3 style={{ fontSize: '0.95rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-color)' }}>
+          <div style={{ marginBottom: 'var(--space-6)', background: 'var(--accent-light)', padding: 'var(--space-5)', borderRadius: 'var(--radius-sm)', border: '1px solid color-mix(in srgb, var(--accent-color) 30%, transparent)' }}>
+            <h3 style={{ fontSize: 'var(--text-base)', marginBottom: 'var(--space-3)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', color: 'var(--accent-color)' }}>
               <HelpCircle size={18} />
-              <span>Interviewer Agent: Meera's Instinct Inquiries</span>
+              <span>Interviewer Agent: {first}'s Instinct Inquiries</span>
             </h3>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.85rem' }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
               {verdict.questions_for_requester.map((q, idx) => (
-                <li key={idx} style={{ display: 'flex', gap: '0.5rem', fontStyle: 'italic', color: 'var(--text-primary)' }}>
+                <li key={idx} style={{ display: 'flex', gap: 'var(--space-2)', fontStyle: 'italic', color: 'var(--text-primary)' }}>
                   <span>❓</span>
                   <span>"{q}"</span>
                 </li>
@@ -228,13 +293,13 @@ export default function DecisionRecord({ verdict, request, onRecordOverride, ove
 
         {/* Recommended Safeguards & Conditions */}
         {verdict.recommended_conditions?.length > 0 && (
-          <div style={{ marginBottom: '1.5rem', background: 'var(--bg-inset)', padding: '1.25rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
-            <h3 style={{ fontSize: '0.95rem', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>
+          <div style={{ marginBottom: 'var(--space-6)', background: 'var(--bg-inset)', padding: 'var(--space-5)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
+            <h3 style={{ fontSize: 'var(--text-base)', marginBottom: 'var(--space-3)', color: 'var(--text-primary)' }}>
               🛡️ Recommended Contractual Safeguards
             </h3>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.85rem' }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
               {verdict.recommended_conditions.map((cond, idx) => (
-                <li key={idx} style={{ display: 'flex', gap: '0.5rem', color: 'var(--text-primary)' }}>
+                <li key={idx} style={{ display: 'flex', gap: 'var(--space-2)', color: 'var(--text-primary)' }}>
                   <span style={{ color: 'var(--primary-color)' }}>✓</span>
                   <span>{cond}</span>
                 </li>
@@ -244,44 +309,69 @@ export default function DecisionRecord({ verdict, request, onRecordOverride, ove
         )}
 
         {/* Mandatory Citations Bar */}
-        <div style={{ paddingTop: '1.25rem', borderTop: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
-          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+        <div style={{ paddingTop: 'var(--space-5)', borderTop: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
+          <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
             Mandatory Citations ({verdict.citations?.length || 0}):
           </span>
           {(verdict.citations || []).map((cite, idx) => (
-            <span key={idx} className="tag tag-info" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.725rem' }}>
+            <button key={idx} type="button" className="tag tag-info" onClick={() => setOpenCite(openCite === cite ? null : cite)}
+              aria-expanded={openCite === cite} title="Open the source"
+              style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', cursor: 'pointer',
+                outline: openCite === cite ? '2px solid var(--primary-color)' : 'none' }}>
               {cite}
-            </span>
+            </button>
           ))}
+          <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>Click any citation to read its source.</span>
         </div>
+        {openCite && (
+          <div role="region" aria-label={`Source ${openCite}`} style={{ marginTop: 'var(--space-3)', padding: 'var(--space-4)',
+            background: 'var(--bg-inset)', border: '1px solid var(--primary-color)', borderRadius: 'var(--radius-sm)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', gap: 'var(--space-3)', alignItems: 'flex-start' }}>
+              <div style={{ minWidth: 0 }}>
+                <div style={{ fontSize: 'var(--text-xs)', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)' }}>
+                  {sources[openCite]?.kind || 'Source'}
+                </div>
+                <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-1)' }}>
+                  {sources[openCite]?.title || openCite}
+                </div>
+              </div>
+              <button type="button" className="btn btn-secondary" style={{ padding: 'var(--space-1) var(--space-3)', fontSize: 'var(--text-xs)' }}
+                onClick={() => setOpenCite(null)}>Close</button>
+            </div>
+            <p style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+              {sources[openCite]?.text || 'Not found in the record.'}
+            </p>
+          </div>
+        )}
       </div>
 
       {/* THE LEARNING MOMENT: Senior Review & Override Loop */}
-      <div className="glass-card" style={{ padding: '1.75rem', background: 'var(--bg-inset)', border: '1px solid var(--border-color)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+      <div className="glass-card" style={{ padding: 'var(--space-6)', background: 'var(--bg-inset)', border: '1px solid var(--border-color)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-4)', marginBottom: 'var(--space-4)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
             <UserCheck size={22} style={{ color: 'var(--primary-color)' }} />
             <div>
-              <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)' }}>
-                Senior Authority Review (Meera Nair)
+              <h3 style={{ fontSize: 'var(--text-lg)', color: 'var(--text-primary)' }}>
+                Senior Authority Review ({fullName})
               </h3>
-              <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                The senior retains final decision authority. Overrides generate lessons that update future verdicts.
+              <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
+                {first} always makes the final call. When {subj} overrides, Pratibimb writes a lesson and files {pos} decision as a precedent; the next verdict uses both.
               </p>
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.75rem' }}>
-            <button 
+          <div style={{ display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap' }}>
+            <button
               className="btn btn-primary"
-              style={{ fontSize: '0.8rem' }}
-              onClick={() => alert(`Verdict ${verdict.verdict.toUpperCase()} confirmed by Meera Nair. Audit record archived.`)}
+              style={{ fontSize: 'var(--text-xs)' }}
+              onClick={() => setConfirmed(true)}
+              disabled={confirmed}
             >
-              Confirm Verdict
+              {confirmed ? `Confirmed by ${first}` : 'Confirm Verdict'}
             </button>
             <button
               className="btn btn-secondary"
-              style={{ fontSize: '0.8rem', borderColor: 'var(--warning)', color: 'var(--warning)' }}
+              style={{ fontSize: 'var(--text-xs)', borderColor: 'var(--warning)', color: 'var(--warning)' }}
               onClick={() => setShowOverrideForm(!showOverrideForm)}
             >
               <RotateCcw size={14} />
@@ -292,39 +382,55 @@ export default function DecisionRecord({ verdict, request, onRecordOverride, ove
 
         {/* Override Form */}
         {showOverrideForm && (
-          <form onSubmit={handleOverrideSubmit} style={{ marginTop: '1.25rem', padding: '1.25rem', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
-            <h4 style={{ fontSize: '0.95rem', marginBottom: '0.75rem', color: 'var(--warning)' }}>
+          <form onSubmit={handleOverrideSubmit} style={{ marginTop: 'var(--space-5)', padding: 'var(--space-5)', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
+            <h4 style={{ fontSize: 'var(--text-base)', marginBottom: 'var(--space-3)', color: 'var(--warning)' }}>
               Record Senior Override & Crystallize Governance Lesson
             </h4>
-            
-            <div style={{ marginBottom: '1rem' }}>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.35rem' }}>
-                Meera's Decision Note / Reason for Disagreement
+
+            <div style={{ marginBottom: 'var(--space-4)' }}>
+              <label htmlFor="senior-decision" style={{ display: 'block', fontSize: 'var(--text-xs)', fontWeight: 600, marginBottom: 'var(--space-1)' }}>
+                {first}'s decision
+              </label>
+              <select
+                id="senior-decision"
+                value={seniorDecision}
+                onChange={(e) => setSeniorDecision(e.target.value)}
+                style={{ width: '100%', padding: 'var(--space-2)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)', fontSize: 'var(--text-sm)' }}
+              >
+                {VERDICTS.filter((v) => v !== verdict.verdict).map((v) => (
+                  <option key={v} value={v}>{vl(v)}</option>
+                ))}
+              </select>
+            </div>
+
+            <div style={{ marginBottom: 'var(--space-4)' }}>
+              <label style={{ display: 'block', fontSize: 'var(--text-xs)', fontWeight: 600, marginBottom: 'var(--space-1)' }}>
+                {first}'s Decision Note / Reason for Disagreement
               </label>
               <textarea
                 rows={2}
                 value={overrideNote}
                 onChange={(e) => setOverrideNote(e.target.value)}
-                style={{ width: '100%', padding: '0.55rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
+                style={{ width: '100%', padding: 'var(--space-2)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)', fontSize: 'var(--text-sm)' }}
               />
             </div>
 
-            <div style={{ marginBottom: '1rem' }}>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.35rem' }}>
+            <div style={{ marginBottom: 'var(--space-4)' }}>
+              <label style={{ display: 'block', fontSize: 'var(--text-xs)', fontWeight: 600, marginBottom: 'var(--space-1)' }}>
                 Codified Governance Rule (Lesson to Add to Memory)
               </label>
               <input
                 type="text"
                 value={proposedRule}
                 onChange={(e) => setProposedRule(e.target.value)}
-                style={{ width: '100%', padding: '0.55rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
+                style={{ width: '100%', padding: 'var(--space-2)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)', fontSize: 'var(--text-sm)' }}
               />
             </div>
 
             <button
               type="submit"
               className="btn btn-primary"
-              style={{ background: 'var(--warning)', borderColor: 'var(--warning)', fontSize: '0.85rem' }}
+              style={{ background: 'var(--warning)', borderColor: 'var(--warning)', fontSize: 'var(--text-sm)' }}
               disabled={isSubmitting}
             >
               <Sparkles size={16} />
@@ -336,20 +442,33 @@ export default function DecisionRecord({ verdict, request, onRecordOverride, ove
         {/* Override Success Notification */}
         {overrideSuccess && (
           <div style={{
-            marginTop: '1rem',
-            padding: '1rem',
+            marginTop: 'var(--space-4)',
+            padding: 'var(--space-4)',
             background: 'var(--success-light)',
             border: '1px solid var(--success)',
             borderRadius: 'var(--radius-sm)',
-            fontSize: '0.85rem',
+            fontSize: 'var(--text-sm)',
             color: 'var(--success)',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.65rem'
+            gap: 'var(--space-3)'
           }}>
             <CheckCircle2 size={20} />
-            <div>
-              <strong>Lesson {overrideSuccess.id} Crystallized!</strong> "{overrideSuccess.rule}" is now registered in Pratibimb's governance ledger. Future vendor renewals will enforce key personnel checks automatically.
+            <div style={{ flex: 1 }}>
+              <strong>Lesson {overrideSuccess.id} saved: {overrideSuccess.title}.</strong> "{overrideSuccess.rule}"
+              <div style={{ marginTop: 'var(--space-1)', color: 'var(--text-secondary)' }}>
+                {verdictBefore && verdictBefore !== verdict.verdict
+                  ? <>Re-run verdict: <strong>{vl(verdictBefore)}</strong> → <strong>{vl(verdict.verdict)}</strong>{verdict.lessons_applied?.includes(overrideSuccess.id) ? `, citing ${overrideSuccess.id}` : ''}.</>
+                  : 'Re-run the request to see the lesson change the verdict.'}
+              </div>
+              <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-2)', flexWrap: 'wrap' }}>
+                <button type="button" className="btn btn-primary" style={{ fontSize: 'var(--text-xs)' }} onClick={() => onRerun && onRerun(request)} disabled={isAnalyzing}>
+                  <RotateCcw size={14} /><span>{isAnalyzing ? 'Re-running…' : 'Re-run this request'}</span>
+                </button>
+                <button type="button" className="btn btn-secondary" style={{ fontSize: 'var(--text-xs)' }} onClick={() => { setVerdictBefore(null); onResetDemo && onResetDemo(); }}>
+                  Reset demo memory
+                </button>
+              </div>
             </div>
           </div>
         )}
