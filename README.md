@@ -10,7 +10,7 @@ as a precedent, and the next verdict uses both.
 also https://pratibimb-88989965991.asia-southeast1.run.app and https://pratibimb.rahulrao.in
 
 Built for the **Google Cloud AI Builder Cup 2026 (JAPAC, Hack2skill)** · Theme: Future of Work & Enterprise Productivity ·
-Team: Rahul Rao & Dipti (CA). All data is synthetic.
+Team: Rahul Rao (builder) & Dipti Rao (Chartered Accountant, Director in statutory audit; voice of Meera). All data is synthetic.
 
 ## One company, three seniors, a Pratibimb for each
 
