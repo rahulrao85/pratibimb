@@ -6,7 +6,8 @@ gives a first-level verdict on new requests the way she would, citing every rule
 **The senior always makes the final call.** When she overrides a verdict, Pratibimb writes a lesson and files her decision
 as a precedent, and the next verdict uses both.
 
-**Live:** https://pratibimb.rahulrao.in (Google Cloud Run, Singapore)
+**Live:** https://pratibimb-aibc.web.app (Firebase Hosting → Cloud Run, Singapore) ·
+also https://pratibimb-88989965991.asia-southeast1.run.app and https://pratibimb.rahulrao.in
 
 Built for the **Google Cloud AI Builder Cup 2026 (JAPAC, Hack2skill)** · Theme: Future of Work & Enterprise Productivity ·
 Team: Rahul Rao & Dipti (CA). All data is synthetic.
@@ -133,6 +134,14 @@ docker run -p 8080:8080 -e GOOGLE_CLOUD_PROJECT=your-project pratibimb   # cache
 ```
 
 On Cloud Run, Vertex AI auth comes from the service account attached to the service; no keys are baked into the image.
+Images are built with Cloud Build into Artifact Registry.
+
+**Firebase Hosting** (`firebase.json`) rewrites every path to the `pratibimb` Cloud Run service, so the site gets a
+`web.app` URL and CDN. Hosting forwards only the cookie named `__session`, which is why the visitor sandbox uses that name.
+
+```bash
+firebase deploy --only hosting --project pratibimb-aibc
+```
 
 ## Design
 

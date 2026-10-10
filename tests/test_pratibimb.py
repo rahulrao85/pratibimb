@@ -231,7 +231,7 @@ def test_api_gives_each_browser_its_own_sandbox(rules_only):
     from app.main import app
     a, b = TestClient(app), TestClient(app)
     req = load("requests.json")["requests"][0]
-    assert "pratibimb_sid" in a.get("/api/lessons").cookies
+    assert "__session" in a.get("/api/lessons").cookies
     r = a.post("/api/learner/override", json={"request_id": req["id"], "engine_verdict": "approve",
                                              "senior_decision": "ask", "senior_override_note": "Key person left."})
     lesson_id = r.json()["lesson"]["id"]

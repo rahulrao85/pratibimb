@@ -18,7 +18,7 @@ POST /api/learner/override  the senior overrides a verdict → a new lesson + an
 POST /api/demo/reset        forget what this visitor taught (the baseline stays)
 GET  /api/usage             Gemini spend so far (from the local usage log)
 
-Every browser gets its own sandbox (cookie pratibimb_sid): lessons and overrides it creates live in the Store
+Every browser gets its own sandbox (cookie __session, the one Firebase Hosting forwards): lessons and overrides it creates live in the Store
 (Firestore on Cloud Run), survive restarts and redeploys, and never leak into another visitor's demo.
 """
 import json
@@ -58,12 +58,14 @@ ROOT = Path(__file__).parent.parent
 STORE = make_store(ROOT / ".cache" / "state")
 ENGINES = {p: PratibimbEngine(pack=p, store=STORE) for p in PACK_IDS}
 engine = ENGINES["vendor"]  # kept for callers that only know the vendor pack
-SID_COOKIE = "pratibimb_sid"
+# Firebase Hosting forwards only the cookie named "__session" to Cloud Run, so the sandbox lives there.
+SID_COOKIE = "__session"
+LEGACY_COOKIE = "pratibimb_sid"
 
 
 def sandbox(request: Request, response: Response) -> str:
     """This visitor's sandbox id (cookie). New visitors get a fresh one."""
-    sid = request.cookies.get(SID_COOKIE)
+    sid = request.cookies.get(SID_COOKIE) or request.cookies.get(LEGACY_COOKIE)
     if not sid or not SID_PATTERN.match(sid):
         sid = uuid.uuid4().hex
         response.set_cookie(SID_COOKIE, sid, max_age=90 * 24 * 3600, httponly=True, samesite="lax",
